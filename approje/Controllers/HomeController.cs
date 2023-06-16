@@ -12,7 +12,18 @@ namespace approje.Controllers
         {
             _logger = logger;
         }
-
+        public IActionResult groups()
+        {
+            return View();
+        }
+        public IActionResult friends()
+        {
+            return View();
+        }
+        public IActionResult favorite()
+        {
+            return View();
+        }
         public IActionResult birthday()
         {
             return View();

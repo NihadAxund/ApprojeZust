@@ -272,6 +272,9 @@
   </ItemGroup>
 
   <ItemGroup>
+    <None Include="Views\Shared\Error.cshtml" />
+    <None Include="Views\Shared\_Layout.cshtml" />
+    <None Include="Views\Shared\_ValidationScriptsPartial.cshtml" />
     <None Include="wwwroot\assets\css\animate.min.css" />
     <None Include="wwwroot\assets\css\bootstrap.min.css" />
     <None Include="wwwroot\assets\css\flaticon.css" />

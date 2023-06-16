@@ -1,6 +1,5 @@
 ﻿
 
-
     <!-- Start Preloader Area -->
     <div class="preloader-area">
         <div class="spinner">
@@ -763,7 +762,7 @@
                             <span class="menu-title">Friends</span>
                         </a>
                     </li>
-                    <li class="nav-item">
+                    <li class="nav-item active">
                         <a href="/home/groups" class="nav-link">
                             <span class="icon"><i class="flaticon-team"></i></span>
                             <span class="menu-title">Groups</span>
@@ -787,7 +786,7 @@
                             <span class="menu-title">Live Chat</span>
                         </a>
                     </li>
-                    <li class="nav-item active">
+                    <li class="nav-item">
                         <a href="/home/birthday" class="nav-link">
                             <span class="icon"><i class="flaticon-cake"></i></span>
                             <span class="menu-title">Birthday</span>
@@ -829,525 +828,1076 @@
         <!-- End Sidemenu Area -->
         <!-- Start Content Page Box Area -->
         <div class="content-page-box-area">
-            <div class="page-banner-box bg-9">
-                <h3>Birthday</h3>
+            <div class="page-banner-box bg-5">
+                <h3>Groups</h3>
             </div>
 
-            <div class="all-birthday-body">
-                <div class="birthday-header">
-                    <h3>Today Birthday</h3>
+            <div class="groups-inner-box-style d-flex justify-content-between align-items-center">
+                <ul class="nav nav-tabs" id="myTab" role="tablist">
+                    <li class="nav-item">
+                        <a class="nav-link active" id="all-groups-tab" data-bs-toggle="tab" href="#all-groups" role="tab" aria-controls="all-groups">All Groups</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" id="most-members-tab" data-bs-toggle="tab" href="#most-members" role="tab" aria-controls="most-members">Most Members</a>
+                    </li>
+                </ul>
+
+                <div class="groups-search-box">
+                    <form>
+                        <input type="text" class="input-search" placeholder="Search groups...">
+                        <button type="submit"><i class="ri-search-line"></i></button>
+                    </form>
+                </div>
+            </div>
+
+            <div class="tab-content" id="myTabContent">
+                <div class="tab-pane fade show active" id="all-groups" role="tabpanel">
+                    <div class="row justify-content-center">
+                        <div class="col-lg-3 col-sm-6">
+                            <div class="single-groups-card">
+                                <div class="groups-image">
+                                    <a href="#">
+                                        <img src="~/assets/images/groups/groups-bg-1.jpg" alt="image">
+                                    </a>
+                                </div>
+                                <div class="groups-content">
+                                    <div class="groups-info d-flex justify-content-between align-items-center">
+                                        <a href="#">
+                                            <img src="~/assets/images/groups/groups-1.jpg" alt="image">
+                                        </a>
+                                        <div class="text ms-3">
+                                            <h3><a href="#">Graphic Design</a></h3>
+                                            <span>Public Groups</span>
+                                        </div>
+                                    </div>
+                                    <ul class="statistics">
+                                        <li>
+                                            <a href="#">
+                                                <span class="item-number">62</span>
+                                                <span class="item-text">Post</span>
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a href="#">
+                                                <span class="item-number">6451</span>
+                                                <span class="item-text">Members</span>
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a href="#">
+                                                <span class="item-number">2016</span>
+                                                <span class="item-text">Since</span>
+                                            </a>
+                                        </li>
+                                    </ul>
+                                    <div class="join-groups-btn">
+                                        <button type="submit">Join Group</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-3 col-sm-6">
+                            <div class="single-groups-card">
+                                <div class="groups-image">
+                                    <a href="#">
+                                        <img src="~/assets/images/groups/groups-bg-2.jpg" alt="image">
+                                    </a>
+                                </div>
+                                <div class="groups-content">
+                                    <div class="groups-info d-flex justify-content-between align-items-center">
+                                        <a href="#">
+                                            <img src="~/assets/images/groups/groups-2.jpg" alt="image">
+                                        </a>
+                                        <div class="text ms-3">
+                                            <h3><a href="#">Marketing</a></h3>
+                                            <span>Public Groups</span>
+                                        </div>
+                                    </div>
+                                    <ul class="statistics">
+                                        <li>
+                                            <a href="#">
+                                                <span class="item-number">173</span>
+                                                <span class="item-text">Post</span>
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a href="#">
+                                                <span class="item-number">7451</span>
+                                                <span class="item-text">Members</span>
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a href="#">
+                                                <span class="item-number">2015</span>
+                                                <span class="item-text">Since</span>
+                                            </a>
+                                        </li>
+                                    </ul>
+                                    <div class="join-groups-btn">
+                                        <button type="submit">Join Group</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-3 col-sm-6">
+                            <div class="single-groups-card">
+                                <div class="groups-image">
+                                    <a href="#">
+                                        <img src="~/assets/images/groups/groups-bg-3.jpg" alt="image">
+                                    </a>
+                                </div>
+                                <div class="groups-content">
+                                    <div class="groups-info d-flex justify-content-between align-items-center">
+                                        <a href="#">
+                                            <img src="~/assets/images/groups/groups-3.jpg" alt="image">
+                                        </a>
+                                        <div class="text ms-3">
+                                            <h3><a href="#">Fitness Club</a></h3>
+                                            <span>Public Groups</span>
+                                        </div>
+                                    </div>
+                                    <ul class="statistics">
+                                        <li>
+                                            <a href="#">
+                                                <span class="item-number">122</span>
+                                                <span class="item-text">Post</span>
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a href="#">
+                                                <span class="item-number">9453</span>
+                                                <span class="item-text">Members</span>
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a href="#">
+                                                <span class="item-number">2013</span>
+                                                <span class="item-text">Since</span>
+                                            </a>
+                                        </li>
+                                    </ul>
+                                    <div class="join-groups-btn">
+                                        <button type="submit">Join Group</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-3 col-sm-6">
+                            <div class="single-groups-card">
+                                <div class="groups-image">
+                                    <a href="#">
+                                        <img src="~/assets/images/groups/groups-bg-4.jpg" alt="image">
+                                    </a>
+                                </div>
+                                <div class="groups-content">
+                                    <div class="groups-info d-flex justify-content-between align-items-center">
+                                        <a href="#">
+                                            <img src="~/assets/images/groups/groups-4.jpg" alt="image">
+                                        </a>
+                                        <div class="text ms-3">
+                                            <h3><a href="#">Restaurant</a></h3>
+                                            <span>Public Groups</span>
+                                        </div>
+                                    </div>
+                                    <ul class="statistics">
+                                        <li>
+                                            <a href="#">
+                                                <span class="item-number">321</span>
+                                                <span class="item-text">Post</span>
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a href="#">
+                                                <span class="item-number">1151</span>
+                                                <span class="item-text">Members</span>
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a href="#">
+                                                <span class="item-number">2019</span>
+                                                <span class="item-text">Since</span>
+                                            </a>
+                                        </li>
+                                    </ul>
+                                    <div class="join-groups-btn">
+                                        <button type="submit">Join Group</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-3 col-sm-6">
+                            <div class="single-groups-card">
+                                <div class="groups-image">
+                                    <a href="#">
+                                        <img src="~/assets/images/groups/groups-bg-5.jpg" alt="image">
+                                    </a>
+                                </div>
+                                <div class="groups-content">
+                                    <div class="groups-info d-flex justify-content-between align-items-center">
+                                        <a href="#">
+                                            <img src="~/assets/images/groups/groups-5.jpg" alt="image">
+                                        </a>
+                                        <div class="text ms-3">
+                                            <h3><a href="#">Travel Life</a></h3>
+                                            <span>Public Groups</span>
+                                        </div>
+                                    </div>
+                                    <ul class="statistics">
+                                        <li>
+                                            <a href="#">
+                                                <span class="item-number">99</span>
+                                                <span class="item-text">Post</span>
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a href="#">
+                                                <span class="item-number">650</span>
+                                                <span class="item-text">Members</span>
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a href="#">
+                                                <span class="item-number">2017</span>
+                                                <span class="item-text">Since</span>
+                                            </a>
+                                        </li>
+                                    </ul>
+                                    <div class="join-groups-btn">
+                                        <button type="submit">Join Group</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-3 col-sm-6">
+                            <div class="single-groups-card">
+                                <div class="groups-image">
+                                    <a href="#">
+                                        <img src="~/assets/images/groups/groups-bg-6.jpg" alt="image">
+                                    </a>
+                                </div>
+                                <div class="groups-content">
+                                    <div class="groups-info d-flex justify-content-between align-items-center">
+                                        <a href="#">
+                                            <img src="~/assets/images/groups/groups-6.jpg" alt="image">
+                                        </a>
+                                        <div class="text ms-3">
+                                            <h3><a href="#">Fashion Day</a></h3>
+                                            <span>Public Groups</span>
+                                        </div>
+                                    </div>
+                                    <ul class="statistics">
+                                        <li>
+                                            <a href="#">
+                                                <span class="item-number">159</span>
+                                                <span class="item-text">Post</span>
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a href="#">
+                                                <span class="item-number">1929</span>
+                                                <span class="item-text">Members</span>
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a href="#">
+                                                <span class="item-number">2018</span>
+                                                <span class="item-text">Since</span>
+                                            </a>
+                                        </li>
+                                    </ul>
+                                    <div class="join-groups-btn">
+                                        <button type="submit">Join Group</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-3 col-sm-6">
+                            <div class="single-groups-card">
+                                <div class="groups-image">
+                                    <a href="#">
+                                        <img src="~/assets/images/groups/groups-bg-7.jpg" alt="image">
+                                    </a>
+                                </div>
+                                <div class="groups-content">
+                                    <div class="groups-info d-flex justify-content-between align-items-center">
+                                        <a href="#">
+                                            <img src="~/assets/images/groups/groups-7.jpg" alt="image">
+                                        </a>
+                                        <div class="text ms-3">
+                                            <h3><a href="#">Photography</a></h3>
+                                            <span>Public Groups</span>
+                                        </div>
+                                    </div>
+                                    <ul class="statistics">
+                                        <li>
+                                            <a href="#">
+                                                <span class="item-number">150</span>
+                                                <span class="item-text">Post</span>
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a href="#">
+                                                <span class="item-number">321</span>
+                                                <span class="item-text">Members</span>
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a href="#">
+                                                <span class="item-number">2019</span>
+                                                <span class="item-text">Since</span>
+                                            </a>
+                                        </li>
+                                    </ul>
+                                    <div class="join-groups-btn">
+                                        <button type="submit">Join Group</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-3 col-sm-6">
+                            <div class="single-groups-card">
+                                <div class="groups-image">
+                                    <a href="#">
+                                        <img src="~/assets/images/groups/groups-bg-8.jpg" alt="image">
+                                    </a>
+                                </div>
+                                <div class="groups-content">
+                                    <div class="groups-info d-flex justify-content-between align-items-center">
+                                        <a href="#">
+                                            <img src="~/assets/images/groups/groups-8.jpg" alt="image">
+                                        </a>
+                                        <div class="text ms-3">
+                                            <h3><a href="#">Child Care</a></h3>
+                                            <span>Public Groups</span>
+                                        </div>
+                                    </div>
+                                    <ul class="statistics">
+                                        <li>
+                                            <a href="#">
+                                                <span class="item-number">58</span>
+                                                <span class="item-text">Post</span>
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a href="#">
+                                                <span class="item-number">224</span>
+                                                <span class="item-text">Members</span>
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a href="#">
+                                                <span class="item-number">2020</span>
+                                                <span class="item-text">Since</span>
+                                            </a>
+                                        </li>
+                                    </ul>
+                                    <div class="join-groups-btn">
+                                        <button type="submit">Join Group</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-3 col-sm-6">
+                            <div class="single-groups-card">
+                                <div class="groups-image">
+                                    <a href="#">
+                                        <img src="~/assets/images/groups/groups-bg-9.jpg" alt="image">
+                                    </a>
+                                </div>
+                                <div class="groups-content">
+                                    <div class="groups-info d-flex justify-content-between align-items-center">
+                                        <a href="#">
+                                            <img src="~/assets/images/groups/groups-9.jpg" alt="image">
+                                        </a>
+                                        <div class="text ms-3">
+                                            <h3><a href="#">Music Club</a></h3>
+                                            <span>Public Groups</span>
+                                        </div>
+                                    </div>
+                                    <ul class="statistics">
+                                        <li>
+                                            <a href="#">
+                                                <span class="item-number">120</span>
+                                                <span class="item-text">Post</span>
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a href="#">
+                                                <span class="item-number">165</span>
+                                                <span class="item-text">Members</span>
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a href="#">
+                                                <span class="item-number">2015</span>
+                                                <span class="item-text">Since</span>
+                                            </a>
+                                        </li>
+                                    </ul>
+                                    <div class="join-groups-btn">
+                                        <button type="submit">Join Group</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-3 col-sm-6">
+                            <div class="single-groups-card">
+                                <div class="groups-image">
+                                    <a href="#">
+                                        <img src="~/assets/images/groups/groups-bg-10.jpg" alt="image">
+                                    </a>
+                                </div>
+                                <div class="groups-content">
+                                    <div class="groups-info d-flex justify-content-between align-items-center">
+                                        <a href="#">
+                                            <img src="~/assets/images/groups/groups-10.jpg" alt="image">
+                                        </a>
+                                        <div class="text ms-3">
+                                            <h3><a href="#">Developer</a></h3>
+                                            <span>Public Groups</span>
+                                        </div>
+                                    </div>
+                                    <ul class="statistics">
+                                        <li>
+                                            <a href="#">
+                                                <span class="item-number">145</span>
+                                                <span class="item-text">Post</span>
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a href="#">
+                                                <span class="item-number">3245</span>
+                                                <span class="item-text">Members</span>
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a href="#">
+                                                <span class="item-number">2019</span>
+                                                <span class="item-text">Since</span>
+                                            </a>
+                                        </li>
+                                    </ul>
+                                    <div class="join-groups-btn">
+                                        <button type="submit">Join Group</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-3 col-sm-6">
+                            <div class="single-groups-card">
+                                <div class="groups-image">
+                                    <a href="#">
+                                        <img src="~/assets/images/groups/groups-bg-11.jpg" alt="image">
+                                    </a>
+                                </div>
+                                <div class="groups-content">
+                                    <div class="groups-info d-flex justify-content-between align-items-center">
+                                        <a href="#">
+                                            <img src="~/assets/images/groups/groups-11.jpg" alt="image">
+                                        </a>
+                                        <div class="text ms-3">
+                                            <h3><a href="#">Sports Fun</a></h3>
+                                            <span>Public Groups</span>
+                                        </div>
+                                    </div>
+                                    <ul class="statistics">
+                                        <li>
+                                            <a href="#">
+                                                <span class="item-number">245</span>
+                                                <span class="item-text">Post</span>
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a href="#">
+                                                <span class="item-number">4245</span>
+                                                <span class="item-text">Members</span>
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a href="#">
+                                                <span class="item-number">2010</span>
+                                                <span class="item-text">Since</span>
+                                            </a>
+                                        </li>
+                                    </ul>
+                                    <div class="join-groups-btn">
+                                        <button type="submit">Join Group</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-3 col-sm-6">
+                            <div class="single-groups-card">
+                                <div class="groups-image">
+                                    <a href="#">
+                                        <img src="~/assets/images/groups/groups-bg-12.jpg" alt="image">
+                                    </a>
+                                </div>
+                                <div class="groups-content">
+                                    <div class="groups-info d-flex justify-content-between align-items-center">
+                                        <a href="#">
+                                            <img src="~/assets/images/groups/groups-12.jpg" alt="image">
+                                        </a>
+                                        <div class="text ms-3">
+                                            <h3><a href="#">Teaching Club</a></h3>
+                                            <span>Public Groups</span>
+                                        </div>
+                                    </div>
+                                    <ul class="statistics">
+                                        <li>
+                                            <a href="#">
+                                                <span class="item-number">62</span>
+                                                <span class="item-text">Post</span>
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a href="#">
+                                                <span class="item-number">6245</span>
+                                                <span class="item-text">Members</span>
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a href="#">
+                                                <span class="item-number">2012</span>
+                                                <span class="item-text">Since</span>
+                                            </a>
+                                        </li>
+                                    </ul>
+                                    <div class="join-groups-btn">
+                                        <button type="submit">Join Group</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="load-more-posts-btn">
+                        <a href="#"><i class="flaticon-loading"></i> Load More</a>
+                    </div>
                 </div>
 
-                <div class="birthday-send-box">
-                    <div class="send-item">
-                        <a href="/home/my-profile"><img src="~/assets/images/user/user-41.jpg" class="rounded-circle" alt="image"></a>
+                <div class="tab-pane fade" id="most-members" role="tabpanel">
+                    <div class="row justify-content-center">
+                        <div class="col-lg-3 col-sm-6">
+                            <div class="single-groups-card">
+                                <div class="groups-image">
+                                    <a href="#">
+                                        <img src="~/assets/images/groups/groups-bg-1.jpg" alt="image">
+                                    </a>
+                                </div>
+                                <div class="groups-content">
+                                    <div class="groups-info d-flex justify-content-between align-items-center">
+                                        <a href="#">
+                                            <img src="~/assets/images/groups/groups-1.jpg" alt="image">
+                                        </a>
+                                        <div class="text ms-3">
+                                            <h3><a href="#">Graphic Design</a></h3>
+                                            <span>Public Groups</span>
+                                        </div>
+                                    </div>
+                                    <ul class="statistics">
+                                        <li>
+                                            <a href="#">
+                                                <span class="item-number">62</span>
+                                                <span class="item-text">Post</span>
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a href="#">
+                                                <span class="item-number">6451</span>
+                                                <span class="item-text">Members</span>
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a href="#">
+                                                <span class="item-number">2016</span>
+                                                <span class="item-text">Since</span>
+                                            </a>
+                                        </li>
+                                    </ul>
+                                    <div class="join-groups-btn">
+                                        <button type="submit">Join Group</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-3 col-sm-6">
+                            <div class="single-groups-card">
+                                <div class="groups-image">
+                                    <a href="#">
+                                        <img src="~/assets/images/groups/groups-bg-2.jpg" alt="image">
+                                    </a>
+                                </div>
+                                <div class="groups-content">
+                                    <div class="groups-info d-flex justify-content-between align-items-center">
+                                        <a href="#">
+                                            <img src="~/assets/images/groups/groups-2.jpg" alt="image">
+                                        </a>
+                                        <div class="text ms-3">
+                                            <h3><a href="#">Marketing</a></h3>
+                                            <span>Public Groups</span>
+                                        </div>
+                                    </div>
+                                    <ul class="statistics">
+                                        <li>
+                                            <a href="#">
+                                                <span class="item-number">173</span>
+                                                <span class="item-text">Post</span>
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a href="#">
+                                                <span class="item-number">7451</span>
+                                                <span class="item-text">Members</span>
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a href="#">
+                                                <span class="item-number">2015</span>
+                                                <span class="item-text">Since</span>
+                                            </a>
+                                        </li>
+                                    </ul>
+                                    <div class="join-groups-btn">
+                                        <button type="submit">Join Group</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-3 col-sm-6">
+                            <div class="single-groups-card">
+                                <div class="groups-image">
+                                    <a href="#">
+                                        <img src="~/assets/images/groups/groups-bg-3.jpg" alt="image">
+                                    </a>
+                                </div>
+                                <div class="groups-content">
+                                    <div class="groups-info d-flex justify-content-between align-items-center">
+                                        <a href="#">
+                                            <img src="~/assets/images/groups/groups-3.jpg" alt="image">
+                                        </a>
+                                        <div class="text ms-3">
+                                            <h3><a href="#">Fitness Club</a></h3>
+                                            <span>Public Groups</span>
+                                        </div>
+                                    </div>
+                                    <ul class="statistics">
+                                        <li>
+                                            <a href="#">
+                                                <span class="item-number">122</span>
+                                                <span class="item-text">Post</span>
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a href="#">
+                                                <span class="item-number">9453</span>
+                                                <span class="item-text">Members</span>
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a href="#">
+                                                <span class="item-number">2013</span>
+                                                <span class="item-text">Since</span>
+                                            </a>
+                                        </li>
+                                    </ul>
+                                    <div class="join-groups-btn">
+                                        <button type="submit">Join Group</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-3 col-sm-6">
+                            <div class="single-groups-card">
+                                <div class="groups-image">
+                                    <a href="#">
+                                        <img src="~/assets/images/groups/groups-bg-4.jpg" alt="image">
+                                    </a>
+                                </div>
+                                <div class="groups-content">
+                                    <div class="groups-info d-flex justify-content-between align-items-center">
+                                        <a href="#">
+                                            <img src="~/assets/images/groups/groups-4.jpg" alt="image">
+                                        </a>
+                                        <div class="text ms-3">
+                                            <h3><a href="#">Restaurant</a></h3>
+                                            <span>Public Groups</span>
+                                        </div>
+                                    </div>
+                                    <ul class="statistics">
+                                        <li>
+                                            <a href="#">
+                                                <span class="item-number">321</span>
+                                                <span class="item-text">Post</span>
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a href="#">
+                                                <span class="item-number">1151</span>
+                                                <span class="item-text">Members</span>
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a href="#">
+                                                <span class="item-number">2019</span>
+                                                <span class="item-text">Since</span>
+                                            </a>
+                                        </li>
+                                    </ul>
+                                    <div class="join-groups-btn">
+                                        <button type="submit">Join Group</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-3 col-sm-6">
+                            <div class="single-groups-card">
+                                <div class="groups-image">
+                                    <a href="#">
+                                        <img src="~/assets/images/groups/groups-bg-5.jpg" alt="image">
+                                    </a>
+                                </div>
+                                <div class="groups-content">
+                                    <div class="groups-info d-flex justify-content-between align-items-center">
+                                        <a href="#">
+                                            <img src="~/assets/images/groups/groups-5.jpg" alt="image">
+                                        </a>
+                                        <div class="text ms-3">
+                                            <h3><a href="#">Travel Life</a></h3>
+                                            <span>Public Groups</span>
+                                        </div>
+                                    </div>
+                                    <ul class="statistics">
+                                        <li>
+                                            <a href="#">
+                                                <span class="item-number">99</span>
+                                                <span class="item-text">Post</span>
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a href="#">
+                                                <span class="item-number">650</span>
+                                                <span class="item-text">Members</span>
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a href="#">
+                                                <span class="item-number">2017</span>
+                                                <span class="item-text">Since</span>
+                                            </a>
+                                        </li>
+                                    </ul>
+                                    <div class="join-groups-btn">
+                                        <button type="submit">Join Group</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-3 col-sm-6">
+                            <div class="single-groups-card">
+                                <div class="groups-image">
+                                    <a href="#">
+                                        <img src="~/assets/images/groups/groups-bg-6.jpg" alt="image">
+                                    </a>
+                                </div>
+                                <div class="groups-content">
+                                    <div class="groups-info d-flex justify-content-between align-items-center">
+                                        <a href="#">
+                                            <img src="~/assets/images/groups/groups-6.jpg" alt="image">
+                                        </a>
+                                        <div class="text ms-3">
+                                            <h3><a href="#">Fashion Day</a></h3>
+                                            <span>Public Groups</span>
+                                        </div>
+                                    </div>
+                                    <ul class="statistics">
+                                        <li>
+                                            <a href="#">
+                                                <span class="item-number">159</span>
+                                                <span class="item-text">Post</span>
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a href="#">
+                                                <span class="item-number">1929</span>
+                                                <span class="item-text">Members</span>
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a href="#">
+                                                <span class="item-number">2018</span>
+                                                <span class="item-text">Since</span>
+                                            </a>
+                                        </li>
+                                    </ul>
+                                    <div class="join-groups-btn">
+                                        <button type="submit">Join Group</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-3 col-sm-6">
+                            <div class="single-groups-card">
+                                <div class="groups-image">
+                                    <a href="#">
+                                        <img src="~/assets/images/groups/groups-bg-7.jpg" alt="image">
+                                    </a>
+                                </div>
+                                <div class="groups-content">
+                                    <div class="groups-info d-flex justify-content-between align-items-center">
+                                        <a href="#">
+                                            <img src="~/assets/images/groups/groups-7.jpg" alt="image">
+                                        </a>
+                                        <div class="text ms-3">
+                                            <h3><a href="#">Photography</a></h3>
+                                            <span>Public Groups</span>
+                                        </div>
+                                    </div>
+                                    <ul class="statistics">
+                                        <li>
+                                            <a href="#">
+                                                <span class="item-number">150</span>
+                                                <span class="item-text">Post</span>
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a href="#">
+                                                <span class="item-number">321</span>
+                                                <span class="item-text">Members</span>
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a href="#">
+                                                <span class="item-number">2019</span>
+                                                <span class="item-text">Since</span>
+                                            </a>
+                                        </li>
+                                    </ul>
+                                    <div class="join-groups-btn">
+                                        <button type="submit">Join Group</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-3 col-sm-6">
+                            <div class="single-groups-card">
+                                <div class="groups-image">
+                                    <a href="#">
+                                        <img src="~/assets/images/groups/groups-bg-8.jpg" alt="image">
+                                    </a>
+                                </div>
+                                <div class="groups-content">
+                                    <div class="groups-info d-flex justify-content-between align-items-center">
+                                        <a href="#">
+                                            <img src="~/assets/images/groups/groups-8.jpg" alt="image">
+                                        </a>
+                                        <div class="text ms-3">
+                                            <h3><a href="#">Child Care</a></h3>
+                                            <span>Public Groups</span>
+                                        </div>
+                                    </div>
+                                    <ul class="statistics">
+                                        <li>
+                                            <a href="#">
+                                                <span class="item-number">58</span>
+                                                <span class="item-text">Post</span>
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a href="#">
+                                                <span class="item-number">224</span>
+                                                <span class="item-text">Members</span>
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a href="#">
+                                                <span class="item-number">2020</span>
+                                                <span class="item-text">Since</span>
+                                            </a>
+                                        </li>
+                                    </ul>
+                                    <div class="join-groups-btn">
+                                        <button type="submit">Join Group</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-3 col-sm-6">
+                            <div class="single-groups-card">
+                                <div class="groups-image">
+                                    <a href="#">
+                                        <img src="~/assets/images/groups/groups-bg-9.jpg" alt="image">
+                                    </a>
+                                </div>
+                                <div class="groups-content">
+                                    <div class="groups-info d-flex justify-content-between align-items-center">
+                                        <a href="#">
+                                            <img src="~/assets/images/groups/groups-9.jpg" alt="image">
+                                        </a>
+                                        <div class="text ms-3">
+                                            <h3><a href="#">Music Club</a></h3>
+                                            <span>Public Groups</span>
+                                        </div>
+                                    </div>
+                                    <ul class="statistics">
+                                        <li>
+                                            <a href="#">
+                                                <span class="item-number">120</span>
+                                                <span class="item-text">Post</span>
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a href="#">
+                                                <span class="item-number">165</span>
+                                                <span class="item-text">Members</span>
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a href="#">
+                                                <span class="item-number">2015</span>
+                                                <span class="item-text">Since</span>
+                                            </a>
+                                        </li>
+                                    </ul>
+                                    <div class="join-groups-btn">
+                                        <button type="submit">Join Group</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-3 col-sm-6">
+                            <div class="single-groups-card">
+                                <div class="groups-image">
+                                    <a href="#">
+                                        <img src="~/assets/images/groups/groups-bg-10.jpg" alt="image">
+                                    </a>
+                                </div>
+                                <div class="groups-content">
+                                    <div class="groups-info d-flex justify-content-between align-items-center">
+                                        <a href="#">
+                                            <img src="~/assets/images/groups/groups-10.jpg" alt="image">
+                                        </a>
+                                        <div class="text ms-3">
+                                            <h3><a href="#">Developer</a></h3>
+                                            <span>Public Groups</span>
+                                        </div>
+                                    </div>
+                                    <ul class="statistics">
+                                        <li>
+                                            <a href="#">
+                                                <span class="item-number">145</span>
+                                                <span class="item-text">Post</span>
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a href="#">
+                                                <span class="item-number">3245</span>
+                                                <span class="item-text">Members</span>
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a href="#">
+                                                <span class="item-number">2019</span>
+                                                <span class="item-text">Since</span>
+                                            </a>
+                                        </li>
+                                    </ul>
+                                    <div class="join-groups-btn">
+                                        <button type="submit">Join Group</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-3 col-sm-6">
+                            <div class="single-groups-card">
+                                <div class="groups-image">
+                                    <a href="#">
+                                        <img src="~/assets/images/groups/groups-bg-11.jpg" alt="image">
+                                    </a>
+                                </div>
+                                <div class="groups-content">
+                                    <div class="groups-info d-flex justify-content-between align-items-center">
+                                        <a href="#">
+                                            <img src="~/assets/images/groups/groups-11.jpg" alt="image">
+                                        </a>
+                                        <div class="text ms-3">
+                                            <h3><a href="#">Sports Fun</a></h3>
+                                            <span>Public Groups</span>
+                                        </div>
+                                    </div>
+                                    <ul class="statistics">
+                                        <li>
+                                            <a href="#">
+                                                <span class="item-number">245</span>
+                                                <span class="item-text">Post</span>
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a href="#">
+                                                <span class="item-number">4245</span>
+                                                <span class="item-text">Members</span>
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a href="#">
+                                                <span class="item-number">2010</span>
+                                                <span class="item-text">Since</span>
+                                            </a>
+                                        </li>
+                                    </ul>
+                                    <div class="join-groups-btn">
+                                        <button type="submit">Join Group</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-3 col-sm-6">
+                            <div class="single-groups-card">
+                                <div class="groups-image">
+                                    <a href="#">
+                                        <img src="~/assets/images/groups/groups-bg-12.jpg" alt="image">
+                                    </a>
+                                </div>
+                                <div class="groups-content">
+                                    <div class="groups-info d-flex justify-content-between align-items-center">
+                                        <a href="#">
+                                            <img src="~/assets/images/groups/groups-12.jpg" alt="image">
+                                        </a>
+                                        <div class="text ms-3">
+                                            <h3><a href="#">Teaching Club</a></h3>
+                                            <span>Public Groups</span>
+                                        </div>
+                                    </div>
+                                    <ul class="statistics">
+                                        <li>
+                                            <a href="#">
+                                                <span class="item-number">62</span>
+                                                <span class="item-text">Post</span>
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a href="#">
+                                                <span class="item-number">6245</span>
+                                                <span class="item-text">Members</span>
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a href="#">
+                                                <span class="item-number">2012</span>
+                                                <span class="item-text">Since</span>
+                                            </a>
+                                        </li>
+                                    </ul>
+                                    <div class="join-groups-btn">
+                                        <button type="submit">Join Group</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
 
-                        <div class="send-content">
-                            <h3>
-                                <a href="/home/my-profile">James Vanwin</a>
-                            </h3>
-                            <span>10 July, 2021</span>
-
-                            <form class="d-flex align-items-center">
-                                <input type="text" class="form-control" placeholder="Write someting">
-                                <button type="submit" class="send-btn d-inline-block">Send</button>
-                            </form>
-                        </div>
-                    </div>
-                    <div class="send-item">
-                        <a href="/home/my-profile"><img src="~/assets/images/user/user-42.jpg" class="rounded-circle" alt="image"></a>
-
-                        <div class="send-content">
-                            <h3>
-                                <a href="/home/my-profile">William Garcia</a>
-                            </h3>
-                            <span>10 July, 2021</span>
-
-                            <form class="d-flex align-items-center">
-                                <input type="text" class="form-control" placeholder="Write someting">
-                                <button type="submit" class="send-btn d-inline-block">Send</button>
-                            </form>
-                        </div>
-                    </div>
-                    <div class="send-item">
-                        <a href="/home/my-profile"><img src="~/assets/images/user/user-43.jpg" class="rounded-circle" alt="image"></a>
-
-                        <div class="send-content">
-                            <h3>
-                                <a href="/home/my-profile">Annie Ferrier</a>
-                            </h3>
-                            <span>10 July, 2021</span>
-
-                            <form class="d-flex align-items-center">
-                                <input type="text" class="form-control" placeholder="Write someting">
-                                <button type="submit" class="send-btn d-inline-block">Send</button>
-                            </form>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="birthday-list-box">
-                    <div class="birthday-header">
-                        <h3>Upcoming Birthday</h3>
-                    </div>
-
-                    <div class="list-item">
-                        <div class="row justify-content-center">
-                            <div class="col-lg-4 col-md-4">
-                                <div class="list-content">
-                                    <a href="/home/my-profile"><img src="~/assets/images/user/user-1.jpg" class="rounded-circle" alt="image"></a>
-                                    <div class="text">
-                                        <h3>
-                                            <a href="/home/my-profile">Vanwin</a>
-                                        </h3>
-                                        <span>11 July, 2021</span>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-lg-4 col-md-4">
-                                <div class="list-content">
-                                    <a href="/home/my-profile"><img src="~/assets/images/user/user-2.jpg" class="rounded-circle" alt="image"></a>
-                                    <div class="text">
-                                        <h3>
-                                            <a href="/home/my-profile">Reynolds</a>
-                                        </h3>
-                                        <span>12 July, 2021</span>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-lg-4 col-md-4">
-                                <div class="list-content">
-                                    <a href="/home/my-profile"><img src="~/assets/images/user/user-3.jpg" class="rounded-circle" alt="image"></a>
-                                    <div class="text">
-                                        <h3>
-                                            <a href="/home/my-profile">Warren</a>
-                                        </h3>
-                                        <span>12 July, 2021</span>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="list-item">
-                        <div class="row justify-content-center">
-                            <div class="col-lg-4 col-md-4">
-                                <div class="list-content">
-                                    <a href="/home/my-profile"><img src="~/assets/images/user/user-4.jpg" class="rounded-circle" alt="image"></a>
-                                    <div class="text">
-                                        <h3>
-                                            <a href="/home/my-profile">Heriberto</a>
-                                        </h3>
-                                        <span>13 July, 2021</span>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-lg-4 col-md-4">
-                                <div class="list-content">
-                                    <a href="/home/my-profile"><img src="~/assets/images/user/user-5.jpg" class="rounded-circle" alt="image"></a>
-                                    <div class="text">
-                                        <h3>
-                                            <a href="/home/my-profile">James</a>
-                                        </h3>
-                                        <span>14 July, 2021</span>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-lg-4 col-md-4">
-                                <div class="list-content">
-                                    <a href="/home/my-profile"><img src="~/assets/images/user/user-6.jpg" class="rounded-circle" alt="image"></a>
-                                    <div class="text">
-                                        <h3>
-                                            <a href="/home/my-profile">David</a>
-                                        </h3>
-                                        <span>15 July, 2021</span>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="list-item">
-                        <div class="row justify-content-center">
-                            <div class="col-lg-4 col-md-4">
-                                <div class="list-content">
-                                    <a href="/home/my-profile"><img src="~/assets/images/user/user-7.jpg" class="rounded-circle" alt="image"></a>
-                                    <div class="text">
-                                        <h3>
-                                            <a href="/home/my-profile">Willie</a>
-                                        </h3>
-                                        <span>18 July, 2021</span>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-lg-4 col-md-4">
-                                <div class="list-content">
-                                    <a href="/home/my-profile"><img src="~/assets/images/user/user-8.jpg" class="rounded-circle" alt="image"></a>
-                                    <div class="text">
-                                        <h3>
-                                            <a href="/home/my-profile">Edith</a>
-                                        </h3>
-                                        <span>18 July, 2021</span>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-lg-4 col-md-4">
-                                <div class="list-content">
-                                    <a href="/home/my-profile"><img src="~/assets/images/user/user-9.jpg" class="rounded-circle" alt="image"></a>
-                                    <div class="text">
-                                        <h3>
-                                            <a href="/home/my-profile">Thompson</a>
-                                        </h3>
-                                        <span>21 July, 2021</span>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="list-item">
-                        <div class="row justify-content-center">
-                            <div class="col-lg-4 col-md-4">
-                                <div class="list-content">
-                                    <a href="/home/my-profile"><img src="~/assets/images/user/user-10.jpg" class="rounded-circle" alt="image"></a>
-                                    <div class="text">
-                                        <h3>
-                                            <a href="/home/my-profile">Torres</a>
-                                        </h3>
-                                        <span>20 July, 2021</span>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-lg-4 col-md-4">
-                                <div class="list-content">
-                                    <a href="/home/my-profile"><img src="~/assets/images/user/user-11.jpg" class="rounded-circle" alt="image"></a>
-                                    <div class="text">
-                                        <h3>
-                                            <a href="/home/my-profile">Calvin</a>
-                                        </h3>
-                                        <span>12 July, 2021</span>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-lg-4 col-md-4">
-                                <div class="list-content">
-                                    <a href="/home/my-profile"><img src="~/assets/images/user/user-12.jpg" class="rounded-circle" alt="image"></a>
-                                    <div class="text">
-                                        <h3>
-                                            <a href="/home/my-profile">Christine</a>
-                                        </h3>
-                                        <span>25 July, 2021</span>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="birthday-list-box">
-                    <div class="birthday-header">
-                        <h3>August</h3>
-                    </div>
-
-                    <div class="list-item">
-                        <div class="row justify-content-center">
-                            <div class="col-lg-4 col-md-4">
-                                <div class="list-content">
-                                    <a href="/home/my-profile"><img src="~/assets/images/user/user-13.jpg" class="rounded-circle" alt="image"></a>
-                                    <div class="text">
-                                        <h3>
-                                            <a href="/home/my-profile">Matthew</a>
-                                        </h3>
-                                        <span>01 August, 2021</span>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-lg-4 col-md-4">
-                                <div class="list-content">
-                                    <a href="/home/my-profile"><img src="~/assets/images/user/user-14.jpg" class="rounded-circle" alt="image"></a>
-                                    <div class="text">
-                                        <h3>
-                                            <a href="/home/my-profile">Donahue</a>
-                                        </h3>
-                                        <span>01 August, 2021</span>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-lg-4 col-md-4">
-                                <div class="list-content">
-                                    <a href="/home/my-profile"><img src="~/assets/images/user/user-15.jpg" class="rounded-circle" alt="image"></a>
-                                    <div class="text">
-                                        <h3>
-                                            <a href="/home/my-profile">Rosemary</a>
-                                        </h3>
-                                        <span>01 August, 2021</span>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="list-item">
-                        <div class="row justify-content-center">
-                            <div class="col-lg-4 col-md-4">
-                                <div class="list-content">
-                                    <a href="/home/my-profile"><img src="~/assets/images/user/user-16.jpg" class="rounded-circle" alt="image"></a>
-                                    <div class="text">
-                                        <h3>
-                                            <a href="/home/my-profile">Bostrom</a>
-                                        </h3>
-                                        <span>11 August, 2021</span>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-lg-4 col-md-4">
-                                <div class="list-content">
-                                    <a href="/home/my-profile"><img src="~/assets/images/user/user-17.jpg" class="rounded-circle" alt="image"></a>
-                                    <div class="text">
-                                        <h3>
-                                            <a href="/home/my-profile">John</a>
-                                        </h3>
-                                        <span>12 August, 2021</span>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-lg-4 col-md-4">
-                                <div class="list-content">
-                                    <a href="/home/my-profile"><img src="~/assets/images/user/user-18.jpg" class="rounded-circle" alt="image"></a>
-                                    <div class="text">
-                                        <h3>
-                                            <a href="/home/my-profile">Barnes</a>
-                                        </h3>
-                                        <span>13 August, 2021</span>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="list-item">
-                        <div class="row justify-content-center">
-                            <div class="col-lg-4 col-md-4">
-                                <div class="list-content">
-                                    <a href="/home/my-profile"><img src="~/assets/images/user/user-19.jpg" class="rounded-circle" alt="image"></a>
-                                    <div class="text">
-                                        <h3>
-                                            <a href="/home/my-profile">Bettyann</a>
-                                        </h3>
-                                        <span>15 August, 2021</span>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-lg-4 col-md-4">
-                                <div class="list-content">
-                                    <a href="/home/my-profile"><img src="~/assets/images/user/user-20.jpg" class="rounded-circle" alt="image"></a>
-                                    <div class="text">
-                                        <h3>
-                                            <a href="/home/my-profile">Chappell</a>
-                                        </h3>
-                                        <span>16 August, 2021</span>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-lg-4 col-md-4">
-                                <div class="list-content">
-                                    <a href="/home/my-profile"><img src="~/assets/images/user/user-21.jpg" class="rounded-circle" alt="image"></a>
-                                    <div class="text">
-                                        <h3>
-                                            <a href="/home/my-profile">Tommie</a>
-                                        </h3>
-                                        <span>17 August, 2021</span>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="list-item">
-                        <div class="row justify-content-center">
-                            <div class="col-lg-4 col-md-4">
-                                <div class="list-content">
-                                    <a href="/home/my-profile"><img src="~/assets/images/user/user-21.jpg" class="rounded-circle" alt="image"></a>
-                                    <div class="text">
-                                        <h3>
-                                            <a href="/home/my-profile">Maurice</a>
-                                        </h3>
-                                        <span>21 August, 2021</span>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-lg-4 col-md-4">
-                                <div class="list-content">
-                                    <a href="/home/my-profile"><img src="~/assets/images/user/user-22.jpg" class="rounded-circle" alt="image"></a>
-                                    <div class="text">
-                                        <h3>
-                                            <a href="/home/my-profile">Sandra</a>
-                                        </h3>
-                                        <span>23 August, 2021</span>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-lg-4 col-md-4">
-                                <div class="list-content">
-                                    <a href="/home/my-profile"><img src="~/assets/images/user/user-23.jpg" class="rounded-circle" alt="image"></a>
-                                    <div class="text">
-                                        <h3>
-                                            <a href="/home/my-profile">M. Huff</a>
-                                        </h3>
-                                        <span>25 August, 2021</span>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="birthday-list-box">
-                    <div class="birthday-header">
-                        <h3>September</h3>
-                    </div>
-
-                    <div class="list-item">
-                        <div class="row justify-content-center">
-                            <div class="col-lg-4 col-md-4">
-                                <div class="list-content">
-                                    <a href="/home/my-profile"><img src="~/assets/images/user/user-24.jpg" class="rounded-circle" alt="image"></a>
-                                    <div class="text">
-                                        <h3>
-                                            <a href="/home/my-profile">Norma</a>
-                                        </h3>
-                                        <span>02 September, 2021</span>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-lg-4 col-md-4">
-                                <div class="list-content">
-                                    <a href="/home/my-profile"><img src="~/assets/images/user/user-25.jpg" class="rounded-circle" alt="image"></a>
-                                    <div class="text">
-                                        <h3>
-                                            <a href="/home/my-profile">Rhoades</a>
-                                        </h3>
-                                        <span>03 September, 2021</span>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-lg-4 col-md-4">
-                                <div class="list-content">
-                                    <a href="/home/my-profile"><img src="~/assets/images/user/user-26.jpg" class="rounded-circle" alt="image"></a>
-                                    <div class="text">
-                                        <h3>
-                                            <a href="/home/my-profile">Alice</a>
-                                        </h3>
-                                        <span>05 September, 2021</span>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="list-item">
-                        <div class="row justify-content-center">
-                            <div class="col-lg-4 col-md-4">
-                                <div class="list-content">
-                                    <a href="/home/my-profile"><img src="~/assets/images/user/user-27.jpg" class="rounded-circle" alt="image"></a>
-                                    <div class="text">
-                                        <h3>
-                                            <a href="/home/my-profile">Callihan</a>
-                                        </h3>
-                                        <span>09 September, 2021</span>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-lg-4 col-md-4">
-                                <div class="list-content">
-                                    <a href="/home/my-profile"><img src="~/assets/images/user/user-28.jpg" class="rounded-circle" alt="image"></a>
-                                    <div class="text">
-                                        <h3>
-                                            <a href="/home/my-profile">Leona</a>
-                                        </h3>
-                                        <span>12 September, 2021</span>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-lg-4 col-md-4">
-                                <div class="list-content">
-                                    <a href="/home/my-profile"><img src="~/assets/images/user/user-29.jpg" class="rounded-circle" alt="image"></a>
-                                    <div class="text">
-                                        <h3>
-                                            <a href="/home/my-profile">Walker</a>
-                                        </h3>
-                                        <span>14 September, 2021</span>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="list-item">
-                        <div class="row justify-content-center">
-                            <div class="col-lg-4 col-md-4">
-                                <div class="list-content">
-                                    <a href="/home/my-profile"><img src="~/assets/images/user/user-30.jpg" class="rounded-circle" alt="image"></a>
-                                    <div class="text">
-                                        <h3>
-                                            <a href="/home/my-profile">Barbara</a>
-                                        </h3>
-                                        <span>12 September, 2021</span>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-lg-4 col-md-4">
-                                <div class="list-content">
-                                    <a href="/home/my-profile"><img src="~/assets/images/user/user-31.jpg" class="rounded-circle" alt="image"></a>
-                                    <div class="text">
-                                        <h3>
-                                            <a href="/home/my-profile">Fleming</a>
-                                        </h3>
-                                        <span>18 September, 2021</span>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-lg-4 col-md-4">
-                                <div class="list-content">
-                                    <a href="/home/my-profile"><img src="~/assets/images/user/user-32.jpg" class="rounded-circle" alt="image"></a>
-                                    <div class="text">
-                                        <h3>
-                                            <a href="/home/my-profile">Zimmerman</a>
-                                        </h3>
-                                        <span>22 September, 2021</span>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="list-item">
-                        <div class="row justify-content-center">
-                            <div class="col-lg-4 col-md-4">
-                                <div class="list-content">
-                                    <a href="/home/my-profile"><img src="~/assets/images/user/user-33.jpg" class="rounded-circle" alt="image"></a>
-                                    <div class="text">
-                                        <h3>
-                                            <a href="/home/my-profile">Anthony</a>
-                                        </h3>
-                                        <span>23 September, 2021</span>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-lg-4 col-md-4">
-                                <div class="list-content">
-                                    <a href="/home/my-profile"><img src="~/assets/images/user/user-34.jpg" class="rounded-circle" alt="image"></a>
-                                    <div class="text">
-                                        <h3>
-                                            <a href="/home/my-profile">Michael</a>
-                                        </h3>
-                                        <span>26 September, 2021</span>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-lg-4 col-md-4">
-                                <div class="list-content">
-                                    <a href="/home/my-profile"><img src="~/assets/images/user/user-35.jpg" class="rounded-circle" alt="image"></a>
-                                    <div class="text">
-                                        <h3>
-                                            <a href="/home/my-profile">Romero</a>
-                                        </h3>
-                                        <span>29 September, 2021</span>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
+                    <div class="load-more-posts-btn">
+                        <a href="#"><i class="flaticon-loading"></i> Load More</a>
                     </div>
                 </div>
             </div>
@@ -1495,3 +2045,4 @@
     <div class="go-top">
         <i class="ri-arrow-up-line"></i>
     </div>
+

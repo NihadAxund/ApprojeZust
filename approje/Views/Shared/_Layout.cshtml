@@ -1,5 +1,30 @@
-﻿
+﻿<!doctype html>
+<html lang="zxx">
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
+    <!-- Links of CSS files -->
+    <link rel="stylesheet" href="~/assets/css/bootstrap.min.css">
+    <link rel="stylesheet" href="~/assets/css/animate.min.css">
+    <link rel="stylesheet" href="~/assets/css/remixicon.css">
+    <link rel="stylesheet" href="~/assets/css/flaticon.css">
+    <link rel="stylesheet" href="~/assets/css/jquery-ui.min.css">
+    <link rel="stylesheet" href="~/assets/css/magnific-popup.min.css">
+    <link rel="stylesheet" href="~/assets/css/simplebar.min.css">
+    <link rel="stylesheet" href="~/assets/css/metismenu.min.css">
+    <link rel="stylesheet" href="~/assets/css/owl.carousel.min.css">
+    <link rel="stylesheet" href="~/assets/css/owl.theme.default.min.css">
+    <link rel="stylesheet" href="~/assets/css/style.css">
+    <link rel="stylesheet" href="~/assets/css/responsive.css">
+
+     <title>@ViewData["Title"]</title>
+
+    <link rel="icon" type="image/png" href="~/assets/images/favicon.png">
+</head>
+
+<body>
 
     <!-- Start Preloader Area -->
     <div class="preloader-area">
@@ -431,7 +456,7 @@
                                         </div>
                                         <ul class="profile-body">
                                             <li><i class="flaticon-user"></i> <a href="/home/my-profile">My Profile</a></li>
-                                            <li><i class="flaticon-settings"></i> <a href="/home/setting">Setting</a></li>
+                                            <li><i class="flaticon-settings"></i> <a href="/home/settings">Setting</a></li>
                                             <li><i class="flaticon-privacy"></i> <a href="/home/privacy">Privacy</a></li>
                                             <li><i class="flaticon-information"></i> <a href="/home/help-and-support">Help & Support</a></li>
                                             <li><i class="flaticon-logout"></i> <a href="/home/index">Logout</a></li>
@@ -706,7 +731,7 @@
                                             </div>
                                             <ul class="profile-body">
                                                 <li><i class="flaticon-user"></i> <a href="/home/my-profile">My Profile</a></li>
-                                                <li><i class="flaticon-settings"></i> <a href="/home/setting">Setting</a></li>
+                                                <li><i class="flaticon-settings"></i> <a href="/home/settings">Setting</a></li>
                                                 <li><i class="flaticon-privacy"></i> <a href="/home/privacy">Privacy</a></li>
                                                 <li><i class="flaticon-information"></i> <a href="/home/help-and-support">Help & Support</a></li>
                                                 <li><i class="flaticon-logout"></i> <a href="/home/index">Logout</a></li>
@@ -739,85 +764,85 @@
 
             <div class="sidemenu-body">
                 <ul class="sidemenu-nav metisMenu h-100" id="sidemenu-nav" data-simplebar>
-                    <li class="nav-item">
+                    <li id="1" class="nav-item active">
                         <a href="/home/index" class="nav-link">
                             <span class="icon"><i class="flaticon-newspaper"></i></span>
                             <span class="menu-title">News Feed</span>
                         </a>
                     </li>
-                    <li class="nav-item">
+                    <li id="2" class="nav-item">
                         <a href="/home/notifications" class="nav-link">
                             <span class="icon"><i class="flaticon-bell"></i></span>
                             <span class="menu-title">Notifications</span>
                         </a>
                     </li>
-                    <li class="nav-item">
+                    <li id="3" class="nav-item">
                         <a href="/home/messages" class="nav-link">
                             <span class="icon"><i class="flaticon-comment-1"></i></span>
                             <span class="menu-title">Messages</span>
                         </a>
                     </li>
-                    <li class="nav-item">
+                    <li id="4" class="nav-item">
                         <a href="/home/friends" class="nav-link">
                             <span class="icon"><i class="flaticon-friends"></i></span>
                             <span class="menu-title">Friends</span>
                         </a>
                     </li>
-                    <li class="nav-item">
+                    <li id="5" class="nav-item">
                         <a href="/home/groups" class="nav-link">
                             <span class="icon"><i class="flaticon-team"></i></span>
                             <span class="menu-title">Groups</span>
                         </a>
                     </li>
-                    <li class="nav-item">
+                    <li id="6" class="nav-item">
                         <a href="/home/favorite" class="nav-link">
                             <span class="icon"><i class="flaticon-star"></i></span>
                             <span class="menu-title">Favorite</span>
                         </a>
                     </li>
-                    <li class="nav-item">
+                    <li id="7" class="nav-item">
                         <a href="/home/events" class="nav-link">
                             <span class="icon"><i class="flaticon-calendar"></i></span>
                             <span class="menu-title">Events</span>
                         </a>
                     </li>
-                    <li class="nav-item">
+                    <li id="8" class="nav-item">
                         <a href="/home/live-chat" class="nav-link">
                             <span class="icon"><i class="flaticon-live-chat"></i></span>
                             <span class="menu-title">Live Chat</span>
                         </a>
                     </li>
-                    <li class="nav-item active">
+                    <li id="9" class="nav-item">
                         <a href="/home/birthday" class="nav-link">
                             <span class="icon"><i class="flaticon-cake"></i></span>
                             <span class="menu-title">Birthday</span>
                         </a>
                     </li>
-                    <li class="nav-item">
+                    <li id="10" class="nav-item">
                         <a href="/home/video" class="nav-link">
                             <span class="icon"><i class="flaticon-video"></i></span>
                             <span class="menu-title">Video</span>
                         </a>
                     </li>
-                    <li class="nav-item">
+                    <li id="12" class="nav-item">
                         <a href="/home/weather" class="nav-link">
                             <span class="icon"><i class="flaticon-cloudy"></i></span>
                             <span class="menu-title">Weather</span>
                         </a>
                     </li>
-                    <li class="nav-item">
+                    <li id="13" class="nav-item">
                         <a href="/home/marketplace" class="nav-link">
                             <span class="icon"><i class="flaticon-online-shopping"></i></span>
                             <span class="menu-title">Marketplace</span>
                         </a>
                     </li>
-                    <li class="nav-item">
+                    <li id="14" class="nav-item">
                         <a href="/home/login" class="nav-link">
                             <span class="icon"><i class="flaticon-user"></i></span>
                             <span class="menu-title">Login</span>
                         </a>
                     </li>
-                    <li class="nav-item">
+                    <li id="15" class="nav-item">
                         <a href="/home/register" class="nav-link">
                             <span class="icon"><i class="flaticon-information"></i></span>
                             <span class="menu-title">Register</span>
@@ -826,532 +851,9 @@
                 </ul>
             </div>
         </div>
-        <!-- End Sidemenu Area -->
+        <!-- End Sidemenu Area -->  
         <!-- Start Content Page Box Area -->
-        <div class="content-page-box-area">
-            <div class="page-banner-box bg-9">
-                <h3>Birthday</h3>
-            </div>
-
-            <div class="all-birthday-body">
-                <div class="birthday-header">
-                    <h3>Today Birthday</h3>
-                </div>
-
-                <div class="birthday-send-box">
-                    <div class="send-item">
-                        <a href="/home/my-profile"><img src="~/assets/images/user/user-41.jpg" class="rounded-circle" alt="image"></a>
-
-                        <div class="send-content">
-                            <h3>
-                                <a href="/home/my-profile">James Vanwin</a>
-                            </h3>
-                            <span>10 July, 2021</span>
-
-                            <form class="d-flex align-items-center">
-                                <input type="text" class="form-control" placeholder="Write someting">
-                                <button type="submit" class="send-btn d-inline-block">Send</button>
-                            </form>
-                        </div>
-                    </div>
-                    <div class="send-item">
-                        <a href="/home/my-profile"><img src="~/assets/images/user/user-42.jpg" class="rounded-circle" alt="image"></a>
-
-                        <div class="send-content">
-                            <h3>
-                                <a href="/home/my-profile">William Garcia</a>
-                            </h3>
-                            <span>10 July, 2021</span>
-
-                            <form class="d-flex align-items-center">
-                                <input type="text" class="form-control" placeholder="Write someting">
-                                <button type="submit" class="send-btn d-inline-block">Send</button>
-                            </form>
-                        </div>
-                    </div>
-                    <div class="send-item">
-                        <a href="/home/my-profile"><img src="~/assets/images/user/user-43.jpg" class="rounded-circle" alt="image"></a>
-
-                        <div class="send-content">
-                            <h3>
-                                <a href="/home/my-profile">Annie Ferrier</a>
-                            </h3>
-                            <span>10 July, 2021</span>
-
-                            <form class="d-flex align-items-center">
-                                <input type="text" class="form-control" placeholder="Write someting">
-                                <button type="submit" class="send-btn d-inline-block">Send</button>
-                            </form>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="birthday-list-box">
-                    <div class="birthday-header">
-                        <h3>Upcoming Birthday</h3>
-                    </div>
-
-                    <div class="list-item">
-                        <div class="row justify-content-center">
-                            <div class="col-lg-4 col-md-4">
-                                <div class="list-content">
-                                    <a href="/home/my-profile"><img src="~/assets/images/user/user-1.jpg" class="rounded-circle" alt="image"></a>
-                                    <div class="text">
-                                        <h3>
-                                            <a href="/home/my-profile">Vanwin</a>
-                                        </h3>
-                                        <span>11 July, 2021</span>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-lg-4 col-md-4">
-                                <div class="list-content">
-                                    <a href="/home/my-profile"><img src="~/assets/images/user/user-2.jpg" class="rounded-circle" alt="image"></a>
-                                    <div class="text">
-                                        <h3>
-                                            <a href="/home/my-profile">Reynolds</a>
-                                        </h3>
-                                        <span>12 July, 2021</span>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-lg-4 col-md-4">
-                                <div class="list-content">
-                                    <a href="/home/my-profile"><img src="~/assets/images/user/user-3.jpg" class="rounded-circle" alt="image"></a>
-                                    <div class="text">
-                                        <h3>
-                                            <a href="/home/my-profile">Warren</a>
-                                        </h3>
-                                        <span>12 July, 2021</span>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="list-item">
-                        <div class="row justify-content-center">
-                            <div class="col-lg-4 col-md-4">
-                                <div class="list-content">
-                                    <a href="/home/my-profile"><img src="~/assets/images/user/user-4.jpg" class="rounded-circle" alt="image"></a>
-                                    <div class="text">
-                                        <h3>
-                                            <a href="/home/my-profile">Heriberto</a>
-                                        </h3>
-                                        <span>13 July, 2021</span>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-lg-4 col-md-4">
-                                <div class="list-content">
-                                    <a href="/home/my-profile"><img src="~/assets/images/user/user-5.jpg" class="rounded-circle" alt="image"></a>
-                                    <div class="text">
-                                        <h3>
-                                            <a href="/home/my-profile">James</a>
-                                        </h3>
-                                        <span>14 July, 2021</span>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-lg-4 col-md-4">
-                                <div class="list-content">
-                                    <a href="/home/my-profile"><img src="~/assets/images/user/user-6.jpg" class="rounded-circle" alt="image"></a>
-                                    <div class="text">
-                                        <h3>
-                                            <a href="/home/my-profile">David</a>
-                                        </h3>
-                                        <span>15 July, 2021</span>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="list-item">
-                        <div class="row justify-content-center">
-                            <div class="col-lg-4 col-md-4">
-                                <div class="list-content">
-                                    <a href="/home/my-profile"><img src="~/assets/images/user/user-7.jpg" class="rounded-circle" alt="image"></a>
-                                    <div class="text">
-                                        <h3>
-                                            <a href="/home/my-profile">Willie</a>
-                                        </h3>
-                                        <span>18 July, 2021</span>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-lg-4 col-md-4">
-                                <div class="list-content">
-                                    <a href="/home/my-profile"><img src="~/assets/images/user/user-8.jpg" class="rounded-circle" alt="image"></a>
-                                    <div class="text">
-                                        <h3>
-                                            <a href="/home/my-profile">Edith</a>
-                                        </h3>
-                                        <span>18 July, 2021</span>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-lg-4 col-md-4">
-                                <div class="list-content">
-                                    <a href="/home/my-profile"><img src="~/assets/images/user/user-9.jpg" class="rounded-circle" alt="image"></a>
-                                    <div class="text">
-                                        <h3>
-                                            <a href="/home/my-profile">Thompson</a>
-                                        </h3>
-                                        <span>21 July, 2021</span>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="list-item">
-                        <div class="row justify-content-center">
-                            <div class="col-lg-4 col-md-4">
-                                <div class="list-content">
-                                    <a href="/home/my-profile"><img src="~/assets/images/user/user-10.jpg" class="rounded-circle" alt="image"></a>
-                                    <div class="text">
-                                        <h3>
-                                            <a href="/home/my-profile">Torres</a>
-                                        </h3>
-                                        <span>20 July, 2021</span>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-lg-4 col-md-4">
-                                <div class="list-content">
-                                    <a href="/home/my-profile"><img src="~/assets/images/user/user-11.jpg" class="rounded-circle" alt="image"></a>
-                                    <div class="text">
-                                        <h3>
-                                            <a href="/home/my-profile">Calvin</a>
-                                        </h3>
-                                        <span>12 July, 2021</span>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-lg-4 col-md-4">
-                                <div class="list-content">
-                                    <a href="/home/my-profile"><img src="~/assets/images/user/user-12.jpg" class="rounded-circle" alt="image"></a>
-                                    <div class="text">
-                                        <h3>
-                                            <a href="/home/my-profile">Christine</a>
-                                        </h3>
-                                        <span>25 July, 2021</span>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="birthday-list-box">
-                    <div class="birthday-header">
-                        <h3>August</h3>
-                    </div>
-
-                    <div class="list-item">
-                        <div class="row justify-content-center">
-                            <div class="col-lg-4 col-md-4">
-                                <div class="list-content">
-                                    <a href="/home/my-profile"><img src="~/assets/images/user/user-13.jpg" class="rounded-circle" alt="image"></a>
-                                    <div class="text">
-                                        <h3>
-                                            <a href="/home/my-profile">Matthew</a>
-                                        </h3>
-                                        <span>01 August, 2021</span>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-lg-4 col-md-4">
-                                <div class="list-content">
-                                    <a href="/home/my-profile"><img src="~/assets/images/user/user-14.jpg" class="rounded-circle" alt="image"></a>
-                                    <div class="text">
-                                        <h3>
-                                            <a href="/home/my-profile">Donahue</a>
-                                        </h3>
-                                        <span>01 August, 2021</span>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-lg-4 col-md-4">
-                                <div class="list-content">
-                                    <a href="/home/my-profile"><img src="~/assets/images/user/user-15.jpg" class="rounded-circle" alt="image"></a>
-                                    <div class="text">
-                                        <h3>
-                                            <a href="/home/my-profile">Rosemary</a>
-                                        </h3>
-                                        <span>01 August, 2021</span>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="list-item">
-                        <div class="row justify-content-center">
-                            <div class="col-lg-4 col-md-4">
-                                <div class="list-content">
-                                    <a href="/home/my-profile"><img src="~/assets/images/user/user-16.jpg" class="rounded-circle" alt="image"></a>
-                                    <div class="text">
-                                        <h3>
-                                            <a href="/home/my-profile">Bostrom</a>
-                                        </h3>
-                                        <span>11 August, 2021</span>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-lg-4 col-md-4">
-                                <div class="list-content">
-                                    <a href="/home/my-profile"><img src="~/assets/images/user/user-17.jpg" class="rounded-circle" alt="image"></a>
-                                    <div class="text">
-                                        <h3>
-                                            <a href="/home/my-profile">John</a>
-                                        </h3>
-                                        <span>12 August, 2021</span>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-lg-4 col-md-4">
-                                <div class="list-content">
-                                    <a href="/home/my-profile"><img src="~/assets/images/user/user-18.jpg" class="rounded-circle" alt="image"></a>
-                                    <div class="text">
-                                        <h3>
-                                            <a href="/home/my-profile">Barnes</a>
-                                        </h3>
-                                        <span>13 August, 2021</span>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="list-item">
-                        <div class="row justify-content-center">
-                            <div class="col-lg-4 col-md-4">
-                                <div class="list-content">
-                                    <a href="/home/my-profile"><img src="~/assets/images/user/user-19.jpg" class="rounded-circle" alt="image"></a>
-                                    <div class="text">
-                                        <h3>
-                                            <a href="/home/my-profile">Bettyann</a>
-                                        </h3>
-                                        <span>15 August, 2021</span>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-lg-4 col-md-4">
-                                <div class="list-content">
-                                    <a href="/home/my-profile"><img src="~/assets/images/user/user-20.jpg" class="rounded-circle" alt="image"></a>
-                                    <div class="text">
-                                        <h3>
-                                            <a href="/home/my-profile">Chappell</a>
-                                        </h3>
-                                        <span>16 August, 2021</span>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-lg-4 col-md-4">
-                                <div class="list-content">
-                                    <a href="/home/my-profile"><img src="~/assets/images/user/user-21.jpg" class="rounded-circle" alt="image"></a>
-                                    <div class="text">
-                                        <h3>
-                                            <a href="/home/my-profile">Tommie</a>
-                                        </h3>
-                                        <span>17 August, 2021</span>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="list-item">
-                        <div class="row justify-content-center">
-                            <div class="col-lg-4 col-md-4">
-                                <div class="list-content">
-                                    <a href="/home/my-profile"><img src="~/assets/images/user/user-21.jpg" class="rounded-circle" alt="image"></a>
-                                    <div class="text">
-                                        <h3>
-                                            <a href="/home/my-profile">Maurice</a>
-                                        </h3>
-                                        <span>21 August, 2021</span>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-lg-4 col-md-4">
-                                <div class="list-content">
-                                    <a href="/home/my-profile"><img src="~/assets/images/user/user-22.jpg" class="rounded-circle" alt="image"></a>
-                                    <div class="text">
-                                        <h3>
-                                            <a href="/home/my-profile">Sandra</a>
-                                        </h3>
-                                        <span>23 August, 2021</span>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-lg-4 col-md-4">
-                                <div class="list-content">
-                                    <a href="/home/my-profile"><img src="~/assets/images/user/user-23.jpg" class="rounded-circle" alt="image"></a>
-                                    <div class="text">
-                                        <h3>
-                                            <a href="/home/my-profile">M. Huff</a>
-                                        </h3>
-                                        <span>25 August, 2021</span>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="birthday-list-box">
-                    <div class="birthday-header">
-                        <h3>September</h3>
-                    </div>
-
-                    <div class="list-item">
-                        <div class="row justify-content-center">
-                            <div class="col-lg-4 col-md-4">
-                                <div class="list-content">
-                                    <a href="/home/my-profile"><img src="~/assets/images/user/user-24.jpg" class="rounded-circle" alt="image"></a>
-                                    <div class="text">
-                                        <h3>
-                                            <a href="/home/my-profile">Norma</a>
-                                        </h3>
-                                        <span>02 September, 2021</span>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-lg-4 col-md-4">
-                                <div class="list-content">
-                                    <a href="/home/my-profile"><img src="~/assets/images/user/user-25.jpg" class="rounded-circle" alt="image"></a>
-                                    <div class="text">
-                                        <h3>
-                                            <a href="/home/my-profile">Rhoades</a>
-                                        </h3>
-                                        <span>03 September, 2021</span>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-lg-4 col-md-4">
-                                <div class="list-content">
-                                    <a href="/home/my-profile"><img src="~/assets/images/user/user-26.jpg" class="rounded-circle" alt="image"></a>
-                                    <div class="text">
-                                        <h3>
-                                            <a href="/home/my-profile">Alice</a>
-                                        </h3>
-                                        <span>05 September, 2021</span>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="list-item">
-                        <div class="row justify-content-center">
-                            <div class="col-lg-4 col-md-4">
-                                <div class="list-content">
-                                    <a href="/home/my-profile"><img src="~/assets/images/user/user-27.jpg" class="rounded-circle" alt="image"></a>
-                                    <div class="text">
-                                        <h3>
-                                            <a href="/home/my-profile">Callihan</a>
-                                        </h3>
-                                        <span>09 September, 2021</span>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-lg-4 col-md-4">
-                                <div class="list-content">
-                                    <a href="/home/my-profile"><img src="~/assets/images/user/user-28.jpg" class="rounded-circle" alt="image"></a>
-                                    <div class="text">
-                                        <h3>
-                                            <a href="/home/my-profile">Leona</a>
-                                        </h3>
-                                        <span>12 September, 2021</span>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-lg-4 col-md-4">
-                                <div class="list-content">
-                                    <a href="/home/my-profile"><img src="~/assets/images/user/user-29.jpg" class="rounded-circle" alt="image"></a>
-                                    <div class="text">
-                                        <h3>
-                                            <a href="/home/my-profile">Walker</a>
-                                        </h3>
-                                        <span>14 September, 2021</span>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="list-item">
-                        <div class="row justify-content-center">
-                            <div class="col-lg-4 col-md-4">
-                                <div class="list-content">
-                                    <a href="/home/my-profile"><img src="~/assets/images/user/user-30.jpg" class="rounded-circle" alt="image"></a>
-                                    <div class="text">
-                                        <h3>
-                                            <a href="/home/my-profile">Barbara</a>
-                                        </h3>
-                                        <span>12 September, 2021</span>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-lg-4 col-md-4">
-                                <div class="list-content">
-                                    <a href="/home/my-profile"><img src="~/assets/images/user/user-31.jpg" class="rounded-circle" alt="image"></a>
-                                    <div class="text">
-                                        <h3>
-                                            <a href="/home/my-profile">Fleming</a>
-                                        </h3>
-                                        <span>18 September, 2021</span>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-lg-4 col-md-4">
-                                <div class="list-content">
-                                    <a href="/home/my-profile"><img src="~/assets/images/user/user-32.jpg" class="rounded-circle" alt="image"></a>
-                                    <div class="text">
-                                        <h3>
-                                            <a href="/home/my-profile">Zimmerman</a>
-                                        </h3>
-                                        <span>22 September, 2021</span>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="list-item">
-                        <div class="row justify-content-center">
-                            <div class="col-lg-4 col-md-4">
-                                <div class="list-content">
-                                    <a href="/home/my-profile"><img src="~/assets/images/user/user-33.jpg" class="rounded-circle" alt="image"></a>
-                                    <div class="text">
-                                        <h3>
-                                            <a href="/home/my-profile">Anthony</a>
-                                        </h3>
-                                        <span>23 September, 2021</span>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-lg-4 col-md-4">
-                                <div class="list-content">
-                                    <a href="/home/my-profile"><img src="~/assets/images/user/user-34.jpg" class="rounded-circle" alt="image"></a>
-                                    <div class="text">
-                                        <h3>
-                                            <a href="/home/my-profile">Michael</a>
-                                        </h3>
-                                        <span>26 September, 2021</span>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-lg-4 col-md-4">
-                                <div class="list-content">
-                                    <a href="/home/my-profile"><img src="~/assets/images/user/user-35.jpg" class="rounded-circle" alt="image"></a>
-                                    <div class="text">
-                                        <h3>
-                                            <a href="/home/my-profile">Romero</a>
-                                        </h3>
-                                        <span>29 September, 2021</span>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
+        @RenderBody()
         <!-- End Content Page Box Area -->
         <!-- Start Right Sidebar Area -->
         <div class="right-sidebar-area" data-simplebar>
@@ -1486,7 +988,7 @@
     <div class="copyrights-area">
         <div class="container">
             <div class="row align-items-center">
-                <p><i class="ri-copyright-line"></i> 2021 Zust. All Rights Reserved by <a href="https://envytheme.com/" target="_blank">EnvyTheme</a></p>
+                <p><i class="ri-copyright-line"></i> 2023 Zust. All Rights Reserved by <a href="https://aykhan.net" target="_blank">aykhan.net</a></p>
             </div>
         </div>
     </div>
@@ -1495,3 +997,47 @@
     <div class="go-top">
         <i class="ri-arrow-up-line"></i>
     </div>
+    <!-- End Go Top Area -->
+    <!-- Links of JS files -->
+    <script src="~/assets/js/jquery.min.js"></script>
+    <script src="~/assets/js/bootstrap.bundle.min.js"></script>
+    <script src="~/assets/js/jquery.magnific-popup.min.js"></script>
+    <script src="~/assets/js/jquery-ui.min.js"></script>
+    <script src="~/assets/js/simplebar.min.js"></script>
+    <script src="~/assets/js/metismenu.min.js"></script>
+    <script src="~/assets/js/owl.carousel.min.js"></script>
+    <script src="~/assets/js/wow.min.js"></script>
+    <script src="~/assets/js/main.js"></script>
+</body>
+</html>
+
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+        var navLinks = document.querySelectorAll('.nav-item');
+
+        var activeItem = localStorage.getItem('activeMenuItem');
+
+        // If an active menu item is found, add the "active" class to it
+        if (activeItem){
+            navLinks.forEach(i => {
+                i.classList.remove('active');
+            })
+            var id = parseInt(activeItem.replace("#", ""));
+            document.getElementById(`${id}`).classList.add("active");
+            localStorage.setItem('activeMenuItem', '#' + navLinks[0].id);
+        }
+
+        navLinks.forEach(function (link) {
+            link.addEventListener('click', function (event) {
+                navLinks.forEach(function (link) {
+                    link.classList.remove('active');
+                });
+
+                this.classList.add('active');
+
+                localStorage.setItem('activeMenuItem', '#' + this.id);
+            });
+        });
+    });
+</script>
+
