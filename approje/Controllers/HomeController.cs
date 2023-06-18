@@ -1,4 +1,7 @@
 ﻿using approje.Models;
+using ECommerce.WebUI.Entities;
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using System.Diagnostics;
 using System.Runtime.CompilerServices;
@@ -7,102 +10,180 @@ namespace approje.Controllers
 {
     public class HomeController : Controller
     {
-        private readonly ILogger<HomeController> _logger;
+        // private readonly ILogger<HomeController> _logger;
+        private UserManager<CustomIdentityUser> _userManager;
+        private RoleManager<CustomIdentityRole> _roleManager;
+        private SignInManager<CustomIdentityUser> _signInManager;
 
-        public HomeController(ILogger<HomeController> logger)
+        public HomeController(UserManager<CustomIdentityUser> userManager,
+            RoleManager<CustomIdentityRole> roleManager,
+            SignInManager<CustomIdentityUser> signInManager)
         {
-            _logger = logger;
+            _userManager = userManager;
+            _roleManager = roleManager;
+            _signInManager = signInManager;
         }
+
+
+        //public HomeController(ILogger<HomeController> logger)
+        //{
+        //    _logger = logger;
+        //}
+        [Authorize]
         public IActionResult groups()
         {
             return View();
         }
+        [Authorize]
         public IActionResult friends()
         {
             return View();
         }
+        [Authorize]
         public IActionResult favorite()
         {
             return View();
         }
+        [Authorize]
         public IActionResult birthday()
         {
             return View();
         }
-
+        [Authorize]
         public IActionResult events()
         {
             return View();
         }
 
-
+        [Authorize]
         public IActionResult Index()
         {
             return View();
         }
-
+        [Authorize]
         public IActionResult Privacy()
         {
             return View();
         }
+        [Authorize]
         [Route("/home/help-and-support")]
         public IActionResult help_and_support()
         {
             return View("help-and-support");
         }
-        
+        [Authorize]
         [Route("/home/live-chat")]
         public IActionResult live_chat()
         {
             // Gerekli işlemler
             return View("live-chat");
         }
+        [Authorize]
         public IActionResult marketplace()
         {
             return View();
         }
+        [Authorize]
         public IActionResult messages()
         {
             return View();
         }
+        [Authorize]
         [Route("/home/my-profile")]
         public IActionResult my_profile()
         {
             return View("my-profile");
         }
-
+        [Authorize]
         public IActionResult notifications()
         {
             return View();
         }
-        public IActionResult register() => View();
+        [Authorize]
 
         public IActionResult setting()
         {
             return View();
         }
-
+        [Authorize]
         public IActionResult video()
         {
             return View();
         }
-
+        [Authorize]
         public IActionResult weather()
         {
             return View();
         }
-
+        [Authorize]
         [Route("/home/forgot-password")]
-        public IActionResult forgot_password() 
+        public IActionResult forgot_password()
         {
             return View();
         }
+        //Accound
+        public IActionResult register() => View();
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+
+        public async Task<ActionResult> register(RegisterViewModel model)
+        {
+            if (ModelState.IsValid)
+            {
+                CustomIdentityUser user = new CustomIdentityUser
+                {
+                    UserName = model.Username,
+                    Email = model.Email
+                };
+                IdentityResult result = await _userManager.CreateAsync(user, model.Password);
+
+                if (result.Succeeded)
+                {
+
+                    if (!_roleManager.RoleExistsAsync("User").Result)
+                    {
+                        CustomIdentityRole role = new CustomIdentityRole
+                        {
+                            Name = "User"
+                        };
+
+                        IdentityResult roleResult = await _roleManager.CreateAsync(role);
+                        if (!roleResult.Succeeded)
+                        {
+                            ModelState.AddModelError("", "We can not add the role");
+                            return View(model);
+                        }
+                    }
+
+                    await _userManager.AddToRoleAsync(user, "User");
+                    return RedirectToAction("login", "Home");
+                }
+            }
+            return View(model);
+        }
+
 
         public IActionResult login()
         {
             return View();
         }
 
+        [HttpPost]
+        public async Task<ActionResult> login(LoginViewModel model)
+        {
+            if (ModelState.IsValid)
+            {
+                var result = await _signInManager.PasswordSignInAsync(model.UserName, model.Password, model.RememberMe, false);
+                if (result.Succeeded)
+                {
+   
+                    return RedirectToAction("index", "Home");
+                }
+                ModelState.AddModelError("", "Invalid Login");
+            }
+            return View(model);
+        }
 
 
 
