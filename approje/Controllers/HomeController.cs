@@ -1,8 +1,10 @@
 ﻿using approje.Models;
 using ECommerce.WebUI.Entities;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Filters;
 using System.Diagnostics;
 using System.Runtime.CompilerServices;
 
@@ -14,15 +16,30 @@ namespace approje.Controllers
         private UserManager<CustomIdentityUser> _userManager;
         private RoleManager<CustomIdentityRole> _roleManager;
         private SignInManager<CustomIdentityUser> _signInManager;
-
+        private CustomIdentityDbContext _context;
+        IHttpContextAccessor _httpContextAccessor;
+         public  UserViewModel _userViewModel { get; set; }
         public HomeController(UserManager<CustomIdentityUser> userManager,
             RoleManager<CustomIdentityRole> roleManager,
-            SignInManager<CustomIdentityUser> signInManager)
+            SignInManager<CustomIdentityUser> signInManager,
+            CustomIdentityDbContext context, IHttpContextAccessor httpContextAccessor)
         {
             _userManager = userManager;
             _roleManager = roleManager;
             _signInManager = signInManager;
+            _context = context;
+            _httpContextAccessor = httpContextAccessor;
+
+
         }
+
+        public override void OnActionExecuting(ActionExecutingContext context)
+        {
+            if (_httpContextAccessor.HttpContext.User.Identity.Name!=null)
+                ViewDataLoadaig();
+            base.OnActionExecuting(context);
+        }
+
 
 
         //public HomeController(ILogger<HomeController> logger)
@@ -56,8 +73,27 @@ namespace approje.Controllers
         }
 
         [Authorize]
+
+        private void ViewDataLoadaig()
+        {
+
+            if(_userViewModel == null)
+            {
+                var _userName = _httpContextAccessor.HttpContext.User.Identity.Name;
+                var user = _context.Users.FirstOrDefault(f => f.UserName == _userName);
+                _userViewModel = new UserViewModel(user.UserName, user.Email);
+            }
+            ViewData["User"] = _userViewModel;
+
+
+            
+        }
+
+
+        [Authorize]
         public IActionResult Index()
         {
+            
             return View();
         }
         [Authorize]
@@ -97,6 +133,7 @@ namespace approje.Controllers
         [Authorize]
         public IActionResult notifications()
         {
+            
             return View();
         }
         [Authorize]
@@ -177,7 +214,6 @@ namespace approje.Controllers
                 var result = await _signInManager.PasswordSignInAsync(model.UserName, model.Password, model.RememberMe, false);
                 if (result.Succeeded)
                 {
-   
                     return RedirectToAction("index", "Home");
                 }
                 ModelState.AddModelError("", "Invalid Login");
