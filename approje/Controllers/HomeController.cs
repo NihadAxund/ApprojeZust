@@ -1,10 +1,12 @@
-﻿using approje.Models;
-using ECommerce.WebUI.Entities;
+﻿using App.Entities.Models;
+using approje.Hubs;
+using approje.Models;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Filters;
+using Microsoft.AspNetCore.SignalR;
 using System.Diagnostics;
 using System.Runtime.CompilerServices;
 
@@ -18,18 +20,19 @@ namespace approje.Controllers
         private SignInManager<CustomIdentityUser> _signInManager;
         private CustomIdentityDbContext _context;
         IHttpContextAccessor _httpContextAccessor;
+        private readonly IHubContext<ChatHub> _hubContext;
          public  UserViewModel _userViewModel { get; set; }
         public HomeController(UserManager<CustomIdentityUser> userManager,
             RoleManager<CustomIdentityRole> roleManager,
             SignInManager<CustomIdentityUser> signInManager,
-            CustomIdentityDbContext context, IHttpContextAccessor httpContextAccessor)
+            CustomIdentityDbContext context, IHttpContextAccessor httpContextAccessor, IHubContext<ChatHub> hubContext)
         {
             _userManager = userManager;
             _roleManager = roleManager;
             _signInManager = signInManager;
             _context = context;
             _httpContextAccessor = httpContextAccessor;
-
+            _hubContext = hubContext;
 
         }
 
@@ -40,12 +43,6 @@ namespace approje.Controllers
             base.OnActionExecuting(context);
         }
 
-
-
-        //public HomeController(ILogger<HomeController> logger)
-        //{
-        //    _logger = logger;
-        //}
         [Authorize]
         public IActionResult groups()
         {

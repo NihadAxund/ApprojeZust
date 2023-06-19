@@ -1,12 +1,11 @@
 ﻿using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 
-namespace ECommerce.WebUI.Entities
+namespace App.Entities.Models
 {
     public class CustomIdentityDbContext:IdentityDbContext<CustomIdentityUser,CustomIdentityRole,string>
     {
-        public CustomIdentityDbContext(DbContextOptions<CustomIdentityDbContext> options)
-            :base(options)
+         public CustomIdentityDbContext(DbContextOptions<CustomIdentityDbContext> options) :base(options)
         {
 
         }

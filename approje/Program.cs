@@ -1,4 +1,6 @@
-﻿using ECommerce.WebUI.Entities;
+﻿using App.Business.Concrete;
+using App.Entities.Models;
+using approje.Hubs;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
@@ -9,7 +11,10 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddControllersWithViews();
 
 var connectionString = "Data Source=(localdb)\\MSSQLLocalDB;Initial Catalog=AppPoroje;Integrated Security=True;Connect Timeout=30;Encrypt=False;Trust Server Certificate=False;Application Intent=ReadWrite;Multi Subnet Failover=False";
+builder.Services.AddSession();
 
+builder.Services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
+builder.Services.AddSingleton<CustomIdentityUserService, CustomIdentityUserService>();
 // Hizmetlerin yapılandırılması
 
 builder.Services.AddDbContext<CustomIdentityDbContext>(options =>
@@ -20,6 +25,8 @@ builder.Services.AddDbContext<CustomIdentityDbContext>(options =>
 builder.Services.AddIdentity<CustomIdentityUser, CustomIdentityRole>()
     .AddEntityFrameworkStores<CustomIdentityDbContext>()
     .AddDefaultTokenProviders();
+
+builder.Services.AddSignalR();
 
 builder.Services.AddAuthentication(options =>
 {
@@ -53,9 +60,14 @@ app.UseRouting();
 app.UseAuthentication();
 app.UseAuthorization();
 
+app.UseEndpoints(endpoints =>
+{
+    endpoints.MapControllerRoute("Default", "{controller=Home}/{action=Index}/{id?}");
+    endpoints.MapHub<ChatHub>("/chathub");
+});
 
-app.MapControllerRoute(
-    name: "default",
-    pattern: "{controller=Home}/{action=Index}/{id?}");
+//app.MapControllerRoute(
+//    name: "default",
+//    pattern: "{controller=Home}/{action=Index}/{id?}");
 
 app.Run();

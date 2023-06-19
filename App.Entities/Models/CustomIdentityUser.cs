@@ -1,8 +1,9 @@
-﻿using Microsoft.AspNetCore.Identity;
+﻿using App.Core.Abstraction;
+using Microsoft.AspNetCore.Identity;
 
-namespace ECommerce.WebUI.Entities
+namespace App.Entities.Models
 {
-    public class CustomIdentityUser:IdentityUser
+    public class CustomIdentityUser:IdentityUser,IEntity
     {
     }
 }
