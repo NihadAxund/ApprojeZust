@@ -9,7 +9,7 @@ namespace approje.Hubs
     {
         private UserManager<CustomIdentityUser> _Usermanegeer { get; set; }
         private IHttpContextAccessor _HttpContextAccessor { get; set; }
-        private static Dictionary<string, string> UsersAndId = new Dictionary<string, string>();
+        private static Dictionary<string, CustomIdentityUser> UsersAndId = new Dictionary<string, CustomIdentityUser>();
 
         public ChatHub(UserManager<CustomIdentityUser> usermanageer,IHttpContextAccessor httpContextAccessor) 
         {
@@ -21,19 +21,25 @@ namespace approje.Hubs
         {
             var user = await _Usermanegeer.GetUserAsync(_HttpContextAccessor.HttpContext.User);
             if (!(UsersAndId.ContainsKey(user.Id))){
-                UsersAndId.Add(user.Id, user.UserName);
-                await Clients.Others.SendAsync("Connect",user.UserName.ToString());
+                UsersAndId.Add(user.Id, user);
+                await Clients.Others.SendAsync("Connect",user.UserName,user.Id);
 
             }   
             
 
            // return base.OnConnectedAsync();
         }
-
-        public async Task Join(string User_Name)
+        public override async Task OnDisconnectedAsync(Exception? exception)
         {
-            UsersAndId.Add(User_Name, Context.ConnectionId);
+            var user = await _Usermanegeer.GetUserAsync(_HttpContextAccessor.HttpContext.User);
+            if(user != null)
+            {
+                UsersAndId.Remove(user.Id);
+                await Clients.Others.SendAsync("Disconnect",user.Id);
+            }
         }
+
+
 
         public async Task SendProgramData()
         {
