@@ -13,7 +13,7 @@ connection.start().then(function () {
 
 connection.on("Connect", function (info,id) {
     var div = document.querySelector("#OnlineUsersDiv");
-    var data = `<article class="item" id ="${id}" >
+    var data = `<article class="item animate__animated animate__slideInRight" id ="${id}" >
                                 <a href="#" class="thumb">
                                     <span class="fullimage bg1" role="img">A</span>
                                 </a>
@@ -28,14 +28,13 @@ connection.on("Connect", function (info,id) {
 
     div.innerHTML += data
   //  alert(div.innerHTML)
+    setTimeout(function () {
+        $("#OnlineUsersDiv").find(`article#${id}`).removeClass("animate__animated");
+    }, 600);
 });
 
 connection.on("Disconnect", function (info) {
    
-  //  alert(info)
+ 
     $(`#OnlineUsersDiv > article#${info}`).remove();
-    //$(document).ready(function () {
-    //    $("#OnlineUsersDiv").find("#d).remove();
-    //});
-   // alert("So");
 });
