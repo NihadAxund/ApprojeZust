@@ -64,7 +64,7 @@ app.UseEndpoints(endpoints =>
 {
     endpoints.MapControllerRoute("Default", "{controller=Home}/{action=Index}/{id?}");
     endpoints.MapHub<ChatHub>("/chathub");
-    //endpoints.MapHub<ChatHub>("/Join");
+
 
 });
 
