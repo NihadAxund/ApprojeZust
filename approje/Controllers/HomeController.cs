@@ -135,7 +135,7 @@ namespace approje.Controllers
         }
         [Authorize]
 
-        public IActionResult setting()
+        public IActionResult settings()
         {
             return View();
         }

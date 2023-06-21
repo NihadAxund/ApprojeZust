@@ -871,14 +871,14 @@
                                 <a href="#"><img src="~/assets/images/weather/weather.jpg" alt="image"></a>
                             </div>
                         </div>
-                        <div class="widget widget-birthday">
+                        <div class="widget widget-birthday" id="OnlineUsersDiv" >
                             <div class="birthday-title d-flex justify-content-between align-items-center">
-                                <h3>Today Birthdays</h3>
-                                <span><a href="#">See All</a></span>
+                                <h3>Online Users</h3>
+                        @*        <span><a href="#">See All</a></span>*@
                             </div>
-                            <article class="item">
+                          @*  <article class="item">
                                 <a href="#" class="thumb">
-                                    <span class="fullimage bg1" role="img"></span>
+                                    <span class="fullimage bg1" role="img">AAA</span>
                                 </a>
 
                                 <div class="info">
@@ -929,8 +929,8 @@
                                     <span>May 20</span>
                                 </div>
                             </article>
-
-                            <div class="birthday-title d-flex justify-content-between align-items-center">
+*@
+                     @*       <div class="birthday-title d-flex justify-content-between align-items-center">
                                 <h3>Coming Birthdays</h3>
                                 <span><a href="#">See All</a></span>
                             </div>
@@ -1009,7 +1009,7 @@
                                 <span class="name"><a href="#">Julia Ramos</a></span>
                                 <span class="add-friend"><a href="#">Add</a></span>
                             </div>
-                        </div>
+                        </div>*@
                     </aside>
                 </div>
             </div>
@@ -1158,5 +1158,7 @@
         <i class="ri-arrow-up-line"></i>
     </div>
 
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/microsoft-signalr/6.0.1/signalr.js"></script>
+
+<script src="~/MyJs/signalr/dist/browser/signalr.js"></script>
+<script src="~/MyJs/chat.js"></script>
+<script src="~/MyJs/index.js"></script>

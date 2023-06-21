@@ -1,6 +1,7 @@
 ﻿using App.Entities.Models;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.SignalR;
+using System.Collections.Generic;
 
 namespace approje.Hubs
 {
@@ -19,10 +20,14 @@ namespace approje.Hubs
         public override async Task OnConnectedAsync()
         {
             var user = await _Usermanegeer.GetUserAsync(_HttpContextAccessor.HttpContext.User);
-          
-            await Clients.Others.SendAsync("Connect",user.Id.ToString());
+            if (!(UsersAndId.ContainsKey(user.Id))){
+                UsersAndId.Add(user.Id, user.UserName);
+                await Clients.Others.SendAsync("Connect",user.UserName.ToString());
 
-            return base.OnConnectedAsync();
+            }   
+            
+
+           // return base.OnConnectedAsync();
         }
 
         public async Task Join(string User_Name)
