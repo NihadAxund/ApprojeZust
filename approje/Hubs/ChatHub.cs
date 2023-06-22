@@ -9,7 +9,7 @@ namespace approje.Hubs
     {
         private UserManager<CustomIdentityUser> _Usermanegeer { get; set; }
         private IHttpContextAccessor _HttpContextAccessor { get; set; }
-        private static Dictionary<string, CustomIdentityUser> UsersAndId = new Dictionary<string, CustomIdentityUser>();
+        public static Dictionary<string, CustomIdentityUser> UsersAndId = new Dictionary<string, CustomIdentityUser>();
 
         public ChatHub(UserManager<CustomIdentityUser> usermanageer,IHttpContextAccessor httpContextAccessor) 
         {

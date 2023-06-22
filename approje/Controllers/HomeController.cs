@@ -78,7 +78,7 @@ namespace approje.Controllers
             {
                 var _userName = _httpContextAccessor.HttpContext.User.Identity.Name;
                 var user = _context.Users.FirstOrDefault(f => f.UserName == _userName);
-                _userViewModel = new UserViewModel(user.UserName, user.Email);
+                _userViewModel = new UserViewModel(user.Id, user.UserName, user.Email);
             }
             ViewData["User"] = _userViewModel;
 
@@ -155,6 +155,29 @@ namespace approje.Controllers
         {
             return View();
         }
+        [Authorize]
+        public async Task<IActionResult> GetAllOnlineUsers()
+        {
+            var list = ChatHub.UsersAndId.Values.ToList();
+            list.Remove(ChatHub.UsersAndId[_userViewModel.Id]);
+                return Ok(list);
+        }
+
+        [Authorize]
+        public async Task<IActionResult> userProfile(string id)
+        {
+            var user = _context.Users.FirstOrDefault(f => f.Id==id);
+            UserViewModel vm = new UserViewModel(user.Id,user.UserName,user.Email);
+            if (vm != null)
+                return View(vm);
+            
+            return Ok();
+        }
+
+
+
+
+
         //Accound
         public IActionResult register() => View();
 
