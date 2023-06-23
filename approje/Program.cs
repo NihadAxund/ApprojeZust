@@ -51,12 +51,7 @@ builder.Services.AddAuthentication(options =>
     options.AccessDeniedPath = "/home/login"; // Erişim reddedildi sayfasının URL'si
 });
 
-builder.Services.AddSignalR(options =>
-{
-    options.HandshakeTimeout = TimeSpan.FromSeconds(15); // Başlangıç el sıkışma süresi
-    options.ClientTimeoutInterval = TimeSpan.FromSeconds(60); // İstemci zaman aşımı süresi
-    options.KeepAliveInterval = TimeSpan.FromSeconds(30); // Keep-alive süresi
-});
+builder.Services.AddSignalR();
 
 
 

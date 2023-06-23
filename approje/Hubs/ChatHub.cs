@@ -11,6 +11,7 @@ namespace approje.Hubs
         private UserManager<CustomIdentityUser> _Usermanegeer { get; set; }
         private IHttpContextAccessor _HttpContextAccessor { get; set; }
         public static Dictionary<string, CustomIdentityUser> UsersAndId = new Dictionary<string, CustomIdentityUser>();
+        private static Dictionary<string, CustomIdentityUser> Disconnect_User = new Dictionary<string, CustomIdentityUser>();
 
         public ChatHub(UserManager<CustomIdentityUser> usermanageer,IHttpContextAccessor httpContextAccessor) 
         {
@@ -25,7 +26,11 @@ namespace approje.Hubs
             {
                 UsersAndId.Add(user.Id, user);
                 await Clients.Others.SendAsync("Connect", user.UserName, user.Id);
-
+                
+            }
+            else if (Disconnect_User.ContainsKey(user.Id))
+            {
+                Disconnect_User.Remove(user.Id);
             }
 
 
@@ -36,8 +41,11 @@ namespace approje.Hubs
             var user = await _Usermanegeer.GetUserAsync(_HttpContextAccessor.HttpContext.User);
             if (user != null)
             {
+                    Disconnect_User.Add(user.Id, user);
+                await Task.Delay(TimeSpan.FromSeconds(5));
                 UsersAndId.Remove(user.Id);
-                await Clients.Others.SendAsync("Disconnect", user.Id);
+                    if(Disconnect_User.ContainsKey(user.Id))
+                        await Clients.Others.SendAsync("Disconnect", user.Id);
             }
         }
 

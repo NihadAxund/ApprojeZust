@@ -182,6 +182,23 @@ namespace approje.Controllers
             return Ok();
         }
 
+        [Authorize]
+        public async Task<JsonResult> SendFollow(string id)
+        {
+            var user = await _userManager.GetUserAsync(_httpContextAccessor.HttpContext.User);
+            var OwnUser =  _userManager.Users.FirstOrDefault(u=>u.Id ==id);
+            if(OwnUser != null)
+            {
+                OwnUser.FriendRequests.Add(new($"{_userViewModel.Name} Send friend request at {DateTime.Now.ToShortDateString()}",
+                    "Requset",_userViewModel.Id,user,id));
+                 await _userManager.UpdateAsync(OwnUser);
+                return new JsonResult(OwnUser);
+            }
+            else
+            {
+                return new JsonResult("Error");
+            }
+        }
 
 
 

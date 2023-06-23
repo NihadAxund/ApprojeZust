@@ -15,7 +15,8 @@ connection.start().then(function () {
 
 connection.on("Connect", function (info,id) {
     var div = document.querySelector("#OnlineUsersDiv");
-    var data = `<article class="item" id ="${id}" >
+    var data = " ";
+    data = `<article class="item" id ="${id}" >
                                 <a href="#" class="thumb">
                                     <span class="fullimage bg1" role="img">A</span>
                                 </a>

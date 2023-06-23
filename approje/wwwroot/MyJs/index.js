@@ -1,13 +1,15 @@
 ﻿
 var div = document.querySelector("#OnlineUsersDiv");
-function GetAllOnlineUsersFunction() {;
+function GetAllOnlineUsersFunction() {
+    
     $.ajax({
         url: "/Home/GetAllOnlineUsers",
         method: "GET",
         success: function (data) {
+          
             for (var i = 0; i < data.length; i++) {
-               // alert(data[i].userName)
-                var dat2a = `<article class="item" id ="${data[i].id}" >
+                // alert(data[i].userName)
+                var text = `<article class="item" id="${data[i].id}" >
                                 <a href="#" class="thumb">
                                     <span class="fullimage bg1" role="img"></span>
                                 </a>
@@ -19,11 +21,29 @@ function GetAllOnlineUsersFunction() {;
                                     <span>Today</span>
                                 </div>
                             </article>`;
+                if (text != null && div != null) {
+                    div.innerHTML += text
+                }
 
-                div.innerHTML += dat2a
-  
             }
 
         }
     });
+}
+
+
+function SendRequest(id) {
+    alert(id);
+    $.ajax({
+        url: "/Home/SendFollow/" + id,
+        method: "GET",
+        success: function (data) {
+            var jsonData = JSON.stringify(data);
+            alert(jsonData)
+        },
+        error: function (err) {
+            console.log(err)
+        }
+
+    })
 }
