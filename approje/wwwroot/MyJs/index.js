@@ -1,15 +1,12 @@
 ﻿
 var div = document.querySelector("#OnlineUsersDiv");
-function GetAllOnlineUsersFunction() {
-   //  alert("he");
+function GetAllOnlineUsersFunction() {;
     $.ajax({
         url: "/Home/GetAllOnlineUsers",
         method: "GET",
         success: function (data) {
-           // console.log(data);
-            //  let content = " ";
             for (var i = 0; i < data.length; i++) {
-                alert(data[i].userName)
+               // alert(data[i].userName)
                 var dat2a = `<article class="item" id ="${data[i].id}" >
                                 <a href="#" class="thumb">
                                     <span class="fullimage bg1" role="img"></span>
@@ -24,9 +21,9 @@ function GetAllOnlineUsersFunction() {
                             </article>`;
 
                 div.innerHTML += dat2a
+  
             }
 
         }
     });
-    //alert("so");
 }

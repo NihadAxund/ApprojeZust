@@ -50,6 +50,23 @@ Default CSS
   --transition: .4s;
 }
 
+#follow-button {
+    color: #3399FF;
+    font-family: "Helvetica";
+    font-size: 12pt;
+    background-color: #ffffff;
+    border: 1px solid;
+    border-color: #3399FF;
+    border-radius: 5px;
+    width: 85px;
+    height: 30px;
+    text-align:center;
+    justify-content:center;
+    padding:4px;
+    cursor: pointer;
+
+}
+
 body {
   padding: 0;
   margin: 0;
@@ -3293,6 +3310,7 @@ News Feed Area CSS
 .news-feed-area .news-feed {
   margin-bottom: 25px;
 }
+
 
 .news-feed-area .news-feed:last-child {
   margin-bottom: 0;

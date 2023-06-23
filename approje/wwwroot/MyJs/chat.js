@@ -6,14 +6,16 @@ connection.start().then(function () {
     console.log("Connected");
     //GetAllOnlineUsers();
     //alert("Conection");
-   GetAllOnlineUsersFunction();
+    setTimeout(function () {
+        GetAllOnlineUsersFunction();
+    }, 1000);
 }).catch(function (err) {
     console.log(err.toString())
 })
 
 connection.on("Connect", function (info,id) {
     var div = document.querySelector("#OnlineUsersDiv");
-    var data = `<article class="item animate__animated animate__slideInRight" id ="${id}" >
+    var data = `<article class="item" id ="${id}" >
                                 <a href="#" class="thumb">
                                     <span class="fullimage bg1" role="img">A</span>
                                 </a>
@@ -26,11 +28,7 @@ connection.on("Connect", function (info,id) {
                                 </div>
                             </article>`;
 
-   div.innerHTML += data
-  ////  alert(div.innerHTML)
-  //  setTimeout(function () {
-  //      $("#OnlineUsersDiv").find(`article#${id}`).removeClass("animate__animated");
-  //  }, 600);
+    div.innerHTML += data;
 });
 
 connection.on("Disconnect", function (info) {

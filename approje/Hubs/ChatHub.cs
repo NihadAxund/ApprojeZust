@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.SignalR;
 using System.Collections.Generic;
+using System.Security.Claims;
 
 namespace approje.Hubs
 {
@@ -20,24 +21,28 @@ namespace approje.Hubs
         public override async Task OnConnectedAsync()
         {
             var user = await _Usermanegeer.GetUserAsync(_HttpContextAccessor.HttpContext.User);
-            if (!(UsersAndId.ContainsKey(user.Id))){
+            if (!(UsersAndId.ContainsKey(user.Id)))
+            {
                 UsersAndId.Add(user.Id, user);
-                await Clients.Others.SendAsync("Connect",user.UserName,user.Id);
+                await Clients.Others.SendAsync("Connect", user.UserName, user.Id);
 
-            }   
-            
+            }
 
-           // return base.OnConnectedAsync();
+
+            // return base.OnConnectedAsync();
         }
         public override async Task OnDisconnectedAsync(Exception? exception)
         {
             var user = await _Usermanegeer.GetUserAsync(_HttpContextAccessor.HttpContext.User);
-            if(user != null)
+            if (user != null)
             {
                 UsersAndId.Remove(user.Id);
-                await Clients.Others.SendAsync("Disconnect",user.Id);
+                await Clients.Others.SendAsync("Disconnect", user.Id);
             }
         }
+
+
+
 
 
 

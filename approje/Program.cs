@@ -4,8 +4,17 @@ using approje.Hubs;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.AspNetCore.SignalR.Client;
+using Microsoft.AspNetCore.SignalR;
 
 var builder = WebApplication.CreateBuilder(args);
+
+builder.Services.AddControllersWithViews().AddJsonOptions(opt =>
+{
+    opt.JsonSerializerOptions.ReferenceHandler = System.Text.Json.Serialization.ReferenceHandler.IgnoreCycles;
+});
+
+
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
@@ -28,6 +37,7 @@ builder.Services.AddIdentity<CustomIdentityUser, CustomIdentityRole>()
 
 builder.Services.AddSignalR();
 
+
 builder.Services.AddAuthentication(options =>
 {
     options.DefaultScheme = CookieAuthenticationDefaults.AuthenticationScheme;
@@ -40,6 +50,14 @@ builder.Services.AddAuthentication(options =>
     options.LoginPath = "/home/login"; // Oturum açma sayfasının URL'si
     options.AccessDeniedPath = "/home/login"; // Erişim reddedildi sayfasının URL'si
 });
+
+builder.Services.AddSignalR(options =>
+{
+    options.HandshakeTimeout = TimeSpan.FromSeconds(15); // Başlangıç el sıkışma süresi
+    options.ClientTimeoutInterval = TimeSpan.FromSeconds(60); // İstemci zaman aşımı süresi
+    options.KeepAliveInterval = TimeSpan.FromSeconds(30); // Keep-alive süresi
+});
+
 
 
 
@@ -62,11 +80,16 @@ app.UseAuthorization();
 
 app.UseEndpoints(endpoints =>
 {
-    endpoints.MapHub<ChatHub>("/chathub");
+    endpoints.MapHub<ChatHub>("/chathub").RequireAuthorization(); // ChatHub'ı endpointlere ekleyin ve kimlik doğrulama gerektirin
+
+    // Diğer endpointler
     endpoints.MapControllerRoute("Default", "{controller=Home}/{action=Index}/{id?}");
-
-
+    endpoints.MapFallbackToController("Index", "Home");
 });
+
+
+
+
 
 //app.MapControllerRoute(
 //    name: "default",

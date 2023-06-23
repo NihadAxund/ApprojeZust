@@ -1,12 +1,14 @@
 ﻿using App.Entities.Models;
 using approje.Hubs;
 using approje.Models;
+
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Filters;
 using Microsoft.AspNetCore.SignalR;
+using Microsoft.AspNetCore.SignalR.Client;
 using System.Diagnostics;
 using System.Runtime.CompilerServices;
 
@@ -21,7 +23,7 @@ namespace approje.Controllers
         private CustomIdentityDbContext _context;
         IHttpContextAccessor _httpContextAccessor;
         private readonly IHubContext<ChatHub> _hubContext;
-         public  UserViewModel _userViewModel { get; set; }
+        public  UserViewModel _userViewModel { get; set; }
         public HomeController(UserManager<CustomIdentityUser> userManager,
             RoleManager<CustomIdentityRole> roleManager,
             SignInManager<CustomIdentityUser> signInManager,
@@ -34,6 +36,7 @@ namespace approje.Controllers
             _httpContextAccessor = httpContextAccessor;
             _hubContext = hubContext;
 
+
         }
 
         public override void OnActionExecuting(ActionExecutingContext context)
@@ -44,9 +47,10 @@ namespace approje.Controllers
         }
 
         [Authorize]
-        public IActionResult groups()
+        public async Task<IActionResult> groups()
         {
-            return View();
+            
+            return PartialView("groups");
         }
         [Authorize]
         public IActionResult friends()
@@ -78,9 +82,13 @@ namespace approje.Controllers
             {
                 var _userName = _httpContextAccessor.HttpContext.User.Identity.Name;
                 var user = _context.Users.FirstOrDefault(f => f.UserName == _userName);
-                _userViewModel = new UserViewModel(user.Id, user.UserName, user.Email);
+                if(user != null)
+                {
+                    _userViewModel = new UserViewModel(user.Id, user.UserName, user.Email);
+                    ViewData["User"] = _userViewModel;
+                }
+                else  RedirectToAction("login");
             }
-            ViewData["User"] = _userViewModel;
 
 
             
@@ -156,11 +164,11 @@ namespace approje.Controllers
             return View();
         }
         [Authorize]
-        public async Task<IActionResult> GetAllOnlineUsers()
+        public IActionResult GetAllOnlineUsers()
         {
             var list = ChatHub.UsersAndId.Values.ToList();
             list.Remove(ChatHub.UsersAndId[_userViewModel.Id]);
-                return Ok(list);
+            return Ok(list);
         }
 
         [Authorize]
@@ -191,7 +199,9 @@ namespace approje.Controllers
                 CustomIdentityUser user = new CustomIdentityUser
                 {
                     UserName = model.Username,
-                    Email = model.Email
+                    Email = model.Email,
+                   
+                
                 };
                 IdentityResult result = await _userManager.CreateAsync(user, model.Password);
 
