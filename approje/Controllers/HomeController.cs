@@ -199,6 +199,12 @@ namespace approje.Controllers
                 return new JsonResult("Error");
             }
         }
+        [Authorize]
+        public async Task<JsonResult> CancelFollow()
+        {
+
+            return new JsonResult("Error");
+        }
 
 
 

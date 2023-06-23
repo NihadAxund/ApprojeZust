@@ -1,5 +1,6 @@
 ﻿
 var div = document.querySelector("#OnlineUsersDiv");
+var FollowButoon = document.querySelector(".follow-button");
 function GetAllOnlineUsersFunction() {
     
     $.ajax({
@@ -32,6 +33,7 @@ function GetAllOnlineUsersFunction() {
 }
 
 
+
 function SendRequest(id) {
     alert(id);
     $.ajax({
@@ -40,10 +42,21 @@ function SendRequest(id) {
         success: function (data) {
             var jsonData = JSON.stringify(data);
             alert(jsonData)
+            $('.follow-button').removeClass('btn-primary').addClass('btn-secondary');
+            FollowButoon.textContent = "CANCEL";
+
+            FollowButoon.onclick = function () {
+                deleteRequest(FollowButoon.id);
+            };
+            
         },
         error: function (err) {
             console.log(err)
         }
-
     })
+    
+}
+
+function deleteRequest(id) {
+    console.log("deleteRequest işlevi çalıştı! ID: " + id);
 }
