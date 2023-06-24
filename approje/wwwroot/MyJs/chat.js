@@ -1,7 +1,6 @@
 ﻿"use strict"
 
 var connection = new signalR.HubConnectionBuilder().withUrl("/chathub").build();
-
 connection.start().then(function () {
     
 }).catch(function (err) {
