@@ -166,6 +166,7 @@ namespace App.Entities.Migrations
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
+                    CompositeId = table.Column<string>(type: "nvarchar(450)", nullable: false),
                     Content = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Status = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     SenderId = table.Column<string>(type: "nvarchar(max)", nullable: false),
@@ -240,6 +241,12 @@ namespace App.Entities.Migrations
                 column: "NormalizedUserName",
                 unique: true,
                 filter: "[NormalizedUserName] IS NOT NULL");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_FriendRequests_CompositeId",
+                table: "FriendRequests",
+                column: "CompositeId",
+                unique: true);
 
             migrationBuilder.CreateIndex(
                 name: "IX_FriendRequests_CustomIdentityUserId",

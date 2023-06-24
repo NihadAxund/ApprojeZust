@@ -9,6 +9,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Filters;
 using Microsoft.AspNetCore.SignalR;
 using Microsoft.AspNetCore.SignalR.Client;
+using Microsoft.EntityFrameworkCore;
 using System.Diagnostics;
 using System.Runtime.CompilerServices;
 
@@ -186,12 +187,17 @@ namespace approje.Controllers
         public async Task<JsonResult> SendFollow(string id)
         {
             var user = await _userManager.GetUserAsync(_httpContextAccessor.HttpContext.User);
-            var OwnUser =  _userManager.Users.FirstOrDefault(u=>u.Id ==id);
-            if(OwnUser != null)
+            var OwnUser = _userManager.Users.FirstOrDefault(u => u.Id == id);
+
+            if (OwnUser != null)
             {
-                OwnUser.FriendRequests.Add(new($"{_userViewModel.Name} Send friend request at {DateTime.Now.ToShortDateString()}",
-                    "Requset",_userViewModel.Id,user,id));
-                 await _userManager.UpdateAsync(OwnUser);
+                OwnUser.FriendRequests.Add(new FriendRequest($"{_userViewModel.Name} Send friend request at {DateTime.Now.ToShortDateString()}",
+                    "Request", _userViewModel.Id, user, id));
+
+                await _userManager.UpdateAsync(OwnUser);
+
+                //await _context.SaveChangesAsync();
+
                 return new JsonResult(OwnUser);
             }
             else
@@ -199,6 +205,7 @@ namespace approje.Controllers
                 return new JsonResult("Error");
             }
         }
+
         [Authorize]
         public async Task<JsonResult> CancelFollow()
         {

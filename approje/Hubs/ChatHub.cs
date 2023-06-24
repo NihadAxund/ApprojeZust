@@ -22,7 +22,7 @@ namespace approje.Hubs
         public override async Task OnConnectedAsync()
         {
             var user = await _Usermanegeer.GetUserAsync(_HttpContextAccessor.HttpContext.User);
-            if (!(UsersAndId.ContainsKey(user.Id)))
+            if (UsersAndId==null||!(UsersAndId.ContainsKey(user.Id)))
             {
                 UsersAndId.Add(user.Id, user);
                 await Clients.Others.SendAsync("Connect", user.UserName, user.Id);

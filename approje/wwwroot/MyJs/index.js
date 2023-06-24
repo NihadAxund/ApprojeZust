@@ -44,11 +44,10 @@ function SendRequest(id) {
             alert(jsonData)
             $('.follow-button').removeClass('btn-primary').addClass('btn-secondary');
             FollowButoon.textContent = "CANCEL";
-
             FollowButoon.onclick = function () {
                 deleteRequest(FollowButoon.id);
-            };
-            
+            }
+
         },
         error: function (err) {
             console.log(err)
@@ -58,5 +57,5 @@ function SendRequest(id) {
 }
 
 function deleteRequest(id) {
-    console.log("deleteRequest işlevi çalıştı! ID: " + id);
+    alert(id);
 }
