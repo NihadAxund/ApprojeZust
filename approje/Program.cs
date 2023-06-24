@@ -24,6 +24,7 @@ builder.Services.AddSession();
 
 builder.Services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
 builder.Services.AddSingleton<CustomIdentityUserService, CustomIdentityUserService>();
+
 // Hizmetlerin yapılandırılması
 
 builder.Services.AddDbContext<CustomIdentityDbContext>(options =>

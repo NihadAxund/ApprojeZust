@@ -567,8 +567,4 @@
     <ProjectReference Include="..\App.Entities\App.Entities.csproj" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="Dtos\" />
-  </ItemGroup>
-
 </Project>

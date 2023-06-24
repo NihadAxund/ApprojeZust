@@ -1,4 +1,5 @@
 ﻿using App.Entities.Models;
+using approje.Dtos;
 using approje.Hubs;
 using approje.Models;
 
@@ -18,6 +19,7 @@ namespace approje.Controllers
     public class HomeController : Controller
     {
         // private readonly ILogger<HomeController> _logger;
+        private CustomIdentityUser _user;
         private UserManager<CustomIdentityUser> _userManager;
         private RoleManager<CustomIdentityRole> _roleManager;
         private SignInManager<CustomIdentityUser> _signInManager;
@@ -83,6 +85,7 @@ namespace approje.Controllers
             {
                 var _userName = _httpContextAccessor.HttpContext.User.Identity.Name;
                 var user = _context.Users.FirstOrDefault(f => f.UserName == _userName);
+                _user = user;
                 if(user != null)
                 {
                     _userViewModel = new UserViewModel(user.Id, user.UserName, user.Email);
@@ -175,8 +178,10 @@ namespace approje.Controllers
         [Authorize]
         public async Task<IActionResult> userProfile(string id)
         {
-            var user = _context.Users.FirstOrDefault(f => f.Id==id);
-            UserViewModel vm = new UserViewModel(user.Id,user.UserName,user.Email);
+
+            var ownuser = await _userManager.Users.Include(u => u.FriendRequests).FirstOrDefaultAsync(u => u.Id == id);
+            var FriendRequest = ownuser.FriendRequests.FirstOrDefault(f=> f.SenderId==_user.Id);
+            OwnUserDto vm = new OwnUserDto(ownuser.Id, ownuser.UserName, ownuser.Email,FriendRequest!=null);
             if (vm != null)
                 return View(vm);
             
@@ -196,7 +201,7 @@ namespace approje.Controllers
 
                 await _userManager.UpdateAsync(OwnUser);
 
-                //await _context.SaveChangesAsync();
+                await _context.SaveChangesAsync();
 
                 return new JsonResult(OwnUser);
             }
