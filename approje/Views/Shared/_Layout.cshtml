@@ -86,7 +86,10 @@
                                     <a href="#" class="dropdown-bs-toggle" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                         <div class="friend-requests-btn">
                                             <i class="flaticon-user"></i>
-                                            <span>3</span>
+                                            @if (user.FriendsRequest.Count > 0)
+                                            {
+                                                <span>@user.FriendsRequest.Count</span>
+                                            }
                                         </div>
                                     </a>
 
@@ -495,7 +498,7 @@
                                         <a href="#" class="dropdown-bs-toggle" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                             <div class="friend-requests-btn">
                                                 <i class="flaticon-user"></i>
-                                                <span>3</span>
+                                                <span>30</span>
                                             </div>
                                         </a>
 

@@ -22,12 +22,9 @@ connection.on("Connect", function (info,id) {
                                     <span>Today</span>
                                 </div>
                             </article>`;
-
     div.innerHTML += data;
 });
 
 connection.on("Disconnect", function (info) {
-   
- 
     $(`#OnlineUsersDiv > article#${info}`).remove();
 });

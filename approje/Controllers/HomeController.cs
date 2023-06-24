@@ -2,7 +2,6 @@
 using approje.Dtos;
 using approje.Hubs;
 using approje.Models;
-
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
@@ -19,18 +18,20 @@ namespace approje.Controllers
     public class HomeController : Controller
     {
         // private readonly ILogger<HomeController> _logger;
-        private CustomIdentityUser _user;
-        private UserManager<CustomIdentityUser> _userManager;
-        private RoleManager<CustomIdentityRole> _roleManager;
-        private SignInManager<CustomIdentityUser> _signInManager;
+        private CustomIdentityUser _user { get; set; }
+        private UserManager<CustomIdentityUser> _userManager { get; set; }
+        private RoleManager<CustomIdentityRole> _roleManager { get; set; }
+        private SignInManager<CustomIdentityUser> _signInManager { get; set; }
         private CustomIdentityDbContext _context;
         IHttpContextAccessor _httpContextAccessor;
         private readonly IHubContext<ChatHub> _hubContext;
         public  UserViewModel _userViewModel { get; set; }
         public HomeController(UserManager<CustomIdentityUser> userManager,
-            RoleManager<CustomIdentityRole> roleManager,
-            SignInManager<CustomIdentityUser> signInManager,
-            CustomIdentityDbContext context, IHttpContextAccessor httpContextAccessor, IHubContext<ChatHub> hubContext)
+                              RoleManager<CustomIdentityRole> roleManager,
+                              SignInManager<CustomIdentityUser> signInManager,
+                              CustomIdentityDbContext context,
+                              IHttpContextAccessor httpContextAccessor,
+                              IHubContext<ChatHub> hubContext)
         {
             _userManager = userManager;
             _roleManager = roleManager;
@@ -78,17 +79,18 @@ namespace approje.Controllers
 
         [Authorize]
 
-        private void ViewDataLoadaig()
+        private async void ViewDataLoadaig()
         {
 
             if(_userViewModel == null)
             {
                 var _userName = _httpContextAccessor.HttpContext.User.Identity.Name;
-                var user = _context.Users.FirstOrDefault(f => f.UserName == _userName);
+                var user = await _userManager.Users.Include(u => u.FriendRequests).FirstOrDefaultAsync(u => u.UserName == _userName);
+
                 _user = user;
                 if(user != null)
                 {
-                    _userViewModel = new UserViewModel(user.Id, user.UserName, user.Email);
+                    _userViewModel = new UserViewModel(user.Id, user.UserName, user.Email,user.FriendRequests.ToList());
                     ViewData["User"] = _userViewModel;
                 }
                 else  RedirectToAction("login");
@@ -238,9 +240,6 @@ namespace approje.Controllers
             
 
         }
-
-
-
 
         //Accound
         public IActionResult register() => View();
