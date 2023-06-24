@@ -41,11 +41,11 @@ namespace approje.Hubs
             var user = await _Usermanegeer.GetUserAsync(_HttpContextAccessor.HttpContext.User);
             if (user != null)
             {
-                    Disconnect_User.Add(user.Id, user);
-                await Task.Delay(TimeSpan.FromSeconds(5));
+                Disconnect_User.Add(user.Id, user);
+                await Task.Delay(TimeSpan.FromSeconds(3));
                 UsersAndId.Remove(user.Id);
-                    if(Disconnect_User.ContainsKey(user.Id))
-                        await Clients.Others.SendAsync("Disconnect", user.Id);
+                if(Disconnect_User.ContainsKey(user.Id))
+                  await Clients.Others.SendAsync("Disconnect", user.Id);
             }
         }
 

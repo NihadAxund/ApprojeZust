@@ -3,12 +3,7 @@
 var connection = new signalR.HubConnectionBuilder().withUrl("/chathub").build();
 
 connection.start().then(function () {
-    console.log("Connected");
-    //GetAllOnlineUsers();
-    //alert("Conection");
-    setTimeout(function () {
-        GetAllOnlineUsersFunction();
-    }, 1000);
+    
 }).catch(function (err) {
     console.log(err.toString())
 })

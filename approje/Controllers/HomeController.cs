@@ -171,8 +171,18 @@ namespace approje.Controllers
         public IActionResult GetAllOnlineUsers()
         {
             var list = ChatHub.UsersAndId.Values.ToList();
-            list.Remove(ChatHub.UsersAndId[_userViewModel.Id]);
-            return Ok(list);
+            try
+            {
+                if (list.Count > 0)
+                    list.Remove(ChatHub.UsersAndId[_userViewModel.Id]);
+                else return Ok();
+                return Ok(list);
+
+            }
+            catch
+            {
+                return Ok();
+            }
         }
 
         [Authorize]
@@ -191,13 +201,13 @@ namespace approje.Controllers
         [Authorize]
         public async Task<JsonResult> SendFollow(string id)
         {
-            var user = await _userManager.GetUserAsync(_httpContextAccessor.HttpContext.User);
+            //var user = await _userManager.GetUserAsync(_httpContextAccessor.HttpContext.User);
             var OwnUser = _userManager.Users.FirstOrDefault(u => u.Id == id);
 
             if (OwnUser != null)
             {
                 OwnUser.FriendRequests.Add(new FriendRequest($"{_userViewModel.Name} Send friend request at {DateTime.Now.ToShortDateString()}",
-                    "Request", _userViewModel.Id, user, id));
+                    "Request", _userViewModel.Id, _user, id));
 
                 await _userManager.UpdateAsync(OwnUser);
 
@@ -212,10 +222,21 @@ namespace approje.Controllers
         }
 
         [Authorize]
-        public async Task<JsonResult> CancelFollow()
+        public async Task<JsonResult> CancelFollow(string id)
         {
+                var OwnUser = await _userManager.Users.Include(u => u.FriendRequests).FirstOrDefaultAsync(u => u.Id == id);
+                if (OwnUser == null) return new JsonResult("Null");
+                var collection = OwnUser.FriendRequests.Where(f => f.SenderId == _user.Id);
+              
+                if(collection.Count()>0)
+                {
+                    foreach (var item in collection.ToList())
+                        OwnUser.FriendRequests.Remove(item);
+                    await _userManager.UpdateAsync(OwnUser);
+                }
+                return new JsonResult("Done");
+            
 
-            return new JsonResult("Error");
         }
 
 

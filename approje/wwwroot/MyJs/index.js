@@ -1,15 +1,20 @@
-﻿
-var div = document.querySelector("#OnlineUsersDiv");
+﻿var div = document.querySelector("#OnlineUsersDiv");
 var FollowButoon = document.querySelector(".follow-button");
-function GetAllOnlineUsersFunction() {
-    
+//GetAllOnlineUsersFunction();
+setTimeout(function () {
+
+    GetOnlineUsersFunction();
+
+}, 1500)
+function GetOnlineUsersFunction() {
+   
     $.ajax({
         url: "/Home/GetAllOnlineUsers",
         method: "GET",
         success: function (data) {
-          
+
             for (var i = 0; i < data.length; i++) {
-                // alert(data[i].userName)
+                //alert(data[i].userName)
                 var text = `<article class="item" id="${data[i].id}" >
                                 <a href="#" class="thumb">
                                     <span class="fullimage bg1" role="img"></span>
@@ -35,7 +40,6 @@ function GetAllOnlineUsersFunction() {
 
 
 function SendRequest(id) {
-    alert(id);
     $.ajax({
         url: "/Home/SendFollow/" + id,
         method: "GET",
@@ -56,6 +60,26 @@ function SendRequest(id) {
     
 }
 
+
 function deleteRequest(id) {
-    alert(id);
+   // alert(id);
+    $.ajax({
+        url: "/Home/CancelFollow/" + id,
+        method: "GET",
+        success: function (data) {
+            var jsonData = JSON.stringify(data);
+            if (jsonData==`"Done"`) {
+                $('.follow-button').removeClass('btn-secondary').addClass('btn-primary'); 
+                FollowButoon.textContent = "+ Follow";
+                FollowButoon.onclick = function () {
+                    SendRequest(FollowButoon.id);
+                }
+            }
+            
+
+        },
+        error: function (err) {
+            console.log(err)
+        }
+    })
 }
