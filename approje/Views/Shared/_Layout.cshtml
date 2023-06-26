@@ -100,6 +100,28 @@
                                         </div>
 
                                         <div class="friend-requests-body" data-simplebar>
+
+                                            @foreach (var item in user.FriendsRequest)
+                                            {
+                                                <div class="item d-flex align-items-center">
+                                                    <div class="figure">
+                                                        <a href="#"><img src="~/assets/images/user/user-2.jpg" class="rounded-circle" alt="image"></a>
+                                                    </div>
+
+                                                    <div class="content d-flex justify-content-between align-items-center">
+                                                        <div class="text">
+                                                            <h4><a href="#">@item.CustomIdentityUser.UserName</a></h4>
+                                                        
+                                                        </div>
+                                                        <div class="btn-box d-flex align-items-center">
+                                                            <button id="@item.ReceiverId" class="delete-btn d-inline-block me-2" data-bs-toggle="tooltip" data-bs-placement="top" title="Delete" type="button"><i class="ri-close-line"></i></button>
+
+                                                            <button id="@item.ReceiverId" class="confirm-btn d-inline-block" data-bs-toggle="tooltip" data-bs-placement="top" title="Confirm" type="button"><i class="ri-check-line"></i></button>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            }
+
                                             <div class="item d-flex align-items-center">
                                                 <div class="figure">
                                                     <a href="#"><img src="~/assets/images/user/user-2.jpg" class="rounded-circle" alt="image"></a>
@@ -467,7 +489,7 @@
                                             <li><i class="flaticon-settings"></i> <a href="/home/settings">Setting</a></li>
                                             <li><i class="flaticon-privacy"></i> <a href="/home/privacy">Privacy</a></li>
                                             <li><i class="flaticon-information"></i> <a href="/home/help-and-support">Help & Support</a></li>
-                                            <li><i class="flaticon-logout"></i> <a href="/home/index">Logout</a></li>
+                                            <li><i class="flaticon-logout"></i> <a href="/home/logout">Logout</a></li>
                                         </ul>
                                     </div>
                                 </div>
@@ -1039,7 +1061,7 @@
                                         <a href="#" class="dropdown-bs-toggle" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                             <div class="friend-requests-btn">
                                                 <i class="flaticon-user"></i>
-                                                <span>3</span>
+                                                <span>30</span>
                                             </div>
                                         </a>
 
@@ -1050,6 +1072,26 @@
                                             </div>
 
                                             <div class="friend-requests-body">
+                                                @foreach (var item in user.FriendsRequest)
+                                                {
+                                                     <div class="item d-flex align-items-center">
+                                                        <div class="figure">
+                                                            <a href="#"><img src="~/assets/images/user/user-1.jpg" class="rounded-circle" alt="image"></a>
+                                                        </div>
+
+                                                        <div class="content d-flex justify-content-between align-items-center">
+                                                            <div class="text">
+                                                                <h4><a href="#">@item.CustomIdentityUser.UserName</a></h4>
+                                                            
+                                                            </div>
+                                                            <div class="btn-box d-flex align-items-center">
+                                                                <button id="@item.ReceiverId" class="delete-btn d-inline-block me-2" data-bs-toggle="tooltip" data-bs-placement="top" title="Delete" type="button"><i class="ri-close-line"></i></button>
+
+                                                                <button id="@item.ReceiverId" class="confirm-btn d-inline-block" data-bs-toggle="tooltip" data-bs-placement="top" title="Confirm" type="button"><i class="ri-check-line"></i></button>
+                                                            </div>
+                                                        </div>
+                                                     </div>
+                                                }
                                                 <div class="item d-flex align-items-center">
                                                     <div class="figure">
                                                         <a href="#"><img src="~/assets/images/user/user-2.jpg" class="rounded-circle" alt="image"></a>
@@ -1057,8 +1099,8 @@
 
                                                     <div class="content d-flex justify-content-between align-items-center">
                                                         <div class="text">
-                                                            <h4><a href="#">Sandra Cross</a></h4>
-                                                            <span>26 Friends</span>
+                                                            <h4><a href="#">Sandra Nihad Cross</a></h4>
+                                                            <span>262 Friends</span>
                                                         </div>
                                                         <div class="btn-box d-flex align-items-center">
                                                             <button class="delete-btn d-inline-block me-2" data-bs-toggle="tooltip" data-bs-placement="top" title="Delete" type="button"><i class="ri-close-line"></i></button>

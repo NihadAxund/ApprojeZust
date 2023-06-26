@@ -1,6 +1,9 @@
 ﻿using App.Entities.Models;
+using approje.Enums;
+using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.SignalR;
+using Microsoft.EntityFrameworkCore;
 using System.Collections.Generic;
 using System.Security.Claims;
 
@@ -31,6 +34,7 @@ namespace approje.Hubs
             else if (Disconnect_User.ContainsKey(user.Id))
             {
                 Disconnect_User.Remove(user.Id);
+  
             }
 
 
@@ -43,19 +47,19 @@ namespace approje.Hubs
             {
                 Disconnect_User.Add(user.Id, user);
                 await Task.Delay(TimeSpan.FromSeconds(3));
-                UsersAndId.Remove(user.Id);
-                if(Disconnect_User.ContainsKey(user.Id))
+                if (Disconnect_User.ContainsKey(user.Id))
+                {
+                    UsersAndId.Remove(user.Id);
                   await Clients.Others.SendAsync("Disconnect", user.Id);
+                }
             }
         }
 
-
-
-
-
-
-        public async Task SendProgramData()
+        public async Task SendNotification(string Ownid, NotificationEnum notificationEnum = NotificationEnum.FriendRequest)
         {
+            var user = await _Usermanegeer.Users.FirstOrDefaultAsync(u => u.Id == Ownid);
+
+            await Clients.Caller.SendAsync("Notification",user.UserName);
 
         }
 

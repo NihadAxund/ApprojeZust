@@ -2,6 +2,7 @@
 using approje.Dtos;
 using approje.Hubs;
 using approje.Models;
+using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
@@ -46,7 +47,7 @@ namespace approje.Controllers
         public override void OnActionExecuting(ActionExecutingContext context)
         {
             if (_httpContextAccessor.HttpContext.User.Identity.Name!=null)
-                ViewDataLoadaig();
+                ViewDataLoading();
             base.OnActionExecuting(context);
         }
 
@@ -78,28 +79,35 @@ namespace approje.Controllers
         }
 
         [Authorize]
+        public async Task<IActionResult> logout()
+        {
+            await _signInManager.SignOutAsync();
 
-        private async void ViewDataLoadaig()
+            await HttpContext.SignOutAsync(IdentityConstants.ExternalScheme);
+            return RedirectToAction("Login");
+        }
+
+
+        [Authorize]
+        private void ViewDataLoading()
         {
 
             if(_userViewModel == null)
             {
-                var _userName = _httpContextAccessor.HttpContext.User.Identity.Name;
-                var user = await _userManager.Users.Include(u => u.FriendRequests).FirstOrDefaultAsync(u => u.UserName == _userName);
+                var _userName =  _httpContextAccessor.HttpContext.User.Identity.Name;
+                var user =  _userManager.Users.Include(u => u.FriendRequests).FirstOrDefaultAsync(u => u.UserName == _userName).Result;
 
                 _user = user;
+              
                 if(user != null)
                 {
                     _userViewModel = new UserViewModel(user.Id, user.UserName, user.Email,user.FriendRequests.ToList());
                     ViewData["User"] = _userViewModel;
+                   // ViewBag.User = _userViewModel;
                 }
                 else  RedirectToAction("login");
             }
-
-
-            
         }
-
 
         [Authorize]
         public IActionResult Index()
@@ -122,7 +130,6 @@ namespace approje.Controllers
         [Route("/home/live-chat")]
         public IActionResult live_chat()
         {
-            // Gerekli işlemler
             return View("live-chat");
         }
         [Authorize]
@@ -144,7 +151,6 @@ namespace approje.Controllers
         [Authorize]
         public IActionResult notifications()
         {
-            
             return View();
         }
         [Authorize]
@@ -170,20 +176,24 @@ namespace approje.Controllers
             return View();
         }
         [Authorize]
-        public IActionResult GetAllOnlineUsers()
-        {
-            var list = ChatHub.UsersAndId.Values.ToList();
-            try
+        public async Task<IActionResult> GetAllOnlineUsers()
+        { 
+            lock (ChatHub.UsersAndId.Values)
             {
-                if (list.Count > 0)
-                    list.Remove(ChatHub.UsersAndId[_userViewModel.Id]);
-                else return Ok();
-                return Ok(list);
+                var list = ChatHub.UsersAndId.Values.ToList();
+                try
+                {
+                    if (list.Count > 0)
+                        list.Remove(ChatHub.UsersAndId[_userViewModel.Id]);
+                    else return Ok();
+                    return Ok(list);
 
-            }
-            catch
-            {
-                return Ok();
+                }
+                catch
+                {
+                    if (list.Count > 0) return Ok(list);
+                    return Ok();
+                }
             }
         }
 
@@ -191,7 +201,11 @@ namespace approje.Controllers
         public async Task<IActionResult> userProfile(string id)
         {
 
-            var ownuser = await _userManager.Users.Include(u => u.FriendRequests).FirstOrDefaultAsync(u => u.Id == id);
+           
+            var ownuser = await _context.Users.FirstOrDefaultAsync(u => u.Id == id);
+            
+            var list = _context.FriendRequests.Where(f => f.ReceiverId == id&& f.SenderId==_user.Id).ToList();
+            ownuser.FriendRequests = list;
             var FriendRequest = ownuser.FriendRequests.FirstOrDefault(f=> f.SenderId==_user.Id);
             OwnUserDto vm = new OwnUserDto(ownuser.Id, ownuser.UserName, ownuser.Email,FriendRequest!=null);
             if (vm != null)
@@ -200,20 +214,20 @@ namespace approje.Controllers
             return Ok();
         }
 
+
+
         [Authorize]
         public async Task<JsonResult> SendFollow(string id)
         {
-            //var user = await _userManager.GetUserAsync(_httpContextAccessor.HttpContext.User);
-            var OwnUser = _userManager.Users.FirstOrDefault(u => u.Id == id);
-
+            var OwnUser = await _context.Users.Include(f=>f.FriendRequests).FirstOrDefaultAsync(u => u.Id == id);
+            var list = _context.FriendRequests.Where(f=>f.ReceiverId==id);
+            OwnUser.FriendRequests = list.ToList();
             if (OwnUser != null)
             {
                 OwnUser.FriendRequests.Add(new FriendRequest($"{_userViewModel.Name} Send friend request at {DateTime.Now.ToShortDateString()}",
-                    "Request", _userViewModel.Id, _user, id));
+                    "Request", _user.Id, OwnUser, id));
 
                 await _userManager.UpdateAsync(OwnUser);
-
-                await _context.SaveChangesAsync();
 
                 return new JsonResult(OwnUser);
             }
@@ -223,23 +237,30 @@ namespace approje.Controllers
             }
         }
 
+      
         [Authorize]
         public async Task<JsonResult> CancelFollow(string id)
         {
-                var OwnUser = await _userManager.Users.Include(u => u.FriendRequests).FirstOrDefaultAsync(u => u.Id == id);
-                if (OwnUser == null) return new JsonResult("Null");
-                var collection = OwnUser.FriendRequests.Where(f => f.SenderId == _user.Id);
-              
-                if(collection.Count()>0)
-                {
-                    foreach (var item in collection.ToList())
-                        OwnUser.FriendRequests.Remove(item);
-                    await _userManager.UpdateAsync(OwnUser);
-                }
-                return new JsonResult("Done");
-            
+            var OwnUser = await _userManager.Users.Include(a=>a.FriendRequests).FirstOrDefaultAsync(u => u.Id == id);
 
+            if (OwnUser == null)
+                return new JsonResult("Null");
+
+            var collection = _context.FriendRequests.Where(f => f.SenderId == _user.Id&&f.ReceiverId==id);
+            if (collection.Any())
+            {
+                foreach (var item in collection.ToList())
+                {
+                    _context.FriendRequests.Remove(item);
+                    OwnUser.FriendRequests.Remove(item);
+                }
+
+                await _context.SaveChangesAsync();
+            }
+
+            return new JsonResult("Done");
         }
+
 
         //Accound
         public IActionResult register() => View();
