@@ -76,9 +76,9 @@ app.UseAuthorization();
 
 app.UseEndpoints(endpoints =>
 {
-    endpoints.MapHub<ChatHub>("/chathub").RequireAuthorization(); // ChatHub'ı endpointlere ekleyin ve kimlik doğrulama gerektirin
+    endpoints.MapHub<ChatHub>("/chathub").RequireAuthorization(); 
 
-    // Diğer endpointler
+   
     endpoints.MapControllerRoute("Default", "{controller=Home}/{action=Index}/{id?}");
     endpoints.MapFallbackToController("Index", "Home");
 });

@@ -1,5 +1,6 @@
 ﻿@{
     var user = ViewBag.User as UserViewModel;
+    var scripttext = ViewData["Scripts"] as string;
 }
 
 <!doctype html>
@@ -1343,7 +1344,7 @@
                     </div>
                 </div>
             </div>
-        </div>
+       
     </div>
 
 
@@ -1362,38 +1363,12 @@
     <script src="~/assets/js/main.js"></script>
     <script src="~/MyJs/signalr/dist/browser/signalr.js"></script>
     <script src="~/MyJs/chat.js"></script>
-    <script src="~/MyJs/index.js"></script>
+    @if (scripttext != null)
+    {
+        <script src="@Url.Content(scripttext)"></script>
+    }
+    @await RenderSectionAsync("Scripts", required: false)
+
 
 </body>
 </html>
-
-@*<script>
-    document.addEventListener("DOMContentLoaded", function () {
-        var navLinks = document.querySelectorAll('.nav-item');
-
-        var activeItem = localStorage.getItem('activeMenuItem');
-
-        // If an active menu item is found, add the "active" class to it
-        if (activeItem){
-            navLinks.forEach(i => {
-                i.classList.remove('active');
-            })
-            var id = parseInt(activeItem.replace("#", ""));
-            document.getElementById(`${id}`).classList.add("active");
-            localStorage.setItem('activeMenuItem', '#' + navLinks[0].id);
-        }
-
-        navLinks.forEach(function (link) {
-            link.addEventListener('click', function (event) {
-                navLinks.forEach(function (link) {
-                    link.classList.remove('active');
-                });
-
-                this.classList.add('active');
-
-                localStorage.setItem('activeMenuItem', '#' + this.id);
-            });
-        });
-    });
-</script>*@
-

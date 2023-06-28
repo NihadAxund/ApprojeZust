@@ -16,7 +16,7 @@ namespace approje.Hubs
         public static Dictionary<string, CustomIdentityUser> UsersAndId = new Dictionary<string, CustomIdentityUser>();
         private static Dictionary<string, CustomIdentityUser> Disconnect_User = new Dictionary<string, CustomIdentityUser>();
 
-        public ChatHub(UserManager<CustomIdentityUser> usermanageer,IHttpContextAccessor httpContextAccessor) 
+        public ChatHub(UserManager<CustomIdentityUser> usermanageer, IHttpContextAccessor httpContextAccessor)
         {
             _Usermanegeer = usermanageer;
             _HttpContextAccessor = httpContextAccessor;
@@ -57,9 +57,10 @@ namespace approje.Hubs
 
         public async Task SendNotification(string Ownid, NotificationEnum notificationEnum = NotificationEnum.FriendRequest)
         {
-            var user = await _Usermanegeer.Users.FirstOrDefaultAsync(u => u.Id == Ownid);
 
-            await Clients.Caller.SendAsync("Notification",user.UserName);
+            var user = await _Usermanegeer.Users.FirstOrDefaultAsync(u => u.Id == Ownid);
+            var me = await _Usermanegeer.GetUserAsync(_HttpContextAccessor.HttpContext.User);
+            await Clients.User(Ownid).SendAsync("Notification",me.UserName);
 
         }
 

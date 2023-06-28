@@ -1,13 +1,10 @@
-﻿var div = document.querySelector("#OnlineUsersDiv");
-var FollowButoon = document.querySelector(".follow-button");
-//GetAllOnlineUsersFunction();
-
+﻿
 function GetOnlineUsersFunction2() {
-   
+
+    var div = document.querySelector("#OnlineUsersDiv");
     $.ajax({
         url: "/Home/GetAllOnlineUsers",
         method: "GET",
-        
         success: function (data) {
             div.innerHTML = " ";
             for (var i = 0; i < data.length; i++) {
@@ -35,7 +32,9 @@ function GetOnlineUsersFunction2() {
 }
 
 
+
 function Logout() {
+    alert("Logout");
     $.ajax({
         url: "/Home//" + id,
         method: "GET",
@@ -43,7 +42,7 @@ function Logout() {
             var jsonData = JSON.stringify(data);
             $('.follow-button').removeClass('btn-primary').addClass('btn-secondary');
             alert("Bu 3cudu logoutdaki")
-            SendNotification(id);
+/*            SendNotification(id);*/
             FollowButoon.textContent = "CANCEL";
             FollowButoon.style.fontSize = "1em";
             FollowButoon.onclick = function () {
@@ -56,50 +55,4 @@ function Logout() {
     })
 }
 
-function SendRequest(id) {
-    $.ajax({
-        url: "/Home/SendFollow/" + id,
-        method: "GET",
-        success: function (data) {
-            var jsonData = JSON.stringify(data);
-            $('.follow-button').removeClass('btn-primary').addClass('btn-secondary');
-            alert("1ci asama")
-            SendNotification(id);
-            alert("2ci asama")
-            FollowButoon.textContent = "CANCEL";
-            FollowButoon.style.fontSize = "1em";
-            FollowButoon.onclick = function () {
-                deleteRequest(FollowButoon.id);
-            }
-        },
-        error: function (err) {
-            console.log(err)
-        }
-    })
-    
-}
-
-
-function deleteRequest(id) {
-    $.ajax({
-        url: "/Home/CancelFollow/" + id,
-        method: "GET",
-        success: function (data) {
-            var jsonData = JSON.stringify(data);
-            if (jsonData==`"Done"`) {
-                $('.follow-button').removeClass('btn-secondary').addClass('btn-primary'); 
-                FollowButoon.textContent = "+";
-                FollowButoon.style.padding = "1px 10px 1px 10px";
-                FollowButoon.style.fontSize = "35px";
-                FollowButoon.onclick = function () {
-                    SendRequest(FollowButoon.id);
-                }
-            }
-            
-
-        },
-        error: function (err) {
-            console.log(err)
-        }
-    })
-}
+setTimeout(function () {GetOnlineUsersFunction2(); }, 1500);

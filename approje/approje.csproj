@@ -269,6 +269,11 @@
     <Content Remove="wwwroot\assets\js\selectize.min.js" />
     <Content Remove="wwwroot\assets\js\simplebar.min.js" />
     <Content Remove="wwwroot\assets\js\wow.min.js" />
+    <Content Remove="wwwroot\MyJs\signalr\UserProfile.js" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <_ContentIncludedByDefault Remove="wwwroot\MyJs\signalr\UserProfile.js" />
   </ItemGroup>
 
   <ItemGroup>
@@ -538,6 +543,7 @@
     <None Include="wwwroot\assets\js\wow.min.js" />
     <None Include="wwwroot\MyJs\signalr\dist\browser\signalr.js" />
     <None Include="wwwroot\MyJs\signalr\dist\browser\signalr.min.js" />
+    <None Include="wwwroot\MyJs\userProfile.js" />
   </ItemGroup>
 
   <ItemGroup>
