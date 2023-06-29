@@ -57,10 +57,7 @@ namespace approje.Hubs
 
         public async Task SendNotification(string Ownid, NotificationEnum notificationEnum = NotificationEnum.FriendRequest)
         {
-
-            var user = await _Usermanegeer.Users.FirstOrDefaultAsync(u => u.Id == Ownid);
-            var me = await _Usermanegeer.GetUserAsync(_HttpContextAccessor.HttpContext.User);
-            await Clients.User(Ownid).SendAsync("Notification",me.UserName);
+            await Clients.User(Ownid).SendAsync("Notification",Ownid);
 
         }
 

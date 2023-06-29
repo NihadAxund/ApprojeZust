@@ -214,6 +214,18 @@ namespace approje.Controllers
             return Ok();
         }
 
+        [Authorize]
+        public async Task<IActionResult> GetAllMeFriendRequest()
+        {
+            var me = await _userManager.GetUserAsync(_httpContextAccessor.HttpContext.User);
+            var list = me.FriendRequests.ToList();
+            List<FriendRequestAndMeDto> list2 = new List<FriendRequestAndMeDto>();
+            foreach (var f in list)
+                list2.Add(new(f.CustomIdentityUser, f.ReceiverName));
+            if(list2.Count > 0) return Ok(list2);
+            return Ok();
+        }
+
 
 
         [Authorize]
@@ -225,7 +237,7 @@ namespace approje.Controllers
             if (OwnUser != null)
             {
                 OwnUser.FriendRequests.Add(new FriendRequest($"{_userViewModel.Name} Send friend request at {DateTime.Now.ToShortDateString()}",
-                    "Request", _user.Id, OwnUser, id));
+                    "Request", _user.Id, OwnUser, id,_user.UserName));
 
                 await _userManager.UpdateAsync(OwnUser);
 

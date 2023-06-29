@@ -1,17 +1,15 @@
 ﻿var FollowButoon = document.querySelector(".follow-button");
 function SendRequest(id) {
-    alert(id + "sendRequest")
+ 
     $.ajax({
         url: "/Home/SendFollow/" + id,
         method: "GET",
         success: function (data) {
-            alert("send Request id")
+   
             var jsonData = JSON.stringify(data);
             $('.follow-button').removeClass('btn-primary').addClass('btn-secondary');
-            alert("1ci asama")
-            alert("Yeni")
+
             SendNotificationFunction(id);
-            alert("2ci asama")
             FollowButoon.textContent = "CANCEL";
             FollowButoon.style.fontSize = "1em";
             FollowButoon.onclick = function () {

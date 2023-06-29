@@ -8,6 +8,7 @@ function GetOnlineUsersFunction2() {
         success: function (data) {
             div.innerHTML = " ";
             for (var i = 0; i < data.length; i++) {
+
                 if ($(`#OnlineUsersDiv #${data[i].id}`).length <= 0) {
                     var text = `<article class="item" id="${data[i].id}" >
                                     <a href="#" class="thumb">

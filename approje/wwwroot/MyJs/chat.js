@@ -11,7 +11,8 @@ connection.start().then(function () {
 
 connection.on("Notification", function (info) { 
 
-    alert(info);
+    alert(info)
+    AddFriendRequstList();
 });
 
 async function SendNotificationFunction(id) {
