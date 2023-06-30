@@ -9,7 +9,7 @@ function SendRequest(id) {
             var jsonData = JSON.stringify(data);
             $('.follow-button').removeClass('btn-primary').addClass('btn-secondary');
 
-            SendNotificationFunction(id);
+            SendNotificationFunction(id,1);
             FollowButoon.textContent = "CANCEL";
             FollowButoon.style.fontSize = "1em";
             FollowButoon.onclick = function () {
@@ -35,6 +35,7 @@ function deleteRequest(id) {
                 FollowButoon.textContent = "+";
                 FollowButoon.style.padding = "1px 10px 1px 10px";
                 FollowButoon.style.fontSize = "35px";
+                SendNotificationFunction(id, 2);
                 FollowButoon.onclick = function () {
                     SendRequest(FollowButoon.id);
                 }

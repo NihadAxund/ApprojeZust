@@ -20,6 +20,7 @@ namespace approje.Controllers
     {
         // private readonly ILogger<HomeController> _logger;
         private CustomIdentityUser _user { get; set; }
+
         private UserManager<CustomIdentityUser> _userManager { get; set; }
         private RoleManager<CustomIdentityRole> _roleManager { get; set; }
         private SignInManager<CustomIdentityUser> _signInManager { get; set; }
@@ -82,7 +83,6 @@ namespace approje.Controllers
         public async Task<IActionResult> logout()
         {
             await _signInManager.SignOutAsync();
-
             await HttpContext.SignOutAsync(IdentityConstants.ExternalScheme);
             return RedirectToAction("Login");
         }
@@ -115,6 +115,9 @@ namespace approje.Controllers
             
             return View();
         }
+
+        private IActionResult errorview() => View();
+
         [Authorize]
         public IActionResult Privacy()
         {
@@ -180,11 +183,14 @@ namespace approje.Controllers
         { 
             lock (ChatHub.UsersAndId.Values)
             {
-                var list = ChatHub.UsersAndId.Values.ToList();
+                var list = ChatHub.UsersAndId.Values.Select(s => s[0]).ToList();
+
+
                 try
                 {
                     if (list.Count > 0)
-                        list.Remove(ChatHub.UsersAndId[_userViewModel.Id]);
+
+                        list.Remove(ChatHub.UsersAndId[_userViewModel.Id][0]);
                     else return Ok();
                     return Ok(list);
 

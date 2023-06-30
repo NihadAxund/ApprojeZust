@@ -1,28 +1,38 @@
 ﻿var FriendRequestList = document.querySelector(".friend-requests-body");
 var FrendRequestCountDiv = document.querySelector(".friend-requests-btn");
-async function AddFriendRequstList() {
-    alert("AddFriendRequstList")
+
+
+async function ControlFriendRequstList() {
     $.ajax({
         url: "/Home/GetAllMeFriendRequest",
         method: "GET",
         success: function (data) {
             FriendRequestList.innerHTML = " ";
             var text = " ";
-
-            alert(data.length);
+          
+            var count = $(`.friend-requests-btn #UserFriendsCount`).length;
+            var spanelement = document.querySelector("#UserFriendsCount")
             if (data.length > 0) {
-                alert("Xetta");
-                var count = $(`.friend-requests-btn #UserFriendsCount`).length;
-                alert(count+"No if")
+
+
                 if (count > 0) {
 
-                    //alert(count+"Counts")
-                    spanelement = document.querySelector("#UserFriendsCount")
+
                     //alert("1ci asama tamam")
                     //spanelement.remove();
                     //alert("Removesuccesful")
                     spanelement.innerHTML = data.length;
                 }
+                else {
+                    
+                    var text = `<span id="UserFriendsCount" >${data.length}</span>`;
+                    FrendRequestCountDiv.innerHTML += text;
+                }
+            }
+            else if (count>0) {
+                spanelement = document.querySelector("#UserFriendsCount")
+                spanelement.remove();
+             
             }
             for (var i = 0; i < data.length; i++) {
                 if (i >= 10) {
@@ -35,7 +45,7 @@ async function AddFriendRequstList() {
                 }
                 else {
                     var item = data[i];
-                    alert(data[i].meName);
+   
                     text +=`
                     <div class="item d-flex align-items-center">
                         <div class="figure">

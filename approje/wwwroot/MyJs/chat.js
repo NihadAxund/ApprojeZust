@@ -9,17 +9,16 @@ connection.start().then(function () {
     console.log(err.toString())
 })
 
-connection.on("Notification", function (info) { 
+connection.on("Notification", function (info,Notfication) { 
 
-    alert(info)
-    AddFriendRequstList();
+    if (Notfication == 1 || Notfication == 2) {
+        ControlFriendRequstList();
+    }
 });
 
-async function SendNotificationFunction(id) {
+async function SendNotificationFunction(id,Notfication) {
 
-    alert("zz");
-    connection.invoke("SendNotification", id,1);
-    alert("Nihad Dusdu buraya ");
+    connection.invoke("SendNotification", id, Notfication);
 }
 //connection.on("Notificatio", function (Username) {
 //    alert(userName);
