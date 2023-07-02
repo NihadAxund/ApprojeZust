@@ -2,6 +2,7 @@
 var FrendRequestCountDiv = document.querySelector(".friend-requests-btn");
 
 
+
 async function ControlFriendRequstList() {
     $.ajax({
         url: "/Home/GetAllMeFriendRequest",
@@ -14,13 +15,7 @@ async function ControlFriendRequstList() {
             var spanelement = document.querySelector("#UserFriendsCount")
             if (data.length > 0) {
 
-
                 if (count > 0) {
-
-
-                    //alert("1ci asama tamam")
-                    //spanelement.remove();
-                    //alert("Removesuccesful")
                     spanelement.innerHTML = data.length;
                 }
                 else {
@@ -62,7 +57,7 @@ async function ControlFriendRequstList() {
                             <div class="btn-box d-flex align-items-center">
                                 <button id="${item.ownCustomIdentityUser.id}" class="delete-btn d-inline-block me-2" data-bs-toggle="tooltip" data-bs-placement="top" title="Delete" type="button"><i class="ri-close-line"></i></button>
 
-                                <button id="${item.ownCustomIdentityUser.id}" class="confirm-btn d-inline-block" data-bs-toggle="tooltip" data-bs-placement="top" title="Confirm" type="button"><i class="ri-check-line"></i></button>
+                                <button id="${item.ownCustomIdentityUser.id}" onclick="AddFriend(id)" class="confirm-btn d-inline-block" data-bs-toggle="tooltip" data-bs-placement="top" title="Confirm" type="button"><i class="ri-check-line"></i></button>
                             </div>
                         </div>
                     </div>`
@@ -71,6 +66,17 @@ async function ControlFriendRequstList() {
             FriendRequestList.innerHTML = text;
         }
     });
+}
 
+function AddFriend(id) {
+    alert(id);
+    $.ajax({
+        url: "/Home/AddFriends/"+id,
+        method: "GET",
+        success: function (data) {
+            alert('Hda')
+            ControlFriendRequstList();
+        }
 
+    });
 }

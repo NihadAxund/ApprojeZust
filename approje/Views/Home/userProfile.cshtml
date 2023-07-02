@@ -86,11 +86,21 @@
                     <li style="height:auto; width:auto;">
                         @if (Model.IsFriend)
                         {
-                            <button style="font-size:1em"; type="button" onclick="deleteRequest(id)" class="btn btn-secondary follow-button animate__animated  animate__zoomInUp" id="@Model.Id">CANCEL</button>
+                            <div class="btn-group" role="group" aria-label="Basic mixed styles example">
+                                <button type="button" class="btn btn-success">Friend</button>
+                                <button type="button" class="btn btn-danger">UnFollow</button>
+                            </div>
                         }
                         else
                         {
-                            <button style="font-size:35px; padding:1px 10px 1px 10px;" type="button" onclick="SendRequest(id)" class="btn btn-primary follow-button animate__animated  animate__flash" id="@Model.Id">+</button>
+                            if (Model.IsFriendRequest)
+                            {
+                                <button style="font-size:1em"; type="button" onclick="deleteRequest(id)" class="btn btn-secondary follow-button animate__animated  animate__zoomInUp" id="@Model.Id">CANCEL</button>
+                            }
+                            else
+                            {
+                                <button style="font-size:35px; padding:1px 10px 1px 10px;" type="button" onclick="SendRequest(id)" class="btn btn-primary follow-button animate__animated  animate__flash" id="@Model.Id">+</button>
+                            }                            
                         }
                     </li>
                     <li>

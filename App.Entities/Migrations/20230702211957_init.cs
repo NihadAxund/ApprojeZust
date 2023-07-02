@@ -29,7 +29,6 @@ namespace App.Entities.Migrations
                 {
                     Id = table.Column<string>(type: "nvarchar(450)", nullable: false),
                     ImageUrl = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    IsOnline = table.Column<bool>(type: "bit", nullable: false),
                     IsFriend = table.Column<bool>(type: "bit", nullable: false),
                     HasRequestPending = table.Column<bool>(type: "bit", nullable: false),
                     DisConnectTime = table.Column<DateTime>(type: "datetime2", nullable: false),
@@ -190,18 +189,18 @@ namespace App.Entities.Migrations
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    OwnId = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    YourFriendId = table.Column<string>(type: "nvarchar(450)", nullable: false)
+                    MyId = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    YourFriendId = table.Column<string>(type: "nvarchar(450)", nullable: false),
+                    CustomIdentityUserId = table.Column<string>(type: "nvarchar(450)", nullable: true)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Friends", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_Friends_AspNetUsers_YourFriendId",
-                        column: x => x.YourFriendId,
+                        name: "FK_Friends_AspNetUsers_CustomIdentityUserId",
+                        column: x => x.CustomIdentityUserId,
                         principalTable: "AspNetUsers",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
+                        principalColumn: "Id");
                 });
 
             migrationBuilder.CreateIndex(
@@ -255,9 +254,15 @@ namespace App.Entities.Migrations
                 column: "CustomIdentityUserId");
 
             migrationBuilder.CreateIndex(
+                name: "IX_Friends_CustomIdentityUserId",
+                table: "Friends",
+                column: "CustomIdentityUserId");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_Friends_YourFriendId",
                 table: "Friends",
-                column: "YourFriendId");
+                column: "YourFriendId",
+                unique: true);
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)

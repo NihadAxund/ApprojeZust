@@ -95,8 +95,7 @@ namespace approje.Controllers
             if(_userViewModel == null)
             {
                 var _userName =  _httpContextAccessor.HttpContext.User.Identity.Name;
-                var user =  _userManager.Users.Include(u => u.FriendRequests).FirstOrDefaultAsync(u => u.UserName == _userName).Result;
-
+                var user =  _userManager.Users.Include(u => u.FriendRequests).Include(u=>u.Friends).FirstOrDefaultAsync(u => u.UserName == _userName).Result;
                 _user = user;
               
                 if(user != null)
@@ -208,12 +207,19 @@ namespace approje.Controllers
         {
 
            
-            var ownuser = await _context.Users.FirstOrDefaultAsync(u => u.Id == id);
-            
+          //  var ownuser = await _context.Users.FirstOrDefaultAsync(u => u.Id == id);
+            var ownuser = await _userManager.Users.Include(u => u.FriendRequests).Include(s=>s.Friends).FirstOrDefaultAsync(u => u.Id == id);
+            var friendslist = _context.Friends.Where(a => a.MyId == id);
+            ownuser.Friends = friendslist.ToList();
             var list = _context.FriendRequests.Where(f => f.ReceiverId == id&& f.SenderId==_user.Id).ToList();
             ownuser.FriendRequests = list;
             var FriendRequest = ownuser.FriendRequests.FirstOrDefault(f=> f.SenderId==_user.Id);
-            OwnUserDto vm = new OwnUserDto(ownuser.Id, ownuser.UserName, ownuser.Email,FriendRequest!=null);
+            if (friendslist.Count() > 0)
+            {
+                var data = friendslist.FirstOrDefault(f => f.MyId == id && f.YourFriendId == _user.Id);
+            }
+            var IsFriend = ownuser.Friends.FirstOrDefault(f=>f.MyId==id&&f.YourFriendId==_user.Id);
+            OwnUserDto vm = new OwnUserDto(ownuser.Id, ownuser.UserName, ownuser.Email,FriendRequest!=null, IsFriend != null);
             if (vm != null)
                 return View(vm);
             
@@ -223,8 +229,8 @@ namespace approje.Controllers
         [Authorize]
         public async Task<IActionResult> GetAllMeFriendRequest()
         {
-            var me = await _userManager.GetUserAsync(_httpContextAccessor.HttpContext.User);
-            var list = me.FriendRequests.ToList();
+            //var me = await _userManager.GetUserAsync(_httpContextAccessor.HttpContext.User);
+            var list = _user.FriendRequests.ToList();
             List<FriendRequestAndMeDto> list2 = new List<FriendRequestAndMeDto>();
             foreach (var f in list)
                 list2.Add(new(f.CustomIdentityUser, f.ReceiverName));
@@ -232,9 +238,40 @@ namespace approje.Controllers
             return Ok();
         }
 
+		[Authorize]
+        public async Task<IActionResult> AddFriends(string id)
+        {
+			var OwnUser = await _context.Users.Include(f => f.FriendRequests).FirstOrDefaultAsync(u => u.Id == id);
+            //OwnUser.Friends.Add(new Friend(OwnUser.Id,_user.Id,_user));
+            //_user.Friends.Add(new Friend(_user.Id, OwnUser.Id, OwnUser));
+            // var l = _context.FriendRequests.ToList();
+            _context.Friends.Add(new Friend(OwnUser.Id, _user.Id));
+            _context.Friends.Add(new Friend(_user.Id, OwnUser.Id));
 
 
-        [Authorize]
+            var removelist = _context.FriendRequests.Where(f => f.ReceiverId == id && f.SenderId == _user.Id || f.ReceiverId == _user.Id && f.SenderId == id);
+            var za = removelist.Count();
+            foreach (var f in removelist)
+                _context.FriendRequests.Remove(f);
+            //await _userManager.UpdateAsync(_user);
+            //await _userManager.UpdateAsync(OwnUser);
+            await _context.SaveChangesAsync();
+            var data = _context.Friends.ToList();
+
+			return Ok();
+        }
+
+		[Authorize]
+		public async Task<JsonResult> DeleteFriend(string id)
+		{
+            var val = _context.Friends.Where(f=>f.YourFriendId==id&&f.MyId==_user.Id|| f.MyId == id && f.YourFriendId == _user.Id);
+            foreach (var f in val)
+                _context.Friends.Remove(f);
+            await _context.SaveChangesAsync();
+			return new("succes");
+		}
+
+		[Authorize]
         public async Task<JsonResult> SendFollow(string id)
         {
             var OwnUser = await _context.Users.Include(f=>f.FriendRequests).FirstOrDefaultAsync(u => u.Id == id);
@@ -246,7 +283,6 @@ namespace approje.Controllers
                     "Request", _user.Id, OwnUser, id,_user.UserName));
 
                 await _userManager.UpdateAsync(OwnUser);
-
                 return new JsonResult(OwnUser);
             }
             else
@@ -254,6 +290,7 @@ namespace approje.Controllers
                 return new JsonResult("Error");
             }
         }
+
 
       
         [Authorize]

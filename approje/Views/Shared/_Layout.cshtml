@@ -110,12 +110,12 @@
 
                                                     <div class="content d-flex justify-content-between align-items-center">
                                                         <div class="text">
-                                                            <h4><a href="/home/userProfile/@item.ReceiverId">@item.CustomIdentityUser.UserName</a></h4>
+                                                            <h4><a href="/home/userProfile/@item.ReceiverId">@item.ReceiverName</a></h4>
                                                         </div>
                                                         <div class="btn-box d-flex align-items-center">
                                                             <button id="@item.ReceiverId" class="delete-btn d-inline-block me-2" data-bs-toggle="tooltip" data-bs-placement="top" title="Delete" type="button"><i class="ri-close-line"></i></button>
 
-                                                            <button id="@item.ReceiverId" class="confirm-btn d-inline-block" data-bs-toggle="tooltip" data-bs-placement="top" title="Confirm" type="button"><i class="ri-check-line"></i></button>
+                                                            <button id="@item.SenderId" onclick="AddFriend(id)" class="confirm-btn d-inline-block" data-bs-toggle="tooltip" data-bs-placement="top" title="Confirm" type="button"><i class="ri-check-line"></i></button>
                                                         </div>
                                                     </div>
                                                 </div>

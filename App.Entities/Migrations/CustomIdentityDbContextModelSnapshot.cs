@@ -84,9 +84,6 @@ namespace App.Entities.Migrations
                     b.Property<bool>("IsFriend")
                         .HasColumnType("bit");
 
-                    b.Property<bool>("IsOnline")
-                        .HasColumnType("bit");
-
                     b.Property<bool>("LockoutEnabled")
                         .HasColumnType("bit");
 
@@ -141,7 +138,10 @@ namespace App.Entities.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
 
-                    b.Property<string>("OwnId")
+                    b.Property<string>("CustomIdentityUserId")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<string>("MyId")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
@@ -151,7 +151,10 @@ namespace App.Entities.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("YourFriendId");
+                    b.HasIndex("CustomIdentityUserId");
+
+                    b.HasIndex("YourFriendId")
+                        .IsUnique();
 
                     b.ToTable("Friends");
                 });
@@ -309,13 +312,9 @@ namespace App.Entities.Migrations
 
             modelBuilder.Entity("App.Entities.Models.Friend", b =>
                 {
-                    b.HasOne("App.Entities.Models.CustomIdentityUser", "YourFriend")
+                    b.HasOne("App.Entities.Models.CustomIdentityUser", null)
                         .WithMany("Friends")
-                        .HasForeignKey("YourFriendId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("YourFriend");
+                        .HasForeignKey("CustomIdentityUserId");
                 });
 
             modelBuilder.Entity("App.Entities.Models.FriendRequest", b =>

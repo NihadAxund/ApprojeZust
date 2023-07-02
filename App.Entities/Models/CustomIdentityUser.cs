@@ -10,7 +10,6 @@ namespace App.Entities.Models
         public virtual ICollection<Friend> Friends { get; set; }
         public virtual ICollection<FriendRequest> FriendRequests { get; set; }
         public string? ImageUrl { get; set; }
-        public bool IsOnline { get; set; }
         public bool IsFriend { get; set; } = false;
         public bool HasRequestPending { get; set; } = false;
         public DateTime DisConnectTime { get; set; } = DateTime.Now;

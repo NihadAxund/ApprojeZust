@@ -48,3 +48,9 @@ function deleteRequest(id) {
         }
     })
 }
+
+async function AddFriendList(id) {
+    $.ajax({
+        url:""
+    })
+}
