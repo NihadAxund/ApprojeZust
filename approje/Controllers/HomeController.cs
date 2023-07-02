@@ -229,11 +229,11 @@ namespace approje.Controllers
         [Authorize]
         public async Task<IActionResult> GetAllMeFriendRequest()
         {
-            //var me = await _userManager.GetUserAsync(_httpContextAccessor.HttpContext.User);
+            var me = await _userManager.GetUserAsync(_httpContextAccessor.HttpContext.User);
             var list = _user.FriendRequests.ToList();
             List<FriendRequestAndMeDto> list2 = new List<FriendRequestAndMeDto>();
             foreach (var f in list)
-                list2.Add(new(f.CustomIdentityUser, f.ReceiverName));
+                list2.Add(new(f.CustomIdentityUser, f.ReceiverName,f.SenderId));
             if(list2.Count > 0) return Ok(list2);
             return Ok();
         }
@@ -242,19 +242,11 @@ namespace approje.Controllers
         public async Task<IActionResult> AddFriends(string id)
         {
 			var OwnUser = await _context.Users.Include(f => f.FriendRequests).FirstOrDefaultAsync(u => u.Id == id);
-            //OwnUser.Friends.Add(new Friend(OwnUser.Id,_user.Id,_user));
-            //_user.Friends.Add(new Friend(_user.Id, OwnUser.Id, OwnUser));
-            // var l = _context.FriendRequests.ToList();
             _context.Friends.Add(new Friend(OwnUser.Id, _user.Id));
             _context.Friends.Add(new Friend(_user.Id, OwnUser.Id));
-
-
             var removelist = _context.FriendRequests.Where(f => f.ReceiverId == id && f.SenderId == _user.Id || f.ReceiverId == _user.Id && f.SenderId == id);
-            var za = removelist.Count();
             foreach (var f in removelist)
                 _context.FriendRequests.Remove(f);
-            //await _userManager.UpdateAsync(_user);
-            //await _userManager.UpdateAsync(OwnUser);
             await _context.SaveChangesAsync();
             var data = _context.Friends.ToList();
 

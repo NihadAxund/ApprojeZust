@@ -40,7 +40,7 @@ async function ControlFriendRequstList() {
                 }
                 else {
                     var item = data[i];
-   
+                    alert(item.ownCustomIdentityUser.id+"Nihad bud");
                     text +=`
                     <div class="item d-flex align-items-center">
                         <div class="figure">
@@ -55,9 +55,9 @@ async function ControlFriendRequstList() {
 
                             </div>
                             <div class="btn-box d-flex align-items-center">
-                                <button id="${item.ownCustomIdentityUser.id}" class="delete-btn d-inline-block me-2" data-bs-toggle="tooltip" data-bs-placement="top" title="Delete" type="button"><i class="ri-close-line"></i></button>
+                                <button id="${item.ownid}" class="delete-btn d-inline-block me-2" data-bs-toggle="tooltip" data-bs-placement="top" title="Delete" type="button"><i class="ri-close-line"></i></button>
 
-                                <button id="${item.ownCustomIdentityUser.id}" onclick="AddFriend(id)" class="confirm-btn d-inline-block" data-bs-toggle="tooltip" data-bs-placement="top" title="Confirm" type="button"><i class="ri-check-line"></i></button>
+                                <button id="${item.ownid}" onclick="AddFriend(id)" class="confirm-btn d-inline-block" data-bs-toggle="tooltip" data-bs-placement="top" title="Confirm" type="button"><i class="ri-check-line"></i></button>
                             </div>
                         </div>
                     </div>`

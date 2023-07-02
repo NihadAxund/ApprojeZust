@@ -6,10 +6,11 @@ namespace approje.Dtos
     {
         public  CustomIdentityUser OwnCustomIdentityUser { get; set; }
         public string MeName { get; set; }
-        public FriendRequestAndMeDto(CustomIdentityUser user, string Name)
+        public string Ownid { get; set; }
+        public FriendRequestAndMeDto(CustomIdentityUser user, string Name,string ownid)
         { 
             OwnCustomIdentityUser = user;
-            MeName = Name;
+            MeName = Name; Ownid = ownid;
         }
     }
 }
