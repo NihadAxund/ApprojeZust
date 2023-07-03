@@ -114,8 +114,7 @@ namespace approje.Controllers
             
             return View();
         }
-
-        private IActionResult errorview() => View();
+        public IActionResult errorview() => View();
 
         [Authorize]
         public IActionResult Privacy()

@@ -16,10 +16,21 @@ connection.on("Notification", function (info,Notfication) {
     }
 });
 
+
 async function SendNotificationFunction(id,Notfication) {
 
     connection.invoke("SendNotification", id, Notfication);
 }
+
+connection.on("ExistingError",function(){
+    alert("Same user cannot be used again")
+    window.location.href = "/home/errorview";
+
+
+});
+
+
+
 //connection.on("Notificatio", function (Username) {
 //    alert(userName);
 //})

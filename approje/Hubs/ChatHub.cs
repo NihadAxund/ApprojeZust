@@ -1,6 +1,7 @@
 ﻿using App.Entities.Models;
 using approje.Enums;
 using Microsoft.AspNetCore.Authentication;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.SignalR;
 using Microsoft.EntityFrameworkCore;
@@ -33,14 +34,16 @@ namespace approje.Hubs
             }
             else if (Disconnect_User.ContainsKey(user.Id))
             {
+
                 Disconnect_User.Remove(user.Id);
+
   
             }
             else
             {
-                UsersAndId[user.Id].Add(user);
-
-			}
+                await Clients.Client(Context.ConnectionId).SendAsync("ExistingError");
+                throw new();
+            }
 
 
             // return base.OnConnectedAsync();
@@ -48,25 +51,31 @@ namespace approje.Hubs
         public override async Task OnDisconnectedAsync(Exception? exception)
         {
             var user = await _Usermanegeer.GetUserAsync(_HttpContextAccessor.HttpContext.User);
-            if (user != null)
-            {
-                Disconnect_User.Add(user.Id, user);
-                await Task.Delay(TimeSpan.FromSeconds(3));
-                if (Disconnect_User.ContainsKey(user.Id))
+
+                if (user != null)
                 {
-                    if (UsersAndId[user.Id].Count > 0)
+                    Disconnect_User.Add(user.Id, user);
+                    await Task.Delay(TimeSpan.FromSeconds(3));
+
+                    if (Disconnect_User.ContainsKey(user.Id))
                     {
-                        UsersAndId[user.Id].RemoveAt(0);
-                        Disconnect_User.Remove(user.Id);
-                    }
-                    if (UsersAndId[user.Id].Count <= 0) { 
-                           UsersAndId.Remove(user.Id);
-                           await Clients.Others.SendAsync("Disconnect", user.Id);               
-                    }
+                        if (UsersAndId[user.Id].Count > 0)
+                        {
+                            UsersAndId[user.Id].RemoveAt(0);
+                            Disconnect_User.Remove(user.Id);
+                        }
+                        if (UsersAndId[user.Id].Count <= 0) { 
+                               UsersAndId.Remove(user.Id);
+                                Clients.Others.SendAsync("Disconnect", user.Id);               
+                        }
                     
                     
+                    }
+
+                    
+         
                 }
-            }
+            
         }
 
         public async Task SendNotification(string Ownid, NotificationEnum notificationEnum = NotificationEnum.FriendRequest)
