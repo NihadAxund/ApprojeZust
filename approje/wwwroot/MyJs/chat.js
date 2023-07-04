@@ -5,15 +5,14 @@ connection.start().then(function () {
 
   //  setTimeout(function () { GetOnlineUsersFunction2(); }, 1500);
 }).catch(function (err) {
-    alert(err);
     console.log(err.toString())
 })
 
 connection.on("Notification", function (info,Notfication) { 
 
-    if (Notfication == 1 || Notfication == 2) {
+    if (Notfication == 1 || Notfication == 2) 
         ControlFriendRequstList();
-    }
+    
 });
 
 
@@ -29,9 +28,4 @@ connection.on("ExistingError",function(){
 
 });
 
-
-
-//connection.on("Notificatio", function (Username) {
-//    alert(userName);
-//})
 
