@@ -55,7 +55,7 @@ async function ControlFriendRequstList() {
 
                             </div>
                             <div class="btn-box d-flex align-items-center">
-                                <button id="${item.ownid}" class="delete-btn d-inline-block me-2" data-bs-toggle="tooltip" data-bs-placement="top" title="Delete" type="button"><i class="ri-close-line"></i></button>
+                                <button id="${item.ownid}" onclick="deleteRequestmini(id)" class="delete-btn d-inline-block me-2" data-bs-toggle="tooltip" data-bs-placement="top" title="Delete" type="button"><i class="ri-close-line"></i></button>
 
                                 <button id="${item.ownid}" onclick="AddFriend(id)" class="confirm-btn d-inline-block" data-bs-toggle="tooltip" data-bs-placement="top" title="Confirm" type="button"><i class="ri-check-line"></i></button>
                             </div>
@@ -79,4 +79,25 @@ function AddFriend(id) {
         }
 
     });
+}
+
+function deleteRequestmini(id) {
+    var element = document.querySelectorAll(`#request${id}`)
+    $.ajax({
+
+        url: "/Home/deleteRequest/" + id,
+        method: "GET",
+        success: function (data) {
+            var jsonData = JSON.stringify(data);
+            alert(data);
+            if (jsonData == `"Done"` || jsonData == "Done" && element.length>0) {
+                ControlFriendRequstList();
+            }
+
+
+        },
+        error: function (err) {
+            console.log(err)
+        }
+    })
 }

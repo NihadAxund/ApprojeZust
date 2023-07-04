@@ -307,6 +307,28 @@ namespace approje.Controllers
             return new JsonResult("Done");
         }
 
+        public async Task<JsonResult> deleteRequest(string id)
+        {
+            var OwnUser = await _userManager.Users.Include(a => a.FriendRequests).FirstOrDefaultAsync(u => u.Id == id);
+
+            if (OwnUser == null)
+                return new JsonResult("Null");
+
+            var collection = _context.FriendRequests.Where(f => f.SenderId == id && f.ReceiverId == _user.Id);
+            if (collection.Any())
+            {
+                foreach (var item in collection.ToList())
+                {
+                    _context.FriendRequests.Remove(item);
+                    OwnUser.FriendRequests.Remove(item);
+                }
+
+                await _context.SaveChangesAsync();
+            }
+
+            return new JsonResult("Done");
+        }
+
 
         //Accound
         public IActionResult register() => View();

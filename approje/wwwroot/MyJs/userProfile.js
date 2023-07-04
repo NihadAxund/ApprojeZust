@@ -23,7 +23,6 @@ function SendRequest(id) {
 
 }
 
-
 function deleteRequest(id) {
     $.ajax({
         url: "/Home/CancelFollow/" + id,
@@ -50,14 +49,14 @@ function deleteRequest(id) {
 }
 
 function deletefriend(id) {
-    alert("!ci")
+
     $.ajax({
         url: "/Home/DeleteFriend/" + id,
         method: "GET",
         success: function (data) {
             var jsonData = JSON.stringify(data);
             if (jsonData == `"Done"`) {
-                
+                location.reload();
             }
 
         },

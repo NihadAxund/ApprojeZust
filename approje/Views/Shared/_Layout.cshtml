@@ -103,7 +103,8 @@
                                         <div class="friend-requests-body" data-simplebar>
                                             @foreach (var item in user.FriendsRequest)
                                             {
-                                                <div class="item d-flex align-items-center">
+                                                var idstring = "request" + item.SenderId;
+                                                <div id="@idstring" class="item d-flex align-items-center">
                                                     <div class="figure">
                                                         <a href="#"><img src="https://w7.pngwing.com/pngs/744/940/png-transparent-anonym-avatar-default-head-person-unknown-user-user-pictures-icon.png" class="rounded-circle" alt="image"></a>
                                                     </div>
@@ -113,7 +114,7 @@
                                                             <h4><a href="/home/userProfile/@item.ReceiverId">@item.ReceiverName</a></h4>
                                                         </div>
                                                         <div class="btn-box d-flex align-items-center">
-                                                            <button id="@item.ReceiverId" class="delete-btn d-inline-block me-2" data-bs-toggle="tooltip" data-bs-placement="top" title="Delete" type="button"><i class="ri-close-line"></i></button>
+                                                            <button id="@item.SenderId" onclick="deleteRequestmini(id)" class="delete-btn d-inline-block me-2" data-bs-toggle="tooltip" data-bs-placement="top" title="Delete" type="button"><i class="ri-close-line"></i></button>
 
                                                             <button id="@item.SenderId" onclick="AddFriend(id)" class="confirm-btn d-inline-block" data-bs-toggle="tooltip" data-bs-placement="top" title="Confirm" type="button"><i class="ri-check-line"></i></button>
                                                         </div>
