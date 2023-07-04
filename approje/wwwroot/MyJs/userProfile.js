@@ -49,20 +49,20 @@ function deleteRequest(id) {
     })
 }
 
-async function deletefriend(id) {
+function deletefriend(id) {
+    alert("!ci")
     $.ajax({
-        url: "/Home/DeleteFriend" + id,
+        url: "/Home/DeleteFriend/" + id,
         method: "GET",
         success: function (data) {
             var jsonData = JSON.stringify(data);
-            alert(data);
             if (jsonData == `"Done"`) {
-                alert(data);
+                
             }
 
         },
         error: function (err) {
-
+            console.log(err);
         }
     })
 }
