@@ -49,6 +49,24 @@ function deleteRequest(id) {
     })
 }
 
+async function deletefriend(id) {
+    $.ajax({
+        url: "/Home/DeleteFriend" + id,
+        method: "GET",
+        success: function (data) {
+            var jsonData = JSON.stringify(data);
+            alert(data);
+            if (jsonData == `"Done"`) {
+                alert(data);
+            }
+
+        },
+        error: function (err) {
+
+        }
+    })
+}
+
 async function AddFriendList(id) {
     $.ajax({
         url:""

@@ -259,7 +259,7 @@ namespace approje.Controllers
             foreach (var f in val)
                 _context.Friends.Remove(f);
             await _context.SaveChangesAsync();
-			return new("succes");
+			return new("Done");
 		}
 
 		[Authorize]

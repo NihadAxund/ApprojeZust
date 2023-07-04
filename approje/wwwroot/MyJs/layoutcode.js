@@ -40,7 +40,7 @@ async function ControlFriendRequstList() {
                 }
                 else {
                     var item = data[i];
-                    alert(item.ownCustomIdentityUser.id+"Nihad bud");
+         
                     text +=`
                     <div class="item d-flex align-items-center">
                         <div class="figure">
@@ -69,12 +69,12 @@ async function ControlFriendRequstList() {
 }
 
 function AddFriend(id) {
-    alert(id);
+ 
     $.ajax({
         url: "/Home/AddFriends/"+id,
         method: "GET",
         success: function (data) {
-            alert('Hda')
+     
             ControlFriendRequstList();
         }
 
