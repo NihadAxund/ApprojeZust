@@ -96,11 +96,12 @@ namespace approje.Controllers
             {
                 var _userName =  _httpContextAccessor.HttpContext.User.Identity.Name;
                 var user =  _userManager.Users.Include(u => u.FriendRequests).Include(u=>u.Friends).FirstOrDefaultAsync(u => u.UserName == _userName).Result;
+
                 _user = user;
               
                 if(user != null)
                 {
-                    _userViewModel = new UserViewModel(user.Id, user.UserName, user.Email,user.FriendRequests.ToList());
+                    _userViewModel = new UserViewModel(user.Id, user.UserName, user.Email,user.FriendRequests.ToList(),user.Friends.Count());
                     ViewData["User"] = _userViewModel;
                    // ViewBag.User = _userViewModel;
                 }
@@ -182,12 +183,9 @@ namespace approje.Controllers
             lock (ChatHub.UsersAndId.Values)
             {
                 var list = ChatHub.UsersAndId.Values.Select(s => s[0]).ToList();
-
-
                 try
                 {
                     if (list.Count > 0)
-
                         list.Remove(ChatHub.UsersAndId[_userViewModel.Id][0]);
                     else return Ok();
                     return Ok(list);
@@ -240,9 +238,14 @@ namespace approje.Controllers
 		[Authorize]
         public async Task<IActionResult> AddFriends(string id)
         {
-			var OwnUser = await _context.Users.Include(f => f.FriendRequests).FirstOrDefaultAsync(u => u.Id == id);
-            _context.Friends.Add(new Friend(OwnUser.Id, _user.Id));
-            _context.Friends.Add(new Friend(_user.Id, OwnUser.Id));
+			var OwnUser = await _context.Users.Include(f => f.FriendRequests).Include(f =>f.Friends).FirstOrDefaultAsync(u => u.Id == id);
+            //_context.Friends.Add(new Friend(OwnUser.Id, _user.Id));
+            //_context.Friends.Add(new Friend(_user.Id, OwnUser.Id));
+            OwnUser.Friends.Add(new Friend(OwnUser.Id, _user.Id));
+            _user.Friends.Add(new Friend(_user.Id, OwnUser.Id));
+            await _userManager.UpdateAsync(OwnUser);
+            await _userManager.UpdateAsync(_user);
+
             var removelist = _context.FriendRequests.Where(f => f.ReceiverId == id && f.SenderId == _user.Id || f.ReceiverId == _user.Id && f.SenderId == id);
             foreach (var f in removelist)
                 _context.FriendRequests.Remove(f);

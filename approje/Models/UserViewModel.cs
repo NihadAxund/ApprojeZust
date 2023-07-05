@@ -8,6 +8,7 @@ namespace approje.Models
         public  string? Name { get; set; }
         public string? Email { get; set; }
         public List<FriendRequest> FriendsRequest { get; set; } = new();
+        public int FriendCount { get; set; }    
 
         public UserViewModel() { }
         public UserViewModel(string id,string name, string email) 
@@ -15,10 +16,11 @@ namespace approje.Models
             Id = id;
             Name = name; Email = email;        
         }
-        public UserViewModel(string id, string name, string email,List<FriendRequest> friends)
+        public UserViewModel(string id, string name, string email,List<FriendRequest> friends, int friendCount)
         {
             Id = id; Name = name;
             Email = email; FriendsRequest = friends;
+            FriendCount = friendCount;
         }
     }
 }
