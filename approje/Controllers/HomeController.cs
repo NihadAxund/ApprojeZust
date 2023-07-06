@@ -13,6 +13,7 @@ using Microsoft.AspNetCore.SignalR.Client;
 using Microsoft.EntityFrameworkCore;
 using System.Diagnostics;
 using System.Runtime.CompilerServices;
+using System.Web;
 
 namespace approje.Controllers
 {
@@ -101,7 +102,7 @@ namespace approje.Controllers
               
                 if(user != null)
                 {
-                    _userViewModel = new UserViewModel(user.Id, user.UserName, user.Email,user.FriendRequests.ToList(),user.Friends.Count());
+                    _userViewModel = new UserViewModel(user.Id, user.UserName, user.Email,user.FriendRequests.ToList(),user.Friends.Count(),user.ImageUrl);
                     ViewData["User"] = _userViewModel;
                    // ViewBag.User = _userViewModel;
                 }
@@ -183,6 +184,7 @@ namespace approje.Controllers
             lock (ChatHub.UsersAndId.Values)
             {
                 var list = ChatHub.UsersAndId.Values.Select(s => s[0]).ToList();
+                
                 try
                 {
                     if (list.Count > 0)
@@ -202,9 +204,6 @@ namespace approje.Controllers
         [Authorize]
         public async Task<IActionResult> userProfile(string id)
         {
-
-           
-          //  var ownuser = await _context.Users.FirstOrDefaultAsync(u => u.Id == id);
             var ownuser = await _userManager.Users.Include(u => u.FriendRequests).Include(s=>s.Friends).FirstOrDefaultAsync(u => u.Id == id);
             var friendslist = _context.Friends.Where(a => a.MyId == id);
             ownuser.Friends = friendslist.ToList();
@@ -216,7 +215,7 @@ namespace approje.Controllers
                 var data = friendslist.FirstOrDefault(f => f.MyId == id && f.YourFriendId == _user.Id);
             }
             var IsFriend = ownuser.Friends.FirstOrDefault(f=>f.MyId==id&&f.YourFriendId==_user.Id);
-            OwnUserDto vm = new OwnUserDto(ownuser.Id, ownuser.UserName, ownuser.Email,FriendRequest!=null, IsFriend != null);
+            OwnUserDto vm = new OwnUserDto(ownuser.Id, ownuser.UserName, ownuser.Email,FriendRequest!=null, IsFriend != null,ownuser.Friends.Count(),ownuser.ImageUrl);
             if (vm != null)
                 return View(vm);
             
@@ -285,8 +284,20 @@ namespace approje.Controllers
             }
         }
 
+        [Authorize]
+        public async Task<JsonResult> NewProfileImage(string id)
+        {
+            if (id != null)
+            {
+                string decodedLink = HttpUtility.UrlDecode(id);
+                _user.ImageUrl = decodedLink;
+                await _userManager.UpdateAsync(_user);
+                return new("Done");
 
-      
+            }
+            return new("Null");
+        }
+
         [Authorize]
         public async Task<JsonResult> CancelFollow(string id)
         {

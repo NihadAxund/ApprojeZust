@@ -12,7 +12,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace App.Entities.Migrations
 {
     [DbContext(typeof(CustomIdentityDbContext))]
-    [Migration("20230702211957_init")]
+    [Migration("20230705172848_init")]
     partial class init
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -143,19 +143,23 @@ namespace App.Entities.Migrations
                     b.Property<string>("CustomIdentityUserId")
                         .HasColumnType("nvarchar(450)");
 
+                    b.Property<string>("Mixid")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(450)");
+
                     b.Property<string>("MyId")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("YourFriendId")
                         .IsRequired()
-                        .HasColumnType("nvarchar(450)");
+                        .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
 
                     b.HasIndex("CustomIdentityUserId");
 
-                    b.HasIndex("YourFriendId")
+                    b.HasIndex("Mixid")
                         .IsUnique();
 
                     b.ToTable("Friends");

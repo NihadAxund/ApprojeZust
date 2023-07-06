@@ -190,7 +190,8 @@ namespace App.Entities.Migrations
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     MyId = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    YourFriendId = table.Column<string>(type: "nvarchar(450)", nullable: false),
+                    YourFriendId = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Mixid = table.Column<string>(type: "nvarchar(450)", nullable: false),
                     CustomIdentityUserId = table.Column<string>(type: "nvarchar(450)", nullable: true)
                 },
                 constraints: table =>
@@ -259,9 +260,9 @@ namespace App.Entities.Migrations
                 column: "CustomIdentityUserId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Friends_YourFriendId",
+                name: "IX_Friends_Mixid",
                 table: "Friends",
-                column: "YourFriendId",
+                column: "Mixid",
                 unique: true);
         }
 

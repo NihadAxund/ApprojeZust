@@ -12,8 +12,8 @@ function GetOnlineUsersFunction2() {
                 if ($(`#OnlineUsersDiv #${data[i].id}`).length <= 0) {
                     var text = `<article class="item" id="${data[i].id}" >
                                     <a href="#" class="thumb">
-                                        <span class="fullimage bg1" role="img"></span>
-                                    </a>
+                                       <img style= "min-height: 55px; min-width: 55px;" max-height: 55px; max-width: 55px;" src="${data[i].imageUrl}" class="rounded-circle" alt="image">
+                                     </a>
                                     <div class="info">
                                         <h4 class="title">
                                             <a href="/home/userProfile/${data[i].id}">${data[i].userName}</a>

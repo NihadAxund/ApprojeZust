@@ -30,7 +30,7 @@
                 <div class="inner-info-box d-flex justify-content-between align-items-center">
                     <div class="info-image">
                         <a href="#">
-                            <img src="~/assets/images/my-profile.jpg" alt="image">
+                            <img src="@Model.Imageurl" alt="image">
                         </a>
                         <div class="icon">
                             <a href="#"><i class="flaticon-photo-camera"></i></a>
@@ -43,20 +43,14 @@
                     <ul class="statistics">
                         <li>
                             <a href="#">
-                                <span class="item-number">59862</span>
+                                <span class="item-number">0</span>
                                 <span class="item-text">Likes</span>
                             </a>
                         </li>
                         <li>
                             <a href="#">
-                                <span class="item-number">8591</span>
-                                <span class="item-text">Following</span>
-                            </a>
-                        </li>
-                        <li>
-                            <a href="#">
-                                <span class="item-number">784514</span>
-                                <span class="item-text">Followers</span>
+                                <span class="item-number">@Model.FriendCount</span>
+                                <span class="item-text">Friends</span>
                             </a>
                         </li>
                     </ul>
@@ -333,12 +327,6 @@
                                                 <a href="#">
                                                     <span class="item-number">82</span>
                                                     <span class="item-text">Likes</span>
-                                                </a>
-                                            </li>
-                                            <li>
-                                                <a href="#">
-                                                    <span class="item-number">50</span>
-                                                    <span class="item-text">Following</span>
                                                 </a>
                                             </li>
                                             <li>

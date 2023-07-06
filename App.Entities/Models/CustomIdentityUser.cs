@@ -9,7 +9,7 @@ namespace App.Entities.Models
     {
         public virtual ICollection<Friend> Friends { get; set; }
         public virtual ICollection<FriendRequest> FriendRequests { get; set; }
-        public string? ImageUrl { get; set; }
+        public string? ImageUrl { get; set; } = "https://w7.pngwing.com/pngs/744/940/png-transparent-anonym-avatar-default-head-person-unknown-user-user-pictures-icon.png";
         public bool IsFriend { get; set; } = false;
         public bool HasRequestPending { get; set; } = false;
         public DateTime DisConnectTime { get; set; } = DateTime.Now;

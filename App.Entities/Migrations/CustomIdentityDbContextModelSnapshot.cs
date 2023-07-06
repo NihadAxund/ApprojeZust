@@ -141,19 +141,23 @@ namespace App.Entities.Migrations
                     b.Property<string>("CustomIdentityUserId")
                         .HasColumnType("nvarchar(450)");
 
+                    b.Property<string>("Mixid")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(450)");
+
                     b.Property<string>("MyId")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("YourFriendId")
                         .IsRequired()
-                        .HasColumnType("nvarchar(450)");
+                        .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
 
                     b.HasIndex("CustomIdentityUserId");
 
-                    b.HasIndex("YourFriendId")
+                    b.HasIndex("Mixid")
                         .IsUnique();
 
                     b.ToTable("Friends");
