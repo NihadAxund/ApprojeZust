@@ -60,9 +60,16 @@ namespace approje.Controllers
             return PartialView("groups");
         }
         [Authorize]
-        public IActionResult friends()
+        public async Task<IActionResult> friends()
         {
-            return View();
+            List<CustomIdentityUser> ramruser = new List<CustomIdentityUser>();
+            var Task1 = Task.Run(async () =>
+            {
+                foreach (var item in _user.Friends)
+                    ramruser.Add(await _userManager.Users.Include(f=>f.Friends).FirstOrDefaultAsync(a => a.Id == item.YourFriendId));
+            });
+            Task.WaitAll(Task1);
+            return View(ramruser);
         }
         [Authorize]
         public IActionResult favorite()
@@ -133,7 +140,17 @@ namespace approje.Controllers
         [Route("/home/live-chat")]
         public IActionResult live_chat()
         {
-            return View("live-chat");
+            lock (ChatHub.UsersAndId.Values)
+            {
+                var list = ChatHub.UsersAndId.Values.Select(s => s[0]).Where(s=>s.Id!=_userViewModel.Id).ToList();
+                List<ChatUserDto> chatUserDtos = new List<ChatUserDto>();
+                foreach (var item in list)
+                {
+                    chatUserDtos.Add(new(item));
+                }
+                return View("live-chat", chatUserDtos);
+                //return View(chatUserDtos);
+            }
         }
         [Authorize]
         public IActionResult marketplace()
@@ -143,6 +160,7 @@ namespace approje.Controllers
         [Authorize]
         public IActionResult messages()
         {
+
             return View();
         }
         [Authorize]

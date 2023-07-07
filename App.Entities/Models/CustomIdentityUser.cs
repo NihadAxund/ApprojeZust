@@ -13,12 +13,13 @@ namespace App.Entities.Models
         public bool IsFriend { get; set; } = false;
         public bool HasRequestPending { get; set; } = false;
         public DateTime DisConnectTime { get; set; } = DateTime.Now;
+        public List<Chat> Chats { get; set; }
         public string ConnectTime { get; set; } = "";
         public CustomIdentityUser()
         {
             Friends = new List<Friend>();
             FriendRequests = new List<FriendRequest>();
-
+            Chats = new();
         }
 
 

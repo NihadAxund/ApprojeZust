@@ -11,11 +11,15 @@ namespace approje.Models
         public int FriendCount { get; set; }
         public string UserImagelink { get; set; } = "https://w7.pngwing.com/pngs/744/940/png-transparent-anonym-avatar-default-head-person-unknown-user-user-pictures-icon.png";
         public UserViewModel() { }
-        public UserViewModel(string id,string name, string email) 
-        {
-            Id = id;
-            Name = name; Email = email;        
-        }
+
+        //public UserViewModel(string id,string name, string email) 
+        //{
+        //    Id = id;
+        //    Name = name; Email = email;        
+        //}
+
+
+
         public UserViewModel(string id, string name, string email,List<FriendRequest> friends, int friendCount,string url)
         {
             Id = id; Name = name;
