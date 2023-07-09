@@ -17,5 +17,11 @@ namespace App.Entities.Models
         {
             Messages = new List<Message>();
         }
+        public Chat(string receiverId, string senderId,CustomIdentityUser receiver)
+        {
+            ReceiverId = receiverId; SenderId = senderId;
+            Messages = new List<Message>(); Receiver = receiver;
+        }
+
     }
 }

@@ -139,10 +139,21 @@ namespace approje.Controllers
         public async Task<IActionResult> MyChat(string id)
         {
             var ownuser = await _userManager.Users.FirstOrDefaultAsync(u => u.Id == id);
-            var messages = await _context.Chats.FirstOrDefaultAsync(c => c.ReceiverId == id&&c.SenderId==_userViewModel.Id);
-            MessagesUsersDto dto = new(messages, ownuser);
-           
+            var chat = await _context.Chats.Include(s=>s.Messages).FirstOrDefaultAsync(c => c.ReceiverId == id&&c.SenderId==_userViewModel.Id);
+            var chats = _context.Chats.ToList();
+            var chats2 = _context.Chats.Include(a=>a.Messages);
+            if (chat == null)
+            {
+                chat = new Chat(ownuser.Id,_userViewModel.Id,ownuser);
+               await _context.Chats.AddAsync(chat);
+               await _context.Chats.AddAsync(new Chat(_userViewModel.Id,ownuser.Id,_user));
+                await _context.SaveChangesAsync();
+
+            }
+
+            MessagesUsersDto dto = new(chat, ownuser);
             return Ok(dto);
+           
         }
         [Authorize]
         [Route("/home/live-chat")]

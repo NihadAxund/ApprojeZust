@@ -1,5 +1,5 @@
 ﻿
-var div = document.querySelector("#live_chat_online_users_div");
+var div2 = document.querySelector("#live_chat_online_users");
 var chatbody = document.querySelector(".live-chat-body");
 connection.on("Connect", function (info, id) {
 
@@ -97,12 +97,13 @@ async function GetAllLiveChatUsers() {
         url: "/Home/GetAllOnlineUsers",
         method: "GET",
         success: function (data) {
-            div.innerHTML = " ";
+            div2.innerHTML = " ";
+            var text = " ";
             for (var i = 0; i < data.length; i++) {
 
-                if ($(`#live_chat_online_users_div #${data[i].id}`).length <= 0) {
+                if ($(`#live_chat_online_users #${data[i].id}`).length <= 0) {
 
-                    var text = `<div class="chat-box" id="${data[i].id}" onclick="LiveMessageUser(id)">
+                     text += `<div class="chat-box" id="${data[i].id}" onclick="LiveMessageUser(id)">
                         <div class="image">
                             <a href="#"><img style="height:85px; width:85px;" src="${data[i].imageUrl}" class="rounded-circle" alt="image"></a>
                             <span class="status-online"></span>
@@ -112,14 +113,14 @@ async function GetAllLiveChatUsers() {
                         </h3>
                     </div>`
 
-                    if (text != null && div != null) {
-                        div.innerHTML += text
-                        if (data.length == 1) {
-                            LiveMessageUser(data[0].id);
-                        }
-                    }
                 }
 
+            }
+            if (text != null && div2 != null) {
+                div2.innerHTML = text
+                if (data.length == 1) {
+                    LiveMessageUser(data[0].id);
+                }
             }
         }
     });
