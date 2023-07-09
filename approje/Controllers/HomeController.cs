@@ -140,8 +140,6 @@ namespace approje.Controllers
         {
             var ownuser = await _userManager.Users.FirstOrDefaultAsync(u => u.Id == id);
             var chat = await _context.Chats.Include(s=>s.Messages).FirstOrDefaultAsync(c => c.ReceiverId == id&&c.SenderId==_userViewModel.Id);
-            var chats = _context.Chats.ToList();
-            var chats2 = _context.Chats.Include(a=>a.Messages);
             if (chat == null)
             {
                 chat = new Chat(ownuser.Id,_userViewModel.Id,ownuser);
@@ -151,10 +149,42 @@ namespace approje.Controllers
 
             }
 
-            MessagesUsersDto dto = new(chat, ownuser);
+            MessagesUsersDto dto = new(chat, _user,_userViewModel.Id);
+
             return Ok(dto);
            
         }
+
+        [HttpPost(Name = "AddMessage")]
+        public async Task<IActionResult> AddMessage(MessageModel model)
+        {
+            try
+            {
+                var chat = _context.Chats.FirstOrDefault(i => i.ReceiverId == model.ReceiverId);
+                if (chat != null)
+                {
+                    var message = new Message
+                    {
+                        Chat = chat,
+                        Content = model.Content,
+                        DateTime = DateTime.Now,
+                        HasSeen = false,
+                        ReceiverId = model.ReceiverId,
+                        SenderId = model.SenderId
+                    };
+                    await _context.Messages.AddAsync(message);
+                    await _context.SaveChangesAsync();
+
+                    return Ok();
+                }
+                return BadRequest();
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
+        }
+
         [Authorize]
         [Route("/home/live-chat")]
         public IActionResult live_chat()

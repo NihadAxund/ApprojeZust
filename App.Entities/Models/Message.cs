@@ -14,6 +14,7 @@ namespace App.Entities.Models
         public string ReceiverId { get; set; }
         public string SenderId { get; set; }
         public virtual Chat Chat { get; set; }
+
         public bool HasSeen { get; set; } = false;
         public Message() { }
         public Message(string content, DateTime dateTime, string receiverId, string senderId, Chat chat, bool hasSeen)

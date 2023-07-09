@@ -8,17 +8,43 @@ connection.on("Connect", function (info, id) {
 
 });
 
+async function chatSendMessage(receiverId, senderId) {
+
+    alert("aa");
+    let content_txt = document.querySelector('#content_txt_chat');
+    alert(content_txt.value);
+    let obj = {
+        receiverId: receiverId,
+        senderId: senderId,
+        content: content_txt.value
+    };
+
+    $.ajax({
+        url: `/Home/AddMessage`,
+        method: "POST",
+        data: obj,
+        success: function (data) {
+            alert("post oldu")
+            //GetMessageCall(receiverId, senderId);
+            content_txt.value = "";
+        },
+        error: function (err) {
+            alert("xetta" + err);
+        }
+    })
+}
 async function LiveMessageUser(id) {
     $.ajax({
         url: `/Home/MyChat/${id}`,
       
         method: "GET",
         success: function (chatdata) {
-            var Ownuser = chatdata.user;
+            var me = chatdata.user;
+            var Ownuser = chatdata.chat.receiver;
             chatbody.innerHTML = " ";
             var text = ` <div class="live-chat-header d-flex justify-content-between align-items-center">
                      <div class="live-chat-info">
-                         <a href="#"><img style="height:50px; width:50px;" src="@MessageUser.User_img" class="rounded-circle" alt="image"></a>
+                         <a href="#"><img style="height:50px; width:50px;" src="${Ownuser.imageUrl}" class="rounded-circle" alt="image"></a>
                          <h3>
                              <a href="#">${Ownuser.userName}</a>
                          </h3>
@@ -39,10 +65,51 @@ async function LiveMessageUser(id) {
 
                  <div class="live-chat-container">
                      <div class="chat-content">
-                         <div class="chat">
+                         
+
+                      
+                     </div>
+
+                     <div class="chat-list-footer">
+                         <form class="d-flex align-items-center">
+                             <div class="btn-box d-flex align-items-center me-3">
+                                 <button class="file-attachment-btn d-inline-block me-2" data-bs-toggle="tooltip" data-bs-placement="top" title="File Attachment" type="button"><i class="ri-attachment-2"></i></button>
+
+                                 <button class="emoji-btn d-inline-block" data-bs-toggle="tooltip" data-bs-placement="top" title="Emoji" type="button"><i class="ri-user-smile-line"></i></button>
+                             </div>
+
+                                <input type="text" id="content_txt_chat" class="form-control" placeholder="Type your message...">
+
+                          
+                         </form>
+                         <button onclick="chatSendMessage('${Ownuser.id}', '${chatdata.meId}')" class="send-btn d-inline-block">Send</button>
+                     </div>
+                 </div>`
+            chatbody.innerHTML += text;
+            var chatcontent = document.querySelector('.chat-content');
+            var texttxt = " "
+            alert("Count:" + chatdata.chat.messages.length);
+            for (var i = 0; i < chatdata.chat.messages.length; i++) {
+                texttxt += `<div class="chat">
                              <div class="chat-avatar">
                                  <a routerLink="/profile" class="d-inline-block">
-                                     <img src="~/assets/images/user/user-11.jpg" width="50" height="50" class="rounded-circle" alt="image">
+                                     <img src="${me.imageUrl}" width="50" height="50" class="rounded-circle" alt="image">
+                                 </a>
+                             </div>
+
+                             <div class="chat-body">
+                                 <div class="chat-message">
+                                     <p>${chatdata.chat.messages[i].content}</p>
+                                     <span class="time d-block">Nihad saat</span>
+                                 </div>
+                             </div>
+                         </div>`;
+            }
+            chatcontent.innerHTML = texttxt;
+            var text2 = `<div class="chat">
+                             <div class="chat-avatar">
+                                 <a routerLink="/profile" class="d-inline-block">
+                                     <img src="" width="50" height="50" class="rounded-circle" alt="image">
                                  </a>
                              </div>
 
@@ -63,30 +130,11 @@ async function LiveMessageUser(id) {
 
                              <div class="chat-body">
                                  <div class="chat-message">
-                                     <p>Said how can I cooperate with you?</p>
+                                     <p>Said how c</p>
                                      <span class="time d-block">7:45 AM</span>
                                  </div>
                              </div>
-                         </div>
-
-                      
-                     </div>
-
-                     <div class="chat-list-footer">
-                         <form class="d-flex align-items-center">
-                             <div class="btn-box d-flex align-items-center me-3">
-                                 <button class="file-attachment-btn d-inline-block me-2" data-bs-toggle="tooltip" data-bs-placement="top" title="File Attachment" type="button"><i class="ri-attachment-2"></i></button>
-
-                                 <button class="emoji-btn d-inline-block" data-bs-toggle="tooltip" data-bs-placement="top" title="Emoji" type="button"><i class="ri-user-smile-line"></i></button>
-                             </div>
-
-                             <input type="text" class="form-control" placeholder="Type your message...">
-
-                             <button type="submit" class="send-btn d-inline-block">Send</button>
-                         </form>
-                     </div>
-                 </div>`
-            chatbody.innerHTML += text;
+                         </div>`;
         }
     });
     
