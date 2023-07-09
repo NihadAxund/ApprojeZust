@@ -71,7 +71,8 @@ async function ControlFriendRequstList() {
 function AddFriend(id) {
  
     $.ajax({
-        url: "/Home/AddFriends/"+id,
+        url: "/Home/AddFriends/" + id,
+
         method: "GET",
         success: function (data) {
      

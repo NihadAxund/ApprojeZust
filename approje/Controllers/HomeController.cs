@@ -104,9 +104,8 @@ namespace approje.Controllers
             {
                 var _userName =  _httpContextAccessor.HttpContext.User.Identity.Name;
                 var user =  _userManager.Users.Include(u => u.FriendRequests).Include(u=>u.Friends).FirstOrDefaultAsync(u => u.UserName == _userName).Result;
-
                 _user = user;
-              
+            
                 if(user != null)
                 {
                     _userViewModel = new UserViewModel(user.Id, user.UserName, user.Email,user.FriendRequests.ToList(),user.Friends.Count(),user.ImageUrl);
@@ -137,6 +136,15 @@ namespace approje.Controllers
             return View("help-and-support");
         }
         [Authorize]
+        public async Task<IActionResult> MyChat(string id)
+        {
+            var ownuser = await _userManager.Users.FirstOrDefaultAsync(u => u.Id == id);
+            var messages = await _context.Chats.FirstOrDefaultAsync(c => c.ReceiverId == id&&c.SenderId==_userViewModel.Id);
+            MessagesUsersDto dto = new(messages, ownuser);
+           
+            return Ok(dto);
+        }
+        [Authorize]
         [Route("/home/live-chat")]
         public IActionResult live_chat()
         {
@@ -145,9 +153,10 @@ namespace approje.Controllers
                 var list = ChatHub.UsersAndId.Values.Select(s => s[0]).Where(s=>s.Id!=_userViewModel.Id).ToList();
                 List<ChatUserDto> chatUserDtos = new List<ChatUserDto>();
                 foreach (var item in list)
-                {
                     chatUserDtos.Add(new(item));
-                }
+                if(chatUserDtos.Count > 0)
+                    ViewData["live_chat_message_user"] = chatUserDtos[0];
+                ViewData["me"] = new ChatUserDto(_user);
                 return View("live-chat", chatUserDtos);
                 //return View(chatUserDtos);
             }

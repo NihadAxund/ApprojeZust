@@ -22,8 +22,8 @@ async function SendNotificationFunction(id,Notfication) {
 }
 
 connection.on("ExistingError",function(){
-    alert("Same user cannot be used again")
     window.location.href = "/home/errorview";
+    alert("Same user cannot be used again")
 
 
 });
