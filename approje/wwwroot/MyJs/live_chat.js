@@ -1,5 +1,4 @@
-﻿
-var div2 = document.querySelector("#live_chat_online_users");
+﻿var div2 = document.querySelector(".live-chat-slides");
 var chatbody = document.querySelector(".live-chat-body");
 connection.on("Connect", function (info, id) {
 
@@ -8,9 +7,17 @@ connection.on("Connect", function (info, id) {
 
 });
 
-async function chatSendMessage(receiverId, senderId) {
 
-    alert("aa");
+connection.on("SendChatUser", function (id, mes) {
+
+    alert(mes);
+
+});
+
+
+
+ function chatSendMessage(receiverId, senderId) {
+
     let content_txt = document.querySelector('#content_txt_chat');
     alert(content_txt.value);
     let obj = {
@@ -24,7 +31,8 @@ async function chatSendMessage(receiverId, senderId) {
         method: "POST",
         data: obj,
         success: function (data) {
-            alert("post oldu")
+            SendChatMessageFunction(receiverId, content_txt.value);
+
             //GetMessageCall(receiverId, senderId);
             content_txt.value = "";
         },
@@ -90,20 +98,42 @@ async function LiveMessageUser(id) {
             var texttxt = " "
             alert("Count:" + chatdata.chat.messages.length);
             for (var i = 0; i < chatdata.chat.messages.length; i++) {
-                texttxt += `<div class="chat">
-                             <div class="chat-avatar">
-                                 <a routerLink="/profile" class="d-inline-block">
-                                     <img src="${me.imageUrl}" width="50" height="50" class="rounded-circle" alt="image">
-                                 </a>
-                             </div>
-
-                             <div class="chat-body">
-                                 <div class="chat-message">
-                                     <p>${chatdata.chat.messages[i].content}</p>
-                                     <span class="time d-block">Nihad saat</span>
+                var item = chatdata.chat.messages[i];
+                if (item.senderId == me.id) {
+                    texttxt += `<div class="chat">
+                                 <div class="chat-avatar">
+                                     <a routerLink="/profile" class="d-inline-block">
+                                         <img src="${me.imageUrl}" width="50" height="50" class="rounded-circle" alt="image">
+                                     </a>
                                  </div>
-                             </div>
-                         </div>`;
+
+                                 <div class="chat-body">
+                                     <div class="chat-message">
+                                         <p>${chatdata.chat.messages[i].content}</p>
+                                         <span class="time d-block">Nihad saat</span>
+                                     </div>
+                                 </div>
+                             </div>`
+                        ;
+
+                }
+                else {
+                    texttxt += `<div class="chat chat-left">
+                                 <div class="chat-avatar">
+                                     <a routerLink="/profile" class="d-inline-block">
+                                         <img src="${Ownuser.imageUrl}" width="50" height="50" class="rounded-circle" alt="image">
+                                     </a>
+                                 </div>
+
+                                 <div class="chat-body">
+                                     <div class="chat-message">
+                                         <p>${chatdata.chat.messages[i].content}</p>
+                                         <span class="time d-block">Nihad saat</span>
+                                     </div>
+                                 </div>
+                             </div>`
+                        ;
+                }
             }
             chatcontent.innerHTML = texttxt;
             var text2 = `<div class="chat">
@@ -173,3 +203,4 @@ async function GetAllLiveChatUsers() {
         }
     });
 }
+setTimeout(GetAllLiveChatUsers, 800);

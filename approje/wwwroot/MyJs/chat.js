@@ -16,10 +16,26 @@ connection.on("Notification", function (info,Notfication) {
 });
 
 
+
 async function SendNotificationFunction(id,Notfication) {
 
     connection.invoke("SendNotification", id, Notfication);
 }
+
+
+
+function SendChatMessageFunction(id, Messagetxt) {
+    alert("aa");
+    try {
+        alert("Send Message Starter...");
+        connection.invoke("SendMessageUser", id, Messagetxt);
+
+    } catch (error) {
+        alert(error);
+        console.error("SendChatMessage error:", error);
+    }
+}
+
 
 connection.on("ExistingError",function(){
     window.location.href = "/home/errorview";

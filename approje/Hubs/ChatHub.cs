@@ -84,6 +84,19 @@ namespace approje.Hubs
 
         }
 
+        public async Task SendMessageUser(string Ownid, string Messagetxt)
+        {
+            try
+            {
+               await Clients.User(Ownid).SendAsync("SendChatUser", Ownid, Messagetxt);
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine("SendChatMessage error:", ex);
+            }
+        }
+
+
         public async Task SendMessage(string user, string message)
         {
             await Clients.All.SendAsync("ReceiveMessage", user, message);

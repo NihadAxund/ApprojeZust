@@ -139,7 +139,8 @@ namespace approje.Controllers
         public async Task<IActionResult> MyChat(string id)
         {
             var ownuser = await _userManager.Users.FirstOrDefaultAsync(u => u.Id == id);
-            var chat = await _context.Chats.Include(s=>s.Messages).FirstOrDefaultAsync(c => c.ReceiverId == id&&c.SenderId==_userViewModel.Id);
+            var chat = await _context.Chats.Include(s=>s.Messages).FirstOrDefaultAsync(c => c.ReceiverId == id&&c.SenderId==_userViewModel.Id
+            || c.ReceiverId==_userViewModel.Id&&c.SenderId==id);
             if (chat == null)
             {
                 chat = new Chat(ownuser.Id,_userViewModel.Id,ownuser);
@@ -147,6 +148,11 @@ namespace approje.Controllers
                await _context.Chats.AddAsync(new Chat(_userViewModel.Id,ownuser.Id,_user));
                 await _context.SaveChangesAsync();
 
+            }
+            else
+            {
+                var messages = chat.Messages.OrderBy(o => o.DateTime).ToList();
+                chat.Messages = messages;
             }
 
             MessagesUsersDto dto = new(chat, _user,_userViewModel.Id);
@@ -192,6 +198,7 @@ namespace approje.Controllers
             lock (ChatHub.UsersAndId.Values)
             {
                 var list = ChatHub.UsersAndId.Values.Select(s => s[0]).Where(s=>s.Id!=_userViewModel.Id).ToList();
+
                 List<ChatUserDto> chatUserDtos = new List<ChatUserDto>();
                 foreach (var item in list)
                     chatUserDtos.Add(new(item));

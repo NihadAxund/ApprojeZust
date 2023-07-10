@@ -20,7 +20,6 @@
 
 
 });
-
 connection.on("Disconnect", function (id) {
     GetOnlineUsersFunction2();
 });
