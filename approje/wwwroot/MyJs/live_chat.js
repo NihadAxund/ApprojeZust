@@ -8,10 +8,9 @@ connection.on("Connect", function (info, id) {
 });
 
 
-connection.on("SendChatUser", function (id, mes) {
+connection.on("SendChatUser", function (id, sendid, mes) {
 
-    alert(mes);
-
+    LiveMessageUser(sendid);
 });
 
 
@@ -19,7 +18,6 @@ connection.on("SendChatUser", function (id, mes) {
  function chatSendMessage(receiverId, senderId) {
 
     let content_txt = document.querySelector('#content_txt_chat');
-    alert(content_txt.value);
     let obj = {
         receiverId: receiverId,
         senderId: senderId,
@@ -31,10 +29,11 @@ connection.on("SendChatUser", function (id, mes) {
         method: "POST",
         data: obj,
         success: function (data) {
-            SendChatMessageFunction(receiverId, content_txt.value);
+            SendChatMessageFunction(receiverId, senderId, content_txt.value);
 
             //GetMessageCall(receiverId, senderId);
             content_txt.value = "";
+            LiveMessageUser(receiverId);
         },
         error: function (err) {
             alert("xetta" + err);
@@ -48,8 +47,9 @@ async function LiveMessageUser(id) {
         method: "GET",
         success: function (chatdata) {
             var me = chatdata.user;
-            var Ownuser = chatdata.chat.receiver;
+            var Ownuser = chatdata.ownuser;
             chatbody.innerHTML = " ";
+            alert(me.userName + "|" + Ownuser.userName)
             var text = ` <div class="live-chat-header d-flex justify-content-between align-items-center">
                      <div class="live-chat-info">
                          <a href="#"><img style="height:50px; width:50px;" src="${Ownuser.imageUrl}" class="rounded-circle" alt="image"></a>
@@ -73,9 +73,7 @@ async function LiveMessageUser(id) {
 
                  <div class="live-chat-container">
                      <div class="chat-content">
-                         
-
-                      
+                          
                      </div>
 
                      <div class="chat-list-footer">
@@ -88,7 +86,6 @@ async function LiveMessageUser(id) {
 
                                 <input type="text" id="content_txt_chat" class="form-control" placeholder="Type your message...">
 
-                          
                          </form>
                          <button onclick="chatSendMessage('${Ownuser.id}', '${chatdata.meId}')" class="send-btn d-inline-block">Send</button>
                      </div>
@@ -96,20 +93,19 @@ async function LiveMessageUser(id) {
             chatbody.innerHTML += text;
             var chatcontent = document.querySelector('.chat-content');
             var texttxt = " "
-            alert("Count:" + chatdata.chat.messages.length);
             for (var i = 0; i < chatdata.chat.messages.length; i++) {
                 var item = chatdata.chat.messages[i];
                 if (item.senderId == me.id) {
                     texttxt += `<div class="chat">
                                  <div class="chat-avatar">
                                      <a routerLink="/profile" class="d-inline-block">
-                                         <img src="${me.imageUrl}" width="50" height="50" class="rounded-circle" alt="image">
+                                         <img src="${me.imageUrl}" style="height:50px; width:50px;" class="rounded-circle" alt="image">
                                      </a>
                                  </div>
 
                                  <div class="chat-body">
                                      <div class="chat-message">
-                                         <p>${chatdata.chat.messages[i].content}</p>
+                                         <p>${item.content}</p>
                                          <span class="time d-block">Nihad saat</span>
                                      </div>
                                  </div>
@@ -121,13 +117,13 @@ async function LiveMessageUser(id) {
                     texttxt += `<div class="chat chat-left">
                                  <div class="chat-avatar">
                                      <a routerLink="/profile" class="d-inline-block">
-                                         <img src="${Ownuser.imageUrl}" width="50" height="50" class="rounded-circle" alt="image">
+                                         <img src="${Ownuser.imageUrl}" style="height:50px; width:50px;" class="rounded-circle" alt="image">
                                      </a>
                                  </div>
 
                                  <div class="chat-body">
                                      <div class="chat-message">
-                                         <p>${chatdata.chat.messages[i].content}</p>
+                                         <p>${item.content}</p>
                                          <span class="time d-block">Nihad saat</span>
                                      </div>
                                  </div>
@@ -136,35 +132,35 @@ async function LiveMessageUser(id) {
                 }
             }
             chatcontent.innerHTML = texttxt;
-            var text2 = `<div class="chat">
-                             <div class="chat-avatar">
-                                 <a routerLink="/profile" class="d-inline-block">
-                                     <img src="" width="50" height="50" class="rounded-circle" alt="image">
-                                 </a>
-                             </div>
+            //var text2 = `<div class="chat">
+            //                 <div class="chat-avatar">
+            //                     <a routerLink="/profile" class="d-inline-block">
+            //                         <img src="" width="50" height="50" class="rounded-circle" alt="image">
+            //                     </a>
+            //                 </div>
 
-                             <div class="chat-body">
-                                 <div class="chat-message">
-                                     <p>Hello, dear I want talk to you?</p>
-                                     <span class="time d-block">7:45 AM</span>
-                                 </div>
-                             </div>
-                         </div>
+            //                 <div class="chat-body">
+            //                     <div class="chat-message">
+            //                         <p>Hello, dear I want talk to you?</p>
+            //                         <span class="time d-block">7:45 AM</span>
+            //                     </div>
+            //                 </div>
+            //             </div>
 
-                         <div class="chat chat-left">
-                             <div class="chat-avatar">
-                                 <a routerLink="/profile" class="d-inline-block">
-                                     <img src="${Ownuser.imageUrl}" width="50" height="50" class="rounded-circle" alt="image">
-                                 </a>
-                             </div>
+            //             <div class="chat chat-left">
+            //                 <div class="chat-avatar">
+            //                     <a routerLink="/profile" class="d-inline-block">
+            //                         <img src="${Ownuser.imageUrl}" width="50" height="50" class="rounded-circle" alt="image">
+            //                     </a>
+            //                 </div>
 
-                             <div class="chat-body">
-                                 <div class="chat-message">
-                                     <p>Said how c</p>
-                                     <span class="time d-block">7:45 AM</span>
-                                 </div>
-                             </div>
-                         </div>`;
+            //                 <div class="chat-body">
+            //                     <div class="chat-message">
+            //                         <p>Said how c</p>
+            //                         <span class="time d-block">7:45 AM</span>
+            //                     </div>
+            //                 </div>
+            //             </div>`;
         }
     });
     

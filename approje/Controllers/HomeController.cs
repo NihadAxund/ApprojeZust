@@ -155,7 +155,7 @@ namespace approje.Controllers
                 chat.Messages = messages;
             }
 
-            MessagesUsersDto dto = new(chat, _user,_userViewModel.Id);
+            MessagesUsersDto dto = new(chat, _user,ownuser,_userViewModel.Id);
 
             return Ok(dto);
            
@@ -166,8 +166,9 @@ namespace approje.Controllers
         {
             try
             {
-                var chat = _context.Chats.FirstOrDefault(i => i.ReceiverId == model.ReceiverId);
-                if (chat != null)
+                var chat = await _context.Chats.FirstOrDefaultAsync(i => i.ReceiverId == model.ReceiverId&&i.SenderId==model.SenderId);
+                var chat2 = await _context.Chats.FirstOrDefaultAsync(i => i.ReceiverId == model.SenderId && i.SenderId == model.ReceiverId);
+                if (chat != null&&chat2!=null)
                 {
                     var message = new Message
                     {
@@ -178,7 +179,17 @@ namespace approje.Controllers
                         ReceiverId = model.ReceiverId,
                         SenderId = model.SenderId
                     };
+                    var message2 = new Message
+                    {
+                        Chat = chat2,
+                        Content = model.Content,
+                        DateTime = DateTime.Now,
+                        HasSeen = false,
+                        ReceiverId = model.ReceiverId,
+                        SenderId = model.SenderId
+                    };
                     await _context.Messages.AddAsync(message);
+                    await _context.Messages.AddAsync(message2);
                     await _context.SaveChangesAsync();
 
                     return Ok();

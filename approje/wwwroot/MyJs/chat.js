@@ -24,14 +24,11 @@ async function SendNotificationFunction(id,Notfication) {
 
 
 
-function SendChatMessageFunction(id, Messagetxt) {
-    alert("aa");
+function SendChatMessageFunction(id,sendid, Messagetxt) {
     try {
-        alert("Send Message Starter...");
-        connection.invoke("SendMessageUser", id, Messagetxt);
+        connection.invoke("SendMessageUser", id,sendid, Messagetxt);
 
     } catch (error) {
-        alert(error);
         console.error("SendChatMessage error:", error);
     }
 }

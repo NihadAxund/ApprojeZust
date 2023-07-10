@@ -6,12 +6,14 @@ namespace approje.Dtos
     {
         public Chat chat { get; set; }
         public CustomIdentityUser user { get; set; }
+        public CustomIdentityUser ownuser { get; set; }
         public string MeId { get; set; }
 
-        public MessagesUsersDto(Chat chat, CustomIdentityUser ownuser, string meId)
+        public MessagesUsersDto(Chat chat, CustomIdentityUser meuser, CustomIdentityUser ownu, string meId)
         {
             this.chat = chat;
-            user = ownuser;
+            user = meuser;
+            ownuser = ownu;
             MeId = meId;
         }
     }
