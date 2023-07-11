@@ -13,6 +13,7 @@ using Microsoft.AspNetCore.SignalR.Client;
 using Microsoft.EntityFrameworkCore;
 using System.Diagnostics;
 using System.Runtime.CompilerServices;
+using System.Security.Claims;
 using System.Web;
 
 namespace approje.Controllers
@@ -42,9 +43,9 @@ namespace approje.Controllers
             _context = context;
             _httpContextAccessor = httpContextAccessor;
             _hubContext = hubContext;
-
-
         }
+
+        
 
         public override void OnActionExecuting(ActionExecutingContext context)
         {
@@ -102,18 +103,36 @@ namespace approje.Controllers
 
             if(_userViewModel == null)
             {
-                var _userName =  _httpContextAccessor.HttpContext.User.Identity.Name;
-                var user =  _userManager.Users.Include(u => u.FriendRequests).Include(u=>u.Friends).FirstOrDefaultAsync(u => u.UserName == _userName).Result;
-                _user = user;
+              //  var _userName =  _httpContextAccessor.HttpContext.User.Identity.Name;
+                string userId = _httpContextAccessor.HttpContext.User.FindFirstValue(ClaimTypes.NameIdentifier);
+
+                var user =  _userManager.Users.Include(u => u.FriendRequests).Include(u=>u.Friends).Include(u=>u.Chats).FirstOrDefaultAsync(u => u.Id==userId).Result;
             
                 if(user != null)
                 {
+                    _user = user;
                     _userViewModel = new UserViewModel(user.Id, user.UserName, user.Email,user.FriendRequests.ToList(),user.Friends.Count(),user.ImageUrl);
                     ViewData["User"] = _userViewModel;
-                   // ViewBag.User = _userViewModel;
+                    // ViewBag.User = _userViewModel;
+                    IsContact(userId);
                 }
                 else  RedirectToAction("login");
             }
+        }
+        [Authorize]
+        private async Task IsContact(string id)
+        {
+            //var zs = _context.Chats.ToList();
+            var list = _context.Chats.Include(s=>s.Receiver).Where(i => i.SenderId == id).Select(l=>l.Receiver).ToList();
+            var Contactlist = new List<ChatUserDto>();
+            foreach (var item in list)
+            {
+                if (ChatHub.UsersAndId.ContainsKey(item.Id))
+                    Contactlist.Add(new(item));
+               
+            }
+            
+            ViewData["ContactList"] = Contactlist;
         }
 
         [Authorize]
@@ -170,11 +189,12 @@ namespace approje.Controllers
                 var chat2 = await _context.Chats.FirstOrDefaultAsync(i => i.ReceiverId == model.SenderId && i.SenderId == model.ReceiverId);
                 if (chat != null&&chat2!=null)
                 {
+                    var time = DateTime.Now.ToString("hh:mm tt");
                     var message = new Message
                     {
                         Chat = chat,
                         Content = model.Content,
-                        DateTime = DateTime.Now,
+                        DateTime = time,
                         HasSeen = false,
                         ReceiverId = model.ReceiverId,
                         SenderId = model.SenderId
@@ -183,7 +203,7 @@ namespace approje.Controllers
                     {
                         Chat = chat2,
                         Content = model.Content,
-                        DateTime = DateTime.Now,
+                        DateTime = time,
                         HasSeen = false,
                         ReceiverId = model.ReceiverId,
                         SenderId = model.SenderId

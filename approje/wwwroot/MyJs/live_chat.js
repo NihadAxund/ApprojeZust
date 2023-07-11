@@ -7,6 +7,9 @@ connection.on("Connect", function (info, id) {
 
 });
 
+connection.on("Disconnect", function (id) {
+    GetAllLiveChatUsers();
+});
 
 connection.on("SendChatUser", function (id, sendid, mes) {
 
@@ -29,6 +32,7 @@ connection.on("SendChatUser", function (id, sendid, mes) {
         method: "POST",
         data: obj,
         success: function (data) {
+            alert("succes");
             SendChatMessageFunction(receiverId, senderId, content_txt.value);
 
             //GetMessageCall(receiverId, senderId);
@@ -105,7 +109,7 @@ async function LiveMessageUser(id) {
                                  <div class="chat-body">
                                      <div class="chat-message">
                                          <p>${item.content}</p>
-                                         <span class="time d-block">Nihad saat</span>
+                                         <span class="time d-block">${item.dateTime}</span>
                                      </div>
                                  </div>
                              </div>`
@@ -123,7 +127,7 @@ async function LiveMessageUser(id) {
                                  <div class="chat-body">
                                      <div class="chat-message">
                                          <p>${item.content}</p>
-                                         <span class="time d-block">Nihad saat</span>
+                                         <span class="time d-block">${item.dateTime}</span>
                                      </div>
                                  </div>
                              </div>`
@@ -177,21 +181,16 @@ async function GetAllLiveChatUsers() {
                 if ($(`#live_chat_online_users #${data[i].id}`).length <= 0) {
 
                     div2.innerHTML+=`<div class="chat-box" id="${data[i].id}" onclick="LiveMessageUser(id)">
-                        <div class="image" style="overflow:hidden; margin-left:5px; margin-right:5px;">
+                        <div class="image" style="overflow:hidden; margin-left:8px; margin-right:8px;">
                             <a href="#"><img style="border:solid 3px green; border-radius:50px; height:85px; width:85px; min-width:85px; min-height:85px;" src="${data[i].imageUrl}" class="rounded-circle" alt="image"></a>
                         </div>
                         <h3>
                             <a href="#">${data[i].userName}</a>
                         </h3>
                     </div>`
-
                 }
-
             }
             if (div2 != null) {
-                // div2.innerHTML = text
-                //console.log(text);
-               // $('#live_chat_online_users').append(text);
                 if (data.length == 1) {
                     LiveMessageUser(data[0].id);
                 }
