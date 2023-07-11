@@ -1,4 +1,4 @@
-﻿var div2 = document.querySelector(".live-chat-slides");
+﻿var div2 = document.querySelector("#live_chat_online_users");
 var chatbody = document.querySelector(".live-chat-body");
 connection.on("Connect", function (info, id) {
 
@@ -77,7 +77,7 @@ async function LiveMessageUser(id) {
                      </div>
 
                      <div class="chat-list-footer">
-                         <form class="d-flex align-items-center">
+                         <div class="d-flex align-items-center">
                              <div class="btn-box d-flex align-items-center me-3">
                                  <button class="file-attachment-btn d-inline-block me-2" data-bs-toggle="tooltip" data-bs-placement="top" title="File Attachment" type="button"><i class="ri-attachment-2"></i></button>
 
@@ -85,9 +85,8 @@ async function LiveMessageUser(id) {
                              </div>
 
                                 <input type="text" id="content_txt_chat" class="form-control" placeholder="Type your message...">
-
-                         </form>
-                         <button onclick="chatSendMessage('${Ownuser.id}', '${chatdata.meId}')" class="send-btn d-inline-block">Send</button>
+                                <button onclick="chatSendMessage('${Ownuser.id}', '${chatdata.meId}')" class="btn btn-primary">Send</button>
+                         </div>
                      </div>
                  </div>`
             chatbody.innerHTML += text;
@@ -171,16 +170,15 @@ async function GetAllLiveChatUsers() {
         url: "/Home/GetAllOnlineUsers",
         method: "GET",
         success: function (data) {
-            div2.innerHTML = " ";
+            div2.innerHTML = "";
             var text = " ";
             for (var i = 0; i < data.length; i++) {
 
                 if ($(`#live_chat_online_users #${data[i].id}`).length <= 0) {
 
-                     text += `<div class="chat-box" id="${data[i].id}" onclick="LiveMessageUser(id)">
-                        <div class="image">
-                            <a href="#"><img style="height:85px; width:85px;" src="${data[i].imageUrl}" class="rounded-circle" alt="image"></a>
-                            <span class="status-online"></span>
+                    div2.innerHTML+=`<div class="chat-box" id="${data[i].id}" onclick="LiveMessageUser(id)">
+                        <div class="image" style="overflow:hidden; margin-left:5px; margin-right:5px;">
+                            <a href="#"><img style="border:solid 3px green; border-radius:50px; height:85px; width:85px; min-width:85px; min-height:85px;" src="${data[i].imageUrl}" class="rounded-circle" alt="image"></a>
                         </div>
                         <h3>
                             <a href="#">${data[i].userName}</a>
@@ -190,8 +188,10 @@ async function GetAllLiveChatUsers() {
                 }
 
             }
-            if (text != null && div2 != null) {
-                div2.innerHTML = text
+            if (div2 != null) {
+                // div2.innerHTML = text
+                //console.log(text);
+               // $('#live_chat_online_users').append(text);
                 if (data.length == 1) {
                     LiveMessageUser(data[0].id);
                 }

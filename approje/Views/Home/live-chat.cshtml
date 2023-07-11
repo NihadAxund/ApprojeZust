@@ -6,8 +6,9 @@
     var Me = ViewBag.me as ChatUserDto;
 }
 @model List<ChatUserDto>;
+
     <!-- Start Preloader Area -->
-    <div class="preloader-area">
+    <div  class="preloader-area">
         <div class="spinner">
             <div class="inner">
                 <div class="disc"></div>
@@ -26,7 +27,8 @@
                 <h3>Live Chat</h3>
             </div>
 
-            <div id="live_chat_online_users" class="live-chat-slides owl-carousel owl-theme">
+            <div style="display:flex; flex-direction:row; overflow:scroll; overflow-y:hidden;" id="live_chat_online_users" class="live-chat-slides owl-carousel owl-theme">
+
 @*                @foreach (var item in Model)
                 {
                     <div class="chat-box" id="@item.Id" onclick="LiveMessageUser(id)">
@@ -191,3 +193,4 @@
     <div class="go-top">
         <i class="ri-arrow-up-line"></i>
     </div>
+
