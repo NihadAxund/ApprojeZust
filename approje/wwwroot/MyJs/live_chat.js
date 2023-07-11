@@ -49,7 +49,7 @@ async function LiveMessageUser(id) {
             var me = chatdata.user;
             var Ownuser = chatdata.ownuser;
             chatbody.innerHTML = " ";
-            alert(me.userName + "|" + Ownuser.userName)
+            //alert(me.userName + "|" + Ownuser.userName)
             var text = ` <div class="live-chat-header d-flex justify-content-between align-items-center">
                      <div class="live-chat-info">
                          <a href="#"><img style="height:50px; width:50px;" src="${Ownuser.imageUrl}" class="rounded-circle" alt="image"></a>
