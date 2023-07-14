@@ -119,6 +119,13 @@ namespace approje.Controllers
                 else  RedirectToAction("login");
             }
         }
+        private async Task<List<Post>> PostList()
+        {
+            var list =  _context.Posts.Include(s=>s.Me).OrderByDescending(p=>p.id).ToList();
+            return list;
+        }
+
+
         [Authorize]
         private async Task IsContact(string id)
         {
@@ -136,10 +143,10 @@ namespace approje.Controllers
         }
 
         [Authorize]
-        public IActionResult Index()
+        public async Task<IActionResult> Index()
         {
-            
-            return View();
+
+            return  View(await PostList());
         }
         public IActionResult errorview() => View();
 
@@ -185,6 +192,8 @@ namespace approje.Controllers
             var Post = new Post(Dto.Description, Dto.VideoOrPhotoLink, _user, Dto.IsVideo);
             if (Post != null)
             {
+                await _context.Posts.AddAsync(Post);
+                await _context.SaveChangesAsync();
                 return new(Post);
             }
             else

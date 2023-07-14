@@ -32,15 +32,14 @@ connection.on("SendChatUser", function (id, sendid, mes) {
         method: "POST",
         data: obj,
         success: function (data) {
-            alert("succes");
             SendChatMessageFunction(receiverId, senderId, content_txt.value);
-
-            //GetMessageCall(receiverId, senderId);
             content_txt.value = "";
             LiveMessageUser(receiverId);
+
         },
         error: function (err) {
-            alert("xetta" + err);
+            alert(err);
+            console.log(err);
         }
     })
 }
