@@ -15,11 +15,13 @@ namespace App.Entities.Models
         public DateTime DisConnectTime { get; set; } = DateTime.Now;
         public List<Chat> Chats { get; set; }
         public string ConnectTime { get; set; } = "";
+        public List<Post> Posts { get; set; }
         public CustomIdentityUser()
         {
             Friends = new List<Friend>();
             FriendRequests = new List<FriendRequest>();
             Chats = new();
+            Posts = new();
         }
 
 

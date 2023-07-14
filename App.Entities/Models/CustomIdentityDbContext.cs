@@ -4,9 +4,9 @@ using System;
 
 namespace App.Entities.Models
 {
-    public class CustomIdentityDbContext:IdentityDbContext<CustomIdentityUser,CustomIdentityRole,string>
+    public class CustomIdentityDbContext : IdentityDbContext<CustomIdentityUser, CustomIdentityRole, string>
     {
-        public CustomIdentityDbContext(DbContextOptions<CustomIdentityDbContext> options) :base(options)
+        public CustomIdentityDbContext(DbContextOptions<CustomIdentityDbContext> options) : base(options)
         {
 
         }
@@ -14,5 +14,9 @@ namespace App.Entities.Models
         public DbSet<Friend> Friends { get; set; }
         public DbSet<Chat> Chats { get; set; }
         public DbSet<Message> Messages { get; set; }
+        public DbSet<Post> Posts {get;set;}
+
+        
+
     }
 }

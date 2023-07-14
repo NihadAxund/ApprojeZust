@@ -179,6 +179,17 @@ namespace approje.Controllers
             return Ok(dto);
            
         }
+        [HttpPost(Name = "AddNewPost")]
+        public async Task<JsonResult> AddNewPost(PostDto Dto)
+        {
+            var Post = new Post(Dto.Description, Dto.VideoOrPhotoLink, _user, Dto.IsVideo);
+            if (Post != null)
+            {
+                return new(Post);
+            }
+            else
+                return new("Error");
+        }
 
         [HttpPost(Name = "AddMessage")]
         public async Task<IActionResult> AddMessage(MessageModel model)

@@ -225,6 +225,28 @@ namespace App.Entities.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "Posts",
+                columns: table => new
+                {
+                    id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Description = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    LikesCount = table.Column<int>(type: "int", nullable: false),
+                    VideoOrPhotoLink = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    IsVideo = table.Column<bool>(type: "bit", nullable: false),
+                    MeId = table.Column<string>(type: "nvarchar(450)", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Posts", x => x.id);
+                    table.ForeignKey(
+                        name: "FK_Posts_AspNetUsers_MeId",
+                        column: x => x.MeId,
+                        principalTable: "AspNetUsers",
+                        principalColumn: "Id");
+                });
+
+            migrationBuilder.CreateTable(
                 name: "Messages",
                 columns: table => new
                 {
@@ -246,6 +268,25 @@ namespace App.Entities.Migrations
                         principalTable: "Chats",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Tag",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Text = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Postid = table.Column<int>(type: "int", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Tag", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_Tag_Posts_Postid",
+                        column: x => x.Postid,
+                        principalTable: "Posts",
+                        principalColumn: "id");
                 });
 
             migrationBuilder.CreateIndex(
@@ -318,6 +359,16 @@ namespace App.Entities.Migrations
                 name: "IX_Messages_ChatId",
                 table: "Messages",
                 column: "ChatId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Posts_MeId",
+                table: "Posts",
+                column: "MeId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Tag_Postid",
+                table: "Tag",
+                column: "Postid");
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
@@ -347,10 +398,16 @@ namespace App.Entities.Migrations
                 name: "Messages");
 
             migrationBuilder.DropTable(
+                name: "Tag");
+
+            migrationBuilder.DropTable(
                 name: "AspNetRoles");
 
             migrationBuilder.DropTable(
                 name: "Chats");
+
+            migrationBuilder.DropTable(
+                name: "Posts");
 
             migrationBuilder.DropTable(
                 name: "AspNetUsers");

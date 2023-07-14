@@ -268,6 +268,60 @@ namespace App.Entities.Migrations
                     b.ToTable("Messages");
                 });
 
+            modelBuilder.Entity("App.Entities.Models.Post", b =>
+                {
+                    b.Property<int>("id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("id"), 1L, 1);
+
+                    b.Property<string>("Description")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<bool>("IsVideo")
+                        .HasColumnType("bit");
+
+                    b.Property<int>("LikesCount")
+                        .HasColumnType("int");
+
+                    b.Property<string>("MeId")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<string>("VideoOrPhotoLink")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("id");
+
+                    b.HasIndex("MeId");
+
+                    b.ToTable("Posts");
+                });
+
+            modelBuilder.Entity("App.Entities.Models.Tag", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
+
+                    b.Property<int?>("Postid")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Text")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("Postid");
+
+                    b.ToTable("Tag");
+                });
+
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
                 {
                     b.Property<int>("Id")
@@ -412,6 +466,22 @@ namespace App.Entities.Migrations
                     b.Navigation("Chat");
                 });
 
+            modelBuilder.Entity("App.Entities.Models.Post", b =>
+                {
+                    b.HasOne("App.Entities.Models.CustomIdentityUser", "Me")
+                        .WithMany("Posts")
+                        .HasForeignKey("MeId");
+
+                    b.Navigation("Me");
+                });
+
+            modelBuilder.Entity("App.Entities.Models.Tag", b =>
+                {
+                    b.HasOne("App.Entities.Models.Post", null)
+                        .WithMany("Tags")
+                        .HasForeignKey("Postid");
+                });
+
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
                 {
                     b.HasOne("App.Entities.Models.CustomIdentityRole", null)
@@ -475,6 +545,13 @@ namespace App.Entities.Migrations
                     b.Navigation("FriendRequests");
 
                     b.Navigation("Friends");
+
+                    b.Navigation("Posts");
+                });
+
+            modelBuilder.Entity("App.Entities.Models.Post", b =>
+                {
+                    b.Navigation("Tags");
                 });
 #pragma warning restore 612, 618
         }

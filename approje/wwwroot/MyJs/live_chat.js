@@ -99,7 +99,7 @@ async function LiveMessageUser(id) {
             for (var i = 0; i < chatdata.chat.messages.length; i++) {
                 var item = chatdata.chat.messages[i];
                 if (item.senderId == me.id) {
-                    texttxt += `<div class="chat">
+                    texttxt += `<div class="chat mt-1 mb-1">
                                  <div class="chat-avatar">
                                      <a routerLink="/profile" class="d-inline-block">
                                          <img src="${me.imageUrl}" style="height:50px; width:50px;" class="rounded-circle" alt="image">
@@ -107,8 +107,8 @@ async function LiveMessageUser(id) {
                                  </div>
 
                                  <div class="chat-body">
-                                     <div class="chat-message">
-                                         <p>${item.content}</p>
+                                     <div class="chat-message bg-success">
+                                         <p class="text-white">${item.content}</p>
                                          <span class="time d-block">${item.dateTime}</span>
                                      </div>
                                  </div>
@@ -117,7 +117,7 @@ async function LiveMessageUser(id) {
 
                 }
                 else {
-                    texttxt += `<div class="chat chat-left">
+                    texttxt += `<div class="chat chat-left mt-1 mb-1">
                                  <div class="chat-avatar">
                                      <a routerLink="/profile" class="d-inline-block">
                                          <img src="${Ownuser.imageUrl}" style="height:50px; width:50px;" class="rounded-circle" alt="image">
@@ -125,8 +125,8 @@ async function LiveMessageUser(id) {
                                  </div>
 
                                  <div class="chat-body">
-                                     <div class="chat-message">
-                                         <p>${item.content}</p>
+                                     <div class="chat-message bg-primary">
+                                         <p class="text-white">${item.content}</p>
                                          <span class="time d-block">${item.dateTime}</span>
                                      </div>
                                  </div>

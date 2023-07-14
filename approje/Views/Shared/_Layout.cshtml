@@ -750,27 +750,30 @@
         @RenderBody()
         <!-- End Content Page Box Area -->
         <!-- Start Right Sidebar Area -->
-        <div class="right-sidebar-area" data-simplebar>
+         @if(contactlist!=null&&contactlist.Count>0){
+            <div class="right-sidebar-area" data-simplebar>
 
-            <div class="recent-contact-box">
-                <div class="title">
-                    <h3>Contact</h3>
-                </div>
-                <div class="contact-body" data-simplebar>
-                    @if(contactlist!=null){
-                        foreach (var item in contactlist)
-                        {
-                            <div class="contact-item">
-                                <a id="@item.Id" href="/home/live-chat"><img src="@item.User_img" class="rounded-circle" alt="image"></a>
-                                <span class="name"><a href="/home/live-chat">@item.Name</a></span>
-      @*                          <span class="status-online"></span>*@
-                            </div>
-                        }
+                <div class="recent-contact-box">
+                    <div class="title">
+                        <h3>Contact</h3>
+                    </div>
+                    <div class="contact-body" data-simplebar>
+     
+                            @foreach (var item in contactlist)
+                            {
+                                <div class="contact-item">
+                                    <a id="@item.Id" href="/home/live-chat"><img src="@item.User_img" class="rounded-circle" alt="image"></a>
+                                    <span class="name"><a href="/home/live-chat">@item.Name</a></span>
+
+                                </div>
+                            }
                         
-                    }
+                    
+                    </div>
                 </div>
             </div>
-        </div>
+
+         }
         <!-- End Right Sidebar Area -->
 
     </div>

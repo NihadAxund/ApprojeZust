@@ -3,6 +3,48 @@
 }
 
 
+<style>
+
+    .radio-icon {
+        position: relative;
+        padding-left: 30px;
+        cursor: pointer;
+    }
+
+        .radio-icon input[type="radio"] {
+            position: absolute;
+            opacity: 0;
+            cursor: pointer;
+        }
+
+        .radio-icon i {
+            position: absolute;
+            left: 0;
+            top: 0;
+            font-size: 20px;
+            color: #ccc;
+        }
+
+        .radio-icon input[type="radio"]:checked + i {
+            color: #007bff;
+        }
+
+
+
+</style>
+
+<script>
+
+    function openModal() {
+    var myModal = new bootstrap.Modal(document.getElementById('exampleModalToggleImage'));
+    myModal.show();
+}
+
+
+
+
+</script>
+
 <!-- Start Preloader Area -->
         <div class="preloader-area">
             <div class="spinner">
@@ -395,26 +437,73 @@
                                 <div class="news-feed-area">
                                     <div class="news-feed news-feed-form">
                                         <h3 class="news-feed-title">Create New Post</h3>
-        
-                                        <form>
+
+                                        <form action="#" method="post">
                                             <div class="form-group">
                                                 <textarea name="message" class="form-control" placeholder="Write something here..."></textarea>
                                             </div>
                                             <ul class="button-group d-flex justify-content-between align-items-center">
-                                                <li class="photo-btn">
-                                                    <button type="submit"><i class="flaticon-gallery"></i> Photo</button>
-                                                </li>
-                                                <li class="video-btn">
-                                                    <button type="submit"><i class="flaticon-video"></i> Video</button>
-                                                </li>
+                                               <li class="photo-btn">
+                                            <label for="radioPhoto" class="radio-icon" onclick="openModal()">
+                                                      <input type="radio" id="radioPhoto" name="mediaType" value="photo" >
+                                                      <i class="flaticon-gallery"></i> Photo
+                                                  </label>
+                                              </li>
+                                              <li class="video-btn" >
+                                                  <label for="radioVideo" class="radio-icon">
+                                                      <input type="radio" id="radioVideo" name="mediaType" value="video">
+                                                      <i class="flaticon-video"></i> Video
+                                                  </label>
+                                              </li>
                                                 <li class="tag-btn">
                                                     <button type="submit"><i class="flaticon-tag"></i> Tag Friends</button>
                                                 </li>
                                                 <li class="post-btn">
-                                                    <button type="submit">Post</button>
+                                                    <button type="button" data-bs-toggle="modal" onclick="">Post</button>
                                                 </li>
                                             </ul>
+
                                         </form>
+
+
+                                <div class="modal fade" id="exampleModalToggleImage" aria-hidden="true" aria-labelledby="exampleModalToggleLabel" tabindex="-1">
+                                    <div class="modal-dialog modal-dialog-centered">
+                                        <div class="modal-content">
+                                            <div class="modal-header">
+                                                <h1 class="modal-title fs-5" id="exampleModalToggleImageLabel">Image</h1>
+                                                <button type="button" class="btn-close" onclick="closeModal()"></button>
+                                            </div>
+                                            <div class="modal-body d-flex justify-content-center flex-column">
+                                                <img id="Loadingphotobox" style="max-width:50vh; max-height:50vi" />
+                                                <div class="input-group mt-4 mb-2">
+                                                    <span class="input-group-text" id="inputGroup-sizing-default">Photo Link</span>
+                                                    <input type="text" id="Loading_Image_Link" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default">
+                                                    <button onclick="LoadingImageBtn()" class="btn btn-primary">Loading</button>
+                                                </div>
+                                            </div>
+                                            <div class="modal-footer">
+                                                <button style="" class="btn btn-primary">Save</button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <script>
+                                    document.addEventListener("DOMContentLoaded", function () {
+                                        // Modal işlemlerini yapabilirsiniz
+                                        var myModal = new bootstrap.Modal(document.getElementById('exampleModalToggleImage'));
+
+                                        function closeModal() {
+                                            myModal.hide();
+                                        }
+                                    });
+                                </script>
+
+
+                               @* <button data-bs-target="#exampleModalToggleImage" data-bs-toggle="modal"><i class="flaticon-gallery"></i> Photo</button>*@
+
+
+
                                     </div>
         
                                     <div class="news-feed news-feed-stories">
